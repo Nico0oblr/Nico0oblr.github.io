@@ -1,0 +1,114 @@
+[
+  {
+    "objectID": "notes/posts/dicke-decay-conventions.html",
+    "href": "notes/posts/dicke-decay-conventions.html",
+    "title": "Dicke states and collective decay: conventions",
+    "section": "",
+    "text": "This note collects the conventions for collective decay of identical two-level emitters. It is a reference for notation, rather than a new research result."
+  },
+  {
+    "objectID": "notes/posts/dicke-decay-conventions.html#collective-operators",
+    "href": "notes/posts/dicke-decay-conventions.html#collective-operators",
+    "title": "Dicke states and collective decay: conventions",
+    "section": "Collective operators",
+    "text": "Collective operators\nFor \\(N\\) two-level emitters, define \\(J_- = \\sum_{i=1}^N \\sigma_-^{(i)}\\), \\(J_+ = J_-^\\dagger\\), and \\(J_z = \\tfrac12\\sum_{i=1}^N \\sigma_z^{(i)}\\). Within a total-spin sector \\(j\\),\n\\[\nJ_-\\lvert j,m\\rangle\n= \\sqrt{(j+m)(j-m+1)}\\,\\lvert j,m-1\\rangle.\n\\]\nThe fully symmetric sector has \\(j=N/2\\). If \\(k=j+m\\) is the number of excitations, then \\(k\\) runs from \\(0\\) to \\(N\\)."
+  },
+  {
+    "objectID": "notes/posts/dicke-decay-conventions.html#rate-convention",
+    "href": "notes/posts/dicke-decay-conventions.html#rate-convention",
+    "title": "Dicke states and collective decay: conventions",
+    "section": "Rate convention",
+    "text": "Rate convention\nUse the master equation\n\\[\n\\dot\\rho = \\Gamma\\,\\mathcal D[J_-]\\rho,\n\\qquad\n\\mathcal D[L]\\rho = L\\rho L^\\dagger\n-\\frac12\\left\\{L^\\dagger L,\\rho\\right\\}.\n\\]\nFor a Dicke state, the jump rate is\n\\[\nr_{j,m}=\\Gamma(j+m)(j-m+1).\n\\]\nIn the symmetric sector this becomes\n\\[\nr_k=\\Gamma k(N-k+1).\n\\]\nConsequently, the fully excited state has rate \\(r_N=\\Gamma N\\), while the ground state has \\(r_0=0\\). These expressions use the dissipator normalization written above; checking that normalization avoids factors of two when comparing implementations."
+  },
+  {
+    "objectID": "notes/posts/dicke-decay-conventions.html#population-dynamics",
+    "href": "notes/posts/dicke-decay-conventions.html#population-dynamics",
+    "title": "Dicke states and collective decay: conventions",
+    "section": "Population dynamics",
+    "text": "Population dynamics\nWriting \\(p_k\\) for the population with \\(k\\) excitations gives\n\\[\n\\dot p_k = r_{k+1}p_{k+1}-r_kp_k,\n\\]\nwith no inflow from above \\(k=N\\) and no outflow below \\(k=0\\). The emitted photon rate is \\(\\sum_k r_kp_k\\).\nThe rate itself is a small Julia function:\ndicke_decay_rate(N, k; Γ = 1.0) = Γ * k * (N - k + 1)\n\ndicke_decay_rate(10, 10)  # 10.0: fully excited\ndicke_decay_rate(10, 5)   # 30.0: inside the ladder\ndicke_decay_rate(10, 0)   #  0.0: ground state"
+  },
+  {
+    "objectID": "notes/posts/dicke-decay-conventions.html#related-reading-and-code",
+    "href": "notes/posts/dicke-decay-conventions.html#related-reading-and-code",
+    "title": "Dicke states and collective decay: conventions",
+    "section": "Related reading and code",
+    "text": "Related reading and code\n\nAbsence of Entanglement Growth in Dicke Superradiance.\nPIDicke.jl for calculations in the Dicke basis."
+  },
+  {
+    "objectID": "code.html",
+    "href": "code.html",
+    "title": "Code",
+    "section": "",
+    "text": "Public repositories for numerical methods and collective quantum dynamics. Each repository contains its own source, examples, and license information."
+  },
+  {
+    "objectID": "code.html#pidicke.jl",
+    "href": "code.html#pidicke.jl",
+    "title": "Code",
+    "section": "PIDicke.jl",
+    "text": "PIDicke.jl\nPermutation-invariant open-system calculations for two-level emitters in the Dicke basis, including population dynamics, quantum trajectories, coherences, and spin–cavity models.\nRepository ↗ Examples ↗"
+  },
+  {
+    "objectID": "code.html#krylovsolvermcwf",
+    "href": "code.html#krylovsolvermcwf",
+    "title": "Code",
+    "section": "KrylovSolverMCWF",
+    "text": "KrylovSolverMCWF\nA Krylov-subspace approach to Monte Carlo wavefunction simulations with QuantumOptics.jl, with an example notebook.\nRepository ↗"
+  },
+  {
+    "objectID": "code.html#number-fluctuations-and-particle-loss",
+    "href": "code.html#number-fluctuations-and-particle-loss",
+    "title": "Code",
+    "section": "Number fluctuations and particle loss",
+    "text": "Number fluctuations and particle loss\nCode accompanying work on number fluctuations and particle loss in Dicke superradiance.\nRepository ↗"
+  },
+  {
+    "objectID": "index.html#research-interests",
+    "href": "index.html#research-interests",
+    "title": "About",
+    "section": "Research interests",
+    "text": "Research interests\nFrom microscopic interactions to collective behavior."
+  },
+  {
+    "objectID": "index.html#beyond-the-paper",
+    "href": "index.html#beyond-the-paper",
+    "title": "About",
+    "section": "Beyond the paper",
+    "text": "Beyond the paper\nThis site brings together my publications, scientific code, and a growing collection of research notes: derivations, conventions, calculations, and questions worth keeping track of."
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "Journal articles and preprints. Each work appears once, with links to the preprint and published version where available.\nGoogle Scholar ↗ Download bibliography"
+  },
+  {
+    "objectID": "publications.html#preprints",
+    "href": "publications.html#preprints",
+    "title": "Publications",
+    "section": "Preprints",
+    "text": "Preprints\n\n2026\n\nExact Analytical Treatment of Collectively Pumped Dicke Superradiance\nAvishi Poddar, Nico Baßler, Julian Lyne, Susanne F. Yelin, Helmut Ritsch, Claudiu Genes and Raphael Holzinger.\nPreprint · arXiv:2610.37665 (2026).\nPreprint ↗\n\n\n\n2026\n\nScaling theory of decoherence in Dicke superradiance\nNico S. Bassler, Julian Lyne and Javier Cuerda.\nPreprint · arXiv:2607.28034 (2026).\nPreprint ↗\n\n\n\n2026\n\nDicke superradiance in degenerate quantum matter: interplay of exchange statistics and spatial confinement\nJulian Lyne, Kai Phillip Schmidt, Claudiu Genes and Nico S. Bassler.\nPreprint · arXiv:2603.00778 (2026).\nPreprint ↗\n\n\n\n2024\n\nGeneralized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules\nN. S. Bassler, M. Reitz, R. Holzinger, A. Vibók, G. J. Halász, B. Gurlek and C. Genes.\nPreprint · arXiv:2405.08718 (2024).\nPreprint ↗"
+  },
+  {
+    "objectID": "publications.html#journal-articles",
+    "href": "publications.html#journal-articles",
+    "title": "Publications",
+    "section": "Journal articles",
+    "text": "Journal articles\n\n2026\n\nSymbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance\nRaphael Holzinger, Nico S. Bassler, Julian Lyne, Susanne F. Yelin and Claudiu Genes.\nPhysical Review Letters 137, 193602 (2026).\nPreprint ↗ Published version ↗\n\n\n\n2026\n\nSolving Dicke superradiance analytically: A compendium of methods\nRaphael Holzinger, Nico S. Bassler, Julian Lyne, Fidel G. Jimenez, Julius T. Gohsrich and Claudiu Genes.\nPhysical Review A 113, 043718 (2026).\nPreprint ↗ Published version ↗\n\n\n\n2025\n\nAbsence of entanglement growth in Dicke superradiance\nNico S. Bassler.\nPhysical Review A 112, 053713 (2025).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nPurcell-modified Doppler cooling of quantum emitters inside optical cavities\nJulian Lyne, Nico S. Bassler, Seong eun Park, Guido Pupillo and Claudiu Genes.\nPhysical Review A 110, 013115 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nN. S. Bassler, I. Varma, M. Proske, P. Windpassinger, K. P. Schmidt and C. Genes.\nPhysical Review Research 6, 023147 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nMetasurface-Based Hybrid Optical Cavities for Chiral Sensing\nNico S. Bassler, Andrea Aiello, Kai P. Schmidt, Claudiu Genes and Michael Reitz.\nPhysical Review Letters 132, 043602 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nScaling Law for Kasha’s Rule in Photoexcited Molecular Aggregates\nRaphael Holzinger, Nico S. Bassler, Helmut Ritsch and Claudiu Genes.\nThe Journal of Physical Chemistry A 128, 3910-3915 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2023\n\nLinear optical elements based on cooperative subwavelength emitter arrays\nNico S. Bassler, Michael Reitz, Kai P. Schmidt and Claudiu Genes.\nOptics Express 31, 6003–6026 (2023).\nPreprint ↗ Published version ↗\n\n\n\n2021\n\nEffects of domain walls in bilayer graphene in an external magnetic field\nN. S. Bassler and K. P. Schmidt.\nPhysical Review B 103, 155422 (2021).\nPreprint ↗ Published version ↗\n\n\n\nRelated calculations and reproducibility resources are collected under research notes and code."
+  },
+  {
+    "objectID": "publications.html#doctoral-thesis",
+    "href": "publications.html#doctoral-thesis",
+    "title": "Publications",
+    "section": "Doctoral thesis",
+    "text": "Doctoral thesis\n\n2025\n\nQuantum Optics with Atoms and Molecules\nNico Baßler.\nDoctoral dissertation, Friedrich-Alexander-Universität Erlangen-Nürnberg (2025).\nUniversity record ↗"
+  },
+  {
+    "objectID": "notes/index.html",
+    "href": "notes/index.html",
+    "title": "Research Notes",
+    "section": "",
+    "text": "A place for derivations, calculations, numerical methods, and ideas that benefit from a little more space. Notes can be short references or longer explorations; each one states its assumptions and conventions.\nThe notebook begins with a reference on Dicke-state decay rates. More notes will follow as material is added.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\nDicke states and collective decay: conventions\n\n\n\nCollective spins\n\nConventions\n\n\n\nA short reference for ladder operators, Lindblad rates, and excitation-number notation.\n\n\n\n\n\n12 Nov 2026\n\n\n\n\n\nNo matching items"
+  }
+]

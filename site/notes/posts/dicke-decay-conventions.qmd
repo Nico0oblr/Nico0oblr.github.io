@@ -1,0 +1,70 @@
+---
+title: "Dicke states and collective decay: conventions"
+description: "A short reference for ladder operators, Lindblad rates, and excitation-number notation."
+date: 2026-11-12
+categories: [Collective spins, Conventions]
+toc: true
+---
+
+This note collects the conventions for collective decay of identical two-level emitters. It is a reference for notation, rather than a new research result.
+
+## Collective operators
+
+For $N$ two-level emitters, define $J_- = \sum_{i=1}^N \sigma_-^{(i)}$, $J_+ = J_-^\dagger$, and $J_z = \tfrac12\sum_{i=1}^N \sigma_z^{(i)}$. Within a total-spin sector $j$,
+
+$$
+J_-\lvert j,m\rangle
+= \sqrt{(j+m)(j-m+1)}\,\lvert j,m-1\rangle.
+$$
+
+The fully symmetric sector has $j=N/2$. If $k=j+m$ is the number of excitations, then $k$ runs from $0$ to $N$.
+
+## Rate convention
+
+Use the master equation
+
+$$
+\dot\rho = \Gamma\,\mathcal D[J_-]\rho,
+\qquad
+\mathcal D[L]\rho = L\rho L^\dagger
+-\frac12\left\{L^\dagger L,\rho\right\}.
+$$
+
+For a Dicke state, the jump rate is
+
+$$
+r_{j,m}=\Gamma(j+m)(j-m+1).
+$$
+
+In the symmetric sector this becomes
+
+$$
+r_k=\Gamma k(N-k+1).
+$$
+
+Consequently, the fully excited state has rate $r_N=\Gamma N$, while the ground state has $r_0=0$. These expressions use the dissipator normalization written above; checking that normalization avoids factors of two when comparing implementations.
+
+## Population dynamics
+
+Writing $p_k$ for the population with $k$ excitations gives
+
+$$
+\dot p_k = r_{k+1}p_{k+1}-r_kp_k,
+$$
+
+with no inflow from above $k=N$ and no outflow below $k=0$. The emitted photon rate is $\sum_k r_kp_k$.
+
+The rate itself is a small Julia function:
+
+```{.julia}
+dicke_decay_rate(N, k; Γ = 1.0) = Γ * k * (N - k + 1)
+
+dicke_decay_rate(10, 10)  # 10.0: fully excited
+dicke_decay_rate(10, 5)   # 30.0: inside the ladder
+dicke_decay_rate(10, 0)   #  0.0: ground state
+```
+
+## Related reading and code
+
+- [Absence of Entanglement Growth in Dicke Superradiance](https://arxiv.org/abs/2504.13646).
+- [PIDicke.jl](https://github.com/Nico0oblr/PiDicke.jl) for calculations in the Dicke basis.

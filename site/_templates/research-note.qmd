@@ -1,0 +1,26 @@
+---
+title: "Title of the note"
+description: "One sentence stating the question or result."
+date: 2026-11-12
+categories: [Topic]
+draft: true
+toc: true
+---
+
+State the question and the main observation.
+
+## Assumptions and conventions
+
+Define the model, notation, and range of validity.
+
+## Calculation
+
+Give the steps needed to reproduce the result.
+
+## What remains open
+
+Record limitations or questions, where relevant.
+
+## References and code
+
+Link the relevant papers and a public repository, if available.

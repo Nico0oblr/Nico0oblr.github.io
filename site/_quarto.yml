@@ -1,0 +1,64 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - publications.qmd
+    - code.qmd
+    - notes/index.qmd
+    - notes/posts/*.qmd
+
+website:
+  title: "Nico S. Baßler"
+  site-url: https://nico0oblr.github.io
+  description: "Theoretical quantum optics: collective light–matter interactions, research notes, publications, and scientific code."
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    background: light
+    title: "Nico S. Baßler"
+    collapse-below: lg
+    left:
+      - href: index.qmd
+        text: About
+      - href: publications.qmd
+        text: Publications
+      - href: notes/index.qmd
+        text: Research Notes
+      - href: code.qmd
+        text: Code
+    right:
+      - href: "https://scholar.google.com/citations?user=3egWxYoAAAAJ&hl=en"
+        icon: mortarboard
+        aria-label: Google Scholar profile
+      - href: https://github.com/Nico0oblr
+        icon: github
+        aria-label: GitHub profile
+  page-footer:
+    left: "Nico S. Baßler · Theoretical quantum optics"
+    right:
+      - text: Google Scholar
+        href: "https://scholar.google.com/citations?user=3egWxYoAAAAJ&hl=en"
+      - text: GitHub
+        href: https://github.com/Nico0oblr
+      - text: Institutional profile
+        href: https://www.iap.tu-darmstadt.de/tqt/theoretical_quantum_technology/team_tqt/team_details_163456.en.jsp
+  open-graph: true
+
+format:
+  html:
+    theme: [cosmo, theme.scss]
+    toc: false
+    anchor-sections: true
+    link-external-newwindow: true
+    code-copy: true
+    highlight-style: github
+    html-math-method: mathjax
+    lang: en
+    smooth-scroll: true
+
+execute:
+  enabled: false
+
+editor: source

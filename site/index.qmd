@@ -1,0 +1,71 @@
+---
+title: "About"
+pagetitle: "Nico S. Baßler · Theoretical quantum optics"
+description: "Collective light–matter interactions, open quantum systems, and the relation between collective emission and quantum correlations."
+title-block-style: none
+page-layout: full
+---
+
+::: {.profile-hero}
+::: {.profile-intro}
+[THEORETICAL QUANTUM OPTICS]{.eyebrow}
+
+<h1 class="profile-name">Nico S. Baßler</h1>
+
+::: {.hero-summary}
+Collective light–matter interactions.<br>
+Quantum correlations. Open systems.
+:::
+
+I study how light and matter behave collectively, with a focus on superradiance, quantum emitter arrays, and the relation between collective dynamics and entanglement. My work combines analytical calculations with numerical simulations.
+
+::: {.profile-links}
+[Publications](publications.qmd){.btn .btn-primary}
+[Research notes](notes/index.qmd){.btn .btn-outline-primary}
+:::
+
+[TU Darmstadt](https://www.iap.tu-darmstadt.de/tqt/theoretical_quantum_technology/team_tqt/team_details_163456.en.jsp) [Google Scholar ↗](https://scholar.google.com/citations?user=3egWxYoAAAAJ&hl=en){.quiet-link} [GitHub ↗](https://github.com/Nico0oblr){.quiet-link}
+:::
+
+:::
+
+::: {.section-heading}
+## Research interests
+
+From microscopic interactions to collective behavior.
+:::
+
+::: {.research-grid}
+::: {.research-item}
+[01]{.item-number}
+
+### Collective emission
+
+Superradiance, subradiance, and the competition between collective dynamics and local decoherence.
+:::
+::: {.research-item}
+[02]{.item-number}
+
+### Quantum correlations
+
+Entanglement, separability, and what collective observables tell us about a many-body quantum state.
+:::
+::: {.research-item}
+[03]{.item-number}
+
+### Light–matter interfaces
+
+Cooperative optical response in emitter arrays, from optical elements to cavities and sensing.
+:::
+:::
+
+::: {.notebook-strip}
+::: {}
+## Beyond the paper
+
+This site brings together my publications, scientific code, and a growing collection of research notes: derivations, conventions, calculations, and questions worth keeping track of.
+:::
+::: {}
+[Explore the notebook →](notes/index.qmd){.text-link}
+:::
+:::

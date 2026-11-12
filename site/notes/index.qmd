@@ -1,0 +1,18 @@
+---
+title: "Research Notes"
+description: "Derivations, calculations, numerical methods, and working conventions in quantum optics."
+listing:
+  contents: posts/*.qmd
+  type: default
+  sort: date desc
+  categories: true
+  fields: [date, title, description, categories]
+  date-format: "D MMM YYYY"
+  sort-ui: false
+  filter-ui: true
+  page-size: 10
+---
+
+A place for derivations, calculations, numerical methods, and ideas that benefit from a little more space. Notes can be short references or longer explorations; each one states its assumptions and conventions.
+
+The notebook begins with a reference on Dicke-state decay rates. More notes will follow as material is added.

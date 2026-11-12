@@ -1,0 +1,40 @@
+---
+title: "Code"
+description: "Public Julia code and reproducibility resources for collective quantum dynamics."
+---
+
+Public repositories for numerical methods and collective quantum dynamics. Each repository contains its own source, examples, and license information.
+
+::: {.code-project}
+[JULIA · OPEN QUANTUM SYSTEMS]{.eyebrow}
+
+## PIDicke.jl
+
+Permutation-invariant open-system calculations for two-level emitters in the Dicke basis, including population dynamics, quantum trajectories, coherences, and spin–cavity models.
+
+[Repository ↗](https://github.com/Nico0oblr/PiDicke.jl){.text-link} [Examples ↗](https://github.com/Nico0oblr/PiDicke.jl/tree/main/examples){.paper-link}
+:::
+
+::: {.code-project}
+[JULIA · NUMERICAL METHODS]{.eyebrow}
+
+## KrylovSolverMCWF
+
+A Krylov-subspace approach to Monte Carlo wavefunction simulations with QuantumOptics.jl, with an example notebook.
+
+[Repository ↗](https://github.com/Nico0oblr/KrylovSolverMCWF){.text-link}
+:::
+
+::: {.code-project}
+[JULIA · REPRODUCIBILITY]{.eyebrow}
+
+## Number fluctuations and particle loss
+
+Code accompanying work on number fluctuations and particle loss in Dicke superradiance.
+
+[Repository ↗](https://github.com/Nico0oblr/Code-for-Number-fluctuations-and-particle-loss-in-Dicke-superradiance-){.text-link}
+:::
+
+::: {.page-endnote}
+[All public repositories on GitHub ↗](https://github.com/Nico0oblr?tab=repositories)
+:::

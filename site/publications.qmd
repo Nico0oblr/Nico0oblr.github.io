@@ -1,0 +1,186 @@
+---
+title: "Publications"
+description: "Publications and preprints by Nico S. Baßler, with links to both versions where available."
+---
+
+Journal articles and preprints. Each work appears once, with links to the preprint and published version where available.
+
+[Google Scholar ↗](https://scholar.google.com/citations?user=3egWxYoAAAAJ&hl=en){.paper-link} [Download bibliography](publications.bib){.paper-link}
+
+## Preprints
+
+::: {.publication}
+[2026]{.publication-year}
+
+### Exact Analytical Treatment of Collectively Pumped Dicke Superradiance
+
+Avishi Poddar, **Nico Baßler**, Julian Lyne, Susanne F. Yelin, Helmut Ritsch, Claudiu Genes and Raphael Holzinger.
+
+Preprint · arXiv:2610.37665 (2026).
+
+[Preprint ↗](https://arxiv.org/abs/2610.37665){.paper-link}
+:::
+
+::: {.publication}
+[2026]{.publication-year}
+
+### Scaling theory of decoherence in Dicke superradiance
+
+**Nico S. Bassler**, Julian Lyne and Javier Cuerda.
+
+Preprint · arXiv:2607.28034 (2026).
+
+[Preprint ↗](https://arxiv.org/abs/2607.28034){.paper-link}
+:::
+
+::: {.publication}
+[2026]{.publication-year}
+
+### Dicke superradiance in degenerate quantum matter: interplay of exchange statistics and spatial confinement
+
+Julian Lyne, Kai Phillip Schmidt, Claudiu Genes and **Nico S. Bassler**.
+
+Preprint · arXiv:2603.00778 (2026).
+
+[Preprint ↗](https://arxiv.org/abs/2603.00778){.paper-link}
+:::
+
+::: {.publication}
+[2024]{.publication-year}
+
+### Generalized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules
+
+**N. S. Bassler**, M. Reitz, R. Holzinger, A. Vibók, G. J. Halász, B. Gurlek and C. Genes.
+
+Preprint · arXiv:2405.08718 (2024).
+
+[Preprint ↗](https://arxiv.org/abs/2405.08718){.paper-link}
+:::
+
+## Journal articles
+
+::: {.publication}
+[2026]{.publication-year}
+
+### Symbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance
+
+Raphael Holzinger, **Nico S. Bassler**, Julian Lyne, Susanne F. Yelin and Claudiu Genes.
+
+*Physical Review Letters* **137**, 193602 (2026).
+
+[Preprint ↗](https://arxiv.org/abs/2511.02390){.paper-link} [Published version ↗](https://doi.org/10.1103/5qcc-wfv6){.paper-link}
+:::
+
+::: {.publication}
+[2026]{.publication-year}
+
+### Solving Dicke superradiance analytically: A compendium of methods
+
+Raphael Holzinger, **Nico S. Bassler**, Julian Lyne, Fidel G. Jimenez, Julius T. Gohsrich and Claudiu Genes.
+
+*Physical Review A* **113**, 043718 (2026).
+
+[Preprint ↗](https://arxiv.org/abs/2503.10463){.paper-link} [Published version ↗](https://doi.org/10.1103/9p44-kwfl){.paper-link}
+:::
+
+::: {.publication}
+[2025]{.publication-year}
+
+### Absence of entanglement growth in Dicke superradiance
+
+**Nico S. Bassler**.
+
+*Physical Review A* **112**, 053713 (2025).
+
+[Preprint ↗](https://arxiv.org/abs/2504.13646){.paper-link} [Published version ↗](https://doi.org/10.1103/qxx1-xr44){.paper-link}
+:::
+
+::: {.publication}
+[2024]{.publication-year}
+
+### Purcell-modified Doppler cooling of quantum emitters inside optical cavities
+
+Julian Lyne, **Nico S. Bassler**, Seong eun Park, Guido Pupillo and Claudiu Genes.
+
+*Physical Review A* **110**, 013115 (2024).
+
+[Preprint ↗](https://arxiv.org/abs/2311.04129){.paper-link} [Published version ↗](https://doi.org/10.1103/PhysRevA.110.013115){.paper-link}
+:::
+
+::: {.publication}
+[2024]{.publication-year}
+
+### Cooperative effects in dense cold atomic gases including magnetic dipole interactions
+
+**N. S. Bassler**, I. Varma, M. Proske, P. Windpassinger, K. P. Schmidt and C. Genes.
+
+*Physical Review Research* **6**, 023147 (2024).
+
+[Preprint ↗](https://arxiv.org/abs/2306.11486){.paper-link} [Published version ↗](https://doi.org/10.1103/PhysRevResearch.6.023147){.paper-link}
+:::
+
+::: {.publication}
+[2024]{.publication-year}
+
+### Metasurface-Based Hybrid Optical Cavities for Chiral Sensing
+
+**Nico S. Bassler**, Andrea Aiello, Kai P. Schmidt, Claudiu Genes and Michael Reitz.
+
+*Physical Review Letters* **132**, 043602 (2024).
+
+[Preprint ↗](https://arxiv.org/abs/2306.00568){.paper-link} [Published version ↗](https://doi.org/10.1103/PhysRevLett.132.043602){.paper-link}
+:::
+
+::: {.publication}
+[2024]{.publication-year}
+
+### Scaling Law for Kasha’s Rule in Photoexcited Molecular Aggregates
+
+Raphael Holzinger, **Nico S. Bassler**, Helmut Ritsch and Claudiu Genes.
+
+*The Journal of Physical Chemistry A* **128**, 3910-3915 (2024).
+
+[Preprint ↗](https://arxiv.org/abs/2304.10236){.paper-link} [Published version ↗](https://doi.org/10.1021/acs.jpca.4c00342){.paper-link}
+:::
+
+::: {.publication}
+[2023]{.publication-year}
+
+### Linear optical elements based on cooperative subwavelength emitter arrays
+
+**Nico S. Bassler**, Michael Reitz, Kai P. Schmidt and Claudiu Genes.
+
+*Optics Express* **31**, 6003–6026 (2023).
+
+[Preprint ↗](https://arxiv.org/abs/2209.03204){.paper-link} [Published version ↗](https://doi.org/10.1364/OE.476830){.paper-link}
+:::
+
+::: {.publication}
+[2021]{.publication-year}
+
+### Effects of domain walls in bilayer graphene in an external magnetic field
+
+**N. S. Bassler** and K. P. Schmidt.
+
+*Physical Review B* **103**, 155422 (2021).
+
+[Preprint ↗](https://arxiv.org/abs/2009.06315){.paper-link} [Published version ↗](https://doi.org/10.1103/PhysRevB.103.155422){.paper-link}
+:::
+
+::: {.page-endnote}
+Related calculations and reproducibility resources are collected under [research notes](notes/index.qmd) and [code](code.qmd).
+:::
+
+## Doctoral thesis
+
+::: {.publication}
+[2025]{.publication-year}
+
+### Quantum Optics with Atoms and Molecules
+
+**Nico Baßler**.
+
+Doctoral dissertation, Friedrich-Alexander-Universität Erlangen-Nürnberg (2025).
+
+[University record ↗](https://www.emergent.physics.nat.fau.de/publications/theses/quantum/){.paper-link}
+:::
