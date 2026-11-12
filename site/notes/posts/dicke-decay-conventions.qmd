@@ -1,27 +1,18 @@
 ---
-title: "Dicke states and collective decay: conventions"
-description: "A short reference for ladder operators, Lindblad rates, and excitation-number notation."
+title: "Dicke superradiance as a continuous-time Markov chain"
+description: "Collective decay as a pure-death process: population dynamics, exponential waiting times, and exact trajectory sampling."
 date: 2026-11-12
-categories: [Collective spins, Conventions]
+categories: [Collective spins, Markov chains, Numerical methods]
 toc: true
 ---
 
-This note collects the conventions for collective decay of identical two-level emitters. It is a reference for notation, rather than a new research result.
+Dicke superradiance provides a useful bridge between open quantum systems and classical stochastic processes. For a state diagonal in the symmetric Dicke basis, collective decay is described exactly by a **continuous-time Markov chain**. Each emission removes one excitation; the time spent waiting for that emission is random.
 
-## Collective operators
+For a specified initial excitation number, the sequence of states is fixed. The randomness lies in the waiting times.
 
-For $N$ two-level emitters, define $J_- = \sum_{i=1}^N \sigma_-^{(i)}$, $J_+ = J_-^\dagger$, and $J_z = \tfrac12\sum_{i=1}^N \sigma_z^{(i)}$. Within a total-spin sector $j$,
+## From the master equation to transition rates
 
-$$
-J_-\lvert j,m\rangle
-= \sqrt{(j+m)(j-m+1)}\,\lvert j,m-1\rangle.
-$$
-
-The fully symmetric sector has $j=N/2$. If $k=j+m$ is the number of excitations, then $k$ runs from $0$ to $N$.
-
-## Rate convention
-
-Use the master equation
+Consider $N$ identical two-level emitters with collective lowering operator $J_- = \sum_{i=1}^N \sigma_-^{(i)}$ and master equation
 
 $$
 \dot\rho = \Gamma\,\mathcal D[J_-]\rho,
@@ -30,41 +21,148 @@ $$
 -\frac12\left\{L^\dagger L,\rho\right\}.
 $$
 
-For a Dicke state, the jump rate is
+Here $\Gamma>0$ is the single-emitter population decay rate. We assume collective decay only, with no drive or other loss channels, and restrict to the fully symmetric sector $j=N/2$.
+
+Let $\lvert k\rangle=\lvert j=N/2,m=k-N/2\rangle$ denote the Dicke state with $k$ excitations. The ladder matrix element is
 
 $$
-r_{j,m}=\Gamma(j+m)(j-m+1).
+J_-\lvert k\rangle
+=\sqrt{k(N-k+1)}\,\lvert k-1\rangle.
 $$
 
-In the symmetric sector this becomes
+A diagonal initial state, including the fully excited state, remains diagonal:
 
 $$
+\rho(t)=\sum_{k=0}^N p_k(t)\lvert k\rangle\langle k\rvert.
+$$
+
+Its populations obey
+
+$$
+\dot p_k=r_{k+1}p_{k+1}-r_kp_k,
+\qquad
+r_k=\Gamma k(N-k+1),
+$$
+
+where $r_0=0$ and the inflow term is absent at $k=N$.
+
+## A pure-death Markov chain
+
+Introduce a classical random variable $K_t\in\{0,1,\ldots,N\}$ for the number of remaining excitations. Its only allowed transition is
+
+$$
+k\longrightarrow k-1
+\quad\text{at rate}\quad
 r_k=\Gamma k(N-k+1).
 $$
 
-Consequently, the fully excited state has rate $r_N=\Gamma N$, while the ground state has $r_0=0$. These expressions use the dissipator normalization written above; checking that normalization avoids factors of two when comparing implementations.
+This is a **pure-death process**, with $k=0$ an absorbing state. The correspondence is
 
-## Population dynamics
+| Collective decay | Markov-chain description |
+|:--|:--|
+| $k$ excitations | State $K_t=k$ |
+| Dicke population $p_k(t)$ | Probability $\Pr(K_t=k)$ |
+| Photon emission | Transition $k\to k-1$ |
+| Population rate equations | Kolmogorov forward equation |
 
-Writing $p_k$ for the population with $k$ excitations gives
+A diagonal mixture corresponds to drawing the initial state $K_0$ with probabilities $p_k(0)$.
+
+Using a column probability vector $\boldsymbol p=(p_0,\ldots,p_N)^\mathsf T$, write
 
 $$
-\dot p_k = r_{k+1}p_{k+1}-r_kp_k,
+\dot{\boldsymbol p}=Q\boldsymbol p,
+\qquad
+Q_{k-1,k}=r_k,\quad Q_{k,k}=-r_k
+\quad (k=1,\ldots,N),
 $$
 
-with no inflow from above $k=N$ and no outflow below $k=0$. The emitted photon rate is $\sum_k r_kp_k$.
+with all remaining entries zero, including $Q_{0,0}=0$. Each column sums to zero, expressing conservation of probability, and
 
-The rate itself is a small Julia function:
+$$
+\boldsymbol p(t)=e^{Qt}\boldsymbol p(0).
+$$
+
+The quantum model determines the rates. Once these rates are known, the population evolution can be studied using the tools of finite-state Markov chains.
+
+## Waiting times and the emission burst
+
+At level $k>0$, the waiting time $\tau_k$ until the next photon has survival probability
+
+$$
+\Pr(\tau_k>\tau)=e^{-r_k\tau},
+\qquad
+\mathbb E[\tau_k]=\frac{1}{r_k}.
+$$
+
+After the jump, the process starts a new exponential waiting time at level $k-1$. The embedded discrete jump chain simply visits $N,N-1,\ldots,0$ when initialized at full excitation. The holding times are independent exponentials, with a different rate at each level.
+
+The fully excited state has rate $r_N=\Gamma N$. Around the middle of the ladder, the rate is of order $\Gamma N^2$, so a trajectory passes through these levels much faster. For comparison, independent emitters give a pure-death process with rates $r_k=\Gamma k$.
+
+The ensemble photon emission rate is
+
+$$
+I(t)=\mathbb E[r_{K_t}]
+=\sum_{k=0}^N r_kp_k(t)
+=-\frac{d}{dt}\mathbb E[K_t].
+$$
+
+This distinguishes the instantaneous rate at a particular level from the experimentally averaged emission curve, which also depends on the distribution of occupied levels.
+
+## Two emitters: equal rates, different populations
+
+For $N=2$, both nonzero transition rates are equal:
+
+$$
+2\xrightarrow{\,2\Gamma\,}1\xrightarrow{\,2\Gamma\,}0.
+$$
+
+Starting in $k=2$, the populations are
+
+$$
+p_2(t)=e^{-2\Gamma t},\qquad
+p_1(t)=2\Gamma t\,e^{-2\Gamma t},\qquad
+p_0(t)=1-(1+2\Gamma t)e^{-2\Gamma t}.
+$$
+
+The time of the second photon is the sum of two independent exponential waiting times with rate $2\Gamma$, an Erlang distribution. The factor of $t$ in $p_1$ also illustrates why formulas that assume distinct decay rates need care: Dicke rates satisfy $r_k=r_{N-k+1}$.
+
+## Exact sampling in Julia
+
+A trajectory can be sampled by drawing the waiting time at each level. This is the single-channel version of a Gillespie jump simulation; it introduces no time-step discretization.
 
 ```{.julia}
-dicke_decay_rate(N, k; Γ = 1.0) = Γ * k * (N - k + 1)
+using Random
 
-dicke_decay_rate(10, 10)  # 10.0: fully excited
-dicke_decay_rate(10, 5)   # 30.0: inside the ladder
-dicke_decay_rate(10, 0)   #  0.0: ground state
+function dicke_chain(N::Integer; Γ = 1.0, rng = Random.default_rng())
+    N >= 0 || throw(ArgumentError("N must be nonnegative"))
+    Γ > 0 || throw(ArgumentError("Γ must be positive"))
+
+    times = [0.0]
+    excitations = [N]
+    t = 0.0
+
+    for k in N:-1:1
+        rate = Γ * k * (N - k + 1)
+        t += randexp(rng) / rate
+        push!(times, t)
+        push!(excitations, k - 1)
+    end
+
+    return (; times, excitations)
+end
+
+path = dicke_chain(10; rng = Xoshiro(42))
 ```
+
+`path.times[2:end]` contains the photon emission times. Between successive times, the excitation number is constant; after the last emission it remains zero. Averaging the occupancy of each level over many such paths recovers $p_k(t)$.
+
+## Scope of the correspondence
+
+The classical process describes excitation populations and photon-counting trajectories for the diagonal states considered here. The quantum state contains additional structure: individual Dicke basis states are generally entangled, and the separability of a mixture requires a separate analysis. Coherences and other measurement schemes require their own descriptions.
 
 ## Related reading and code
 
-- [Absence of Entanglement Growth in Dicke Superradiance](https://arxiv.org/abs/2504.13646).
-- [PIDicke.jl](https://github.com/Nico0oblr/PiDicke.jl) for calculations in the Dicke basis.
+- R. Holzinger *et al.*, **Solving Dicke superradiance analytically: A compendium of methods**. [Preprint](https://arxiv.org/abs/2503.10463) · [Published version](https://doi.org/10.1103/9p44-kwfl). See the trajectory and probabilistic approaches.
+- N. S. Bassler, **Absence of entanglement growth in Dicke superradiance**. [Preprint](https://arxiv.org/abs/2504.13646) · [Published version](https://doi.org/10.1103/qxx1-xr44).
+- D. T. Gillespie, **Exact stochastic simulation of coupled chemical reactions**, *J. Phys. Chem.* **81**, 2340–2361 (1977). [Published version](https://doi.org/10.1021/j100540a008).
+- [PIDicke.jl](https://github.com/Nico0oblr/PiDicke.jl) for population generators and trajectory simulations in the Dicke basis.

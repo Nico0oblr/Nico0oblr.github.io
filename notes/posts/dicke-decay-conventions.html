@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2026-11-12">
-<meta name="description" content="A short reference for ladder operators, Lindblad rates, and excitation-number notation.">
+<meta name="description" content="Collective decay as a pure-death process: population dynamics, exponential waiting times, and exact trajectory sampling.">
 
-<title>Dicke states and collective decay: conventions – Nico S. Baßler</title>
+<title>Dicke superradiance as a continuous-time Markov chain – Nico S. Baßler</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-687630e97bf25af2fef248cb8cd8db16.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-960901c571956d62a69e40be4d415116.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -136,8 +136,8 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Dicke states and collective decay: conventions – Nico S. Baßler">
-<meta property="og:description" content="A short reference for ladder operators, Lindblad rates, and excitation-number notation.">
+<meta property="og:title" content="Dicke superradiance as a continuous-time Markov chain – Nico S. Baßler">
+<meta property="og:description" content="Collective decay as a pure-death process: population dynamics, exponential waiting times, and exact trajectory sampling.">
 <meta property="og:site_name" content="Nico S. Baßler">
 </head>
 
@@ -202,9 +202,12 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#collective-operators" id="toc-collective-operators" class="nav-link active" data-scroll-target="#collective-operators">Collective operators</a></li>
-  <li><a href="#rate-convention" id="toc-rate-convention" class="nav-link" data-scroll-target="#rate-convention">Rate convention</a></li>
-  <li><a href="#population-dynamics" id="toc-population-dynamics" class="nav-link" data-scroll-target="#population-dynamics">Population dynamics</a></li>
+  <li><a href="#from-the-master-equation-to-transition-rates" id="toc-from-the-master-equation-to-transition-rates" class="nav-link active" data-scroll-target="#from-the-master-equation-to-transition-rates">From the master equation to transition rates</a></li>
+  <li><a href="#a-pure-death-markov-chain" id="toc-a-pure-death-markov-chain" class="nav-link" data-scroll-target="#a-pure-death-markov-chain">A pure-death Markov chain</a></li>
+  <li><a href="#waiting-times-and-the-emission-burst" id="toc-waiting-times-and-the-emission-burst" class="nav-link" data-scroll-target="#waiting-times-and-the-emission-burst">Waiting times and the emission burst</a></li>
+  <li><a href="#two-emitters-equal-rates-different-populations" id="toc-two-emitters-equal-rates-different-populations" class="nav-link" data-scroll-target="#two-emitters-equal-rates-different-populations">Two emitters: equal rates, different populations</a></li>
+  <li><a href="#exact-sampling-in-julia" id="toc-exact-sampling-in-julia" class="nav-link" data-scroll-target="#exact-sampling-in-julia">Exact sampling in Julia</a></li>
+  <li><a href="#scope-of-the-correspondence" id="toc-scope-of-the-correspondence" class="nav-link" data-scroll-target="#scope-of-the-correspondence">Scope of the correspondence</a></li>
   <li><a href="#related-reading-and-code" id="toc-related-reading-and-code" class="nav-link" data-scroll-target="#related-reading-and-code">Related reading and code</a></li>
   </ul>
 </nav>
@@ -214,16 +217,17 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Dicke states and collective decay: conventions</h1>
+<h1 class="title">Dicke superradiance as a continuous-time Markov chain</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Collective spins</div>
-    <div class="quarto-category">Conventions</div>
+    <div class="quarto-category">Markov chains</div>
+    <div class="quarto-category">Numerical methods</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    A short reference for ladder operators, Lindblad rates, and excitation-number notation.
+    Collective decay as a pure-death process: population dynamics, exponential waiting times, and exact trajectory sampling.
   </div>
 </div>
 
@@ -246,54 +250,153 @@ window.Quarto = {
 </header>
 
 
-<p>This note collects the conventions for collective decay of identical two-level emitters. It is a reference for notation, rather than a new research result.</p>
-<section id="collective-operators" class="level2">
-<h2 class="anchored" data-anchor-id="collective-operators">Collective operators</h2>
-<p>For <span class="math inline">\(N\)</span> two-level emitters, define <span class="math inline">\(J_- = \sum_{i=1}^N \sigma_-^{(i)}\)</span>, <span class="math inline">\(J_+ = J_-^\dagger\)</span>, and <span class="math inline">\(J_z = \tfrac12\sum_{i=1}^N \sigma_z^{(i)}\)</span>. Within a total-spin sector <span class="math inline">\(j\)</span>,</p>
-<p><span class="math display">\[
-J_-\lvert j,m\rangle
-= \sqrt{(j+m)(j-m+1)}\,\lvert j,m-1\rangle.
-\]</span></p>
-<p>The fully symmetric sector has <span class="math inline">\(j=N/2\)</span>. If <span class="math inline">\(k=j+m\)</span> is the number of excitations, then <span class="math inline">\(k\)</span> runs from <span class="math inline">\(0\)</span> to <span class="math inline">\(N\)</span>.</p>
-</section>
-<section id="rate-convention" class="level2">
-<h2 class="anchored" data-anchor-id="rate-convention">Rate convention</h2>
-<p>Use the master equation</p>
+<p>Dicke superradiance provides a useful bridge between open quantum systems and classical stochastic processes. For a state diagonal in the symmetric Dicke basis, collective decay is described exactly by a <strong>continuous-time Markov chain</strong>. Each emission removes one excitation; the time spent waiting for that emission is random.</p>
+<p>For a specified initial excitation number, the sequence of states is fixed. The randomness lies in the waiting times.</p>
+<section id="from-the-master-equation-to-transition-rates" class="level2">
+<h2 class="anchored" data-anchor-id="from-the-master-equation-to-transition-rates">From the master equation to transition rates</h2>
+<p>Consider <span class="math inline">\(N\)</span> identical two-level emitters with collective lowering operator <span class="math inline">\(J_- = \sum_{i=1}^N \sigma_-^{(i)}\)</span> and master equation</p>
 <p><span class="math display">\[
 \dot\rho = \Gamma\,\mathcal D[J_-]\rho,
 \qquad
 \mathcal D[L]\rho = L\rho L^\dagger
 -\frac12\left\{L^\dagger L,\rho\right\}.
 \]</span></p>
-<p>For a Dicke state, the jump rate is</p>
+<p>Here <span class="math inline">\(\Gamma&gt;0\)</span> is the single-emitter population decay rate. We assume collective decay only, with no drive or other loss channels, and restrict to the fully symmetric sector <span class="math inline">\(j=N/2\)</span>.</p>
+<p>Let <span class="math inline">\(\lvert k\rangle=\lvert j=N/2,m=k-N/2\rangle\)</span> denote the Dicke state with <span class="math inline">\(k\)</span> excitations. The ladder matrix element is</p>
 <p><span class="math display">\[
-r_{j,m}=\Gamma(j+m)(j-m+1).
+J_-\lvert k\rangle
+=\sqrt{k(N-k+1)}\,\lvert k-1\rangle.
 \]</span></p>
-<p>In the symmetric sector this becomes</p>
+<p>A diagonal initial state, including the fully excited state, remains diagonal:</p>
 <p><span class="math display">\[
+\rho(t)=\sum_{k=0}^N p_k(t)\lvert k\rangle\langle k\rvert.
+\]</span></p>
+<p>Its populations obey</p>
+<p><span class="math display">\[
+\dot p_k=r_{k+1}p_{k+1}-r_kp_k,
+\qquad
+r_k=\Gamma k(N-k+1),
+\]</span></p>
+<p>where <span class="math inline">\(r_0=0\)</span> and the inflow term is absent at <span class="math inline">\(k=N\)</span>.</p>
+</section>
+<section id="a-pure-death-markov-chain" class="level2">
+<h2 class="anchored" data-anchor-id="a-pure-death-markov-chain">A pure-death Markov chain</h2>
+<p>Introduce a classical random variable <span class="math inline">\(K_t\in\{0,1,\ldots,N\}\)</span> for the number of remaining excitations. Its only allowed transition is</p>
+<p><span class="math display">\[
+k\longrightarrow k-1
+\quad\text{at rate}\quad
 r_k=\Gamma k(N-k+1).
 \]</span></p>
-<p>Consequently, the fully excited state has rate <span class="math inline">\(r_N=\Gamma N\)</span>, while the ground state has <span class="math inline">\(r_0=0\)</span>. These expressions use the dissipator normalization written above; checking that normalization avoids factors of two when comparing implementations.</p>
-</section>
-<section id="population-dynamics" class="level2">
-<h2 class="anchored" data-anchor-id="population-dynamics">Population dynamics</h2>
-<p>Writing <span class="math inline">\(p_k\)</span> for the population with <span class="math inline">\(k\)</span> excitations gives</p>
+<p>This is a <strong>pure-death process</strong>, with <span class="math inline">\(k=0\)</span> an absorbing state. The correspondence is</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Collective decay</th>
+<th style="text-align: left;">Markov-chain description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(k\)</span> excitations</td>
+<td style="text-align: left;">State <span class="math inline">\(K_t=k\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dicke population <span class="math inline">\(p_k(t)\)</span></td>
+<td style="text-align: left;">Probability <span class="math inline">\(\Pr(K_t=k)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Photon emission</td>
+<td style="text-align: left;">Transition <span class="math inline">\(k\to k-1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Population rate equations</td>
+<td style="text-align: left;">Kolmogorov forward equation</td>
+</tr>
+</tbody>
+</table>
+<p>A diagonal mixture corresponds to drawing the initial state <span class="math inline">\(K_0\)</span> with probabilities <span class="math inline">\(p_k(0)\)</span>.</p>
+<p>Using a column probability vector <span class="math inline">\(\boldsymbol p=(p_0,\ldots,p_N)^\mathsf T\)</span>, write</p>
 <p><span class="math display">\[
-\dot p_k = r_{k+1}p_{k+1}-r_kp_k,
+\dot{\boldsymbol p}=Q\boldsymbol p,
+\qquad
+Q_{k-1,k}=r_k,\quad Q_{k,k}=-r_k
+\quad (k=1,\ldots,N),
 \]</span></p>
-<p>with no inflow from above <span class="math inline">\(k=N\)</span> and no outflow below <span class="math inline">\(k=0\)</span>. The emitted photon rate is <span class="math inline">\(\sum_k r_kp_k\)</span>.</p>
-<p>The rate itself is a small Julia function:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dicke_decay_rate</span>(N, k; Γ <span class="op">=</span> <span class="fl">1.0</span>) <span class="op">=</span> Γ <span class="op">*</span> k <span class="op">*</span> (N <span class="op">-</span> k <span class="op">+</span> <span class="fl">1</span>)</span>
+<p>with all remaining entries zero, including <span class="math inline">\(Q_{0,0}=0\)</span>. Each column sums to zero, expressing conservation of probability, and</p>
+<p><span class="math display">\[
+\boldsymbol p(t)=e^{Qt}\boldsymbol p(0).
+\]</span></p>
+<p>The quantum model determines the rates. Once these rates are known, the population evolution can be studied using the tools of finite-state Markov chains.</p>
+</section>
+<section id="waiting-times-and-the-emission-burst" class="level2">
+<h2 class="anchored" data-anchor-id="waiting-times-and-the-emission-burst">Waiting times and the emission burst</h2>
+<p>At level <span class="math inline">\(k&gt;0\)</span>, the waiting time <span class="math inline">\(\tau_k\)</span> until the next photon has survival probability</p>
+<p><span class="math display">\[
+\Pr(\tau_k&gt;\tau)=e^{-r_k\tau},
+\qquad
+\mathbb E[\tau_k]=\frac{1}{r_k}.
+\]</span></p>
+<p>After the jump, the process starts a new exponential waiting time at level <span class="math inline">\(k-1\)</span>. The embedded discrete jump chain simply visits <span class="math inline">\(N,N-1,\ldots,0\)</span> when initialized at full excitation. The holding times are independent exponentials, with a different rate at each level.</p>
+<p>The fully excited state has rate <span class="math inline">\(r_N=\Gamma N\)</span>. Around the middle of the ladder, the rate is of order <span class="math inline">\(\Gamma N^2\)</span>, so a trajectory passes through these levels much faster. For comparison, independent emitters give a pure-death process with rates <span class="math inline">\(r_k=\Gamma k\)</span>.</p>
+<p>The ensemble photon emission rate is</p>
+<p><span class="math display">\[
+I(t)=\mathbb E[r_{K_t}]
+=\sum_{k=0}^N r_kp_k(t)
+=-\frac{d}{dt}\mathbb E[K_t].
+\]</span></p>
+<p>This distinguishes the instantaneous rate at a particular level from the experimentally averaged emission curve, which also depends on the distribution of occupied levels.</p>
+</section>
+<section id="two-emitters-equal-rates-different-populations" class="level2">
+<h2 class="anchored" data-anchor-id="two-emitters-equal-rates-different-populations">Two emitters: equal rates, different populations</h2>
+<p>For <span class="math inline">\(N=2\)</span>, both nonzero transition rates are equal:</p>
+<p><span class="math display">\[
+2\xrightarrow{\,2\Gamma\,}1\xrightarrow{\,2\Gamma\,}0.
+\]</span></p>
+<p>Starting in <span class="math inline">\(k=2\)</span>, the populations are</p>
+<p><span class="math display">\[
+p_2(t)=e^{-2\Gamma t},\qquad
+p_1(t)=2\Gamma t\,e^{-2\Gamma t},\qquad
+p_0(t)=1-(1+2\Gamma t)e^{-2\Gamma t}.
+\]</span></p>
+<p>The time of the second photon is the sum of two independent exponential waiting times with rate <span class="math inline">\(2\Gamma\)</span>, an Erlang distribution. The factor of <span class="math inline">\(t\)</span> in <span class="math inline">\(p_1\)</span> also illustrates why formulas that assume distinct decay rates need care: Dicke rates satisfy <span class="math inline">\(r_k=r_{N-k+1}\)</span>.</p>
+</section>
+<section id="exact-sampling-in-julia" class="level2">
+<h2 class="anchored" data-anchor-id="exact-sampling-in-julia">Exact sampling in Julia</h2>
+<p>A trajectory can be sampled by drawing the waiting time at each level. This is the single-channel version of a Gillespie jump simulation; it introduces no time-step discretization.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dicke_decay_rate</span>(<span class="fl">10</span>, <span class="fl">10</span>)  <span class="co"># 10.0: fully excited</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dicke_decay_rate</span>(<span class="fl">10</span>, <span class="fl">5</span>)   <span class="co"># 30.0: inside the ladder</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dicke_decay_rate</span>(<span class="fl">10</span>, <span class="fl">0</span>)   <span class="co">#  0.0: ground state</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">dicke_chain</span>(N<span class="op">::</span><span class="dt">Integer</span>; Γ <span class="op">=</span> <span class="fl">1.0</span>, rng <span class="op">=</span> <span class="bu">Random</span>.<span class="fu">default_rng</span>())</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    N <span class="op">&gt;=</span> <span class="fl">0</span> <span class="op">||</span> <span class="fu">throw</span>(<span class="fu">ArgumentError</span>(<span class="st">"N must be nonnegative"</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    Γ <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">||</span> <span class="fu">throw</span>(<span class="fu">ArgumentError</span>(<span class="st">"Γ must be positive"</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    times <span class="op">=</span> [<span class="fl">0.0</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    excitations <span class="op">=</span> [N]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> N<span class="op">:-</span><span class="fl">1</span><span class="op">:</span><span class="fl">1</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        rate <span class="op">=</span> Γ <span class="op">*</span> k <span class="op">*</span> (N <span class="op">-</span> k <span class="op">+</span> <span class="fl">1</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        t <span class="op">+=</span> <span class="fu">randexp</span>(rng) <span class="op">/</span> rate</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">push!</span>(times, t)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">push!</span>(excitations, k <span class="op">-</span> <span class="fl">1</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (; times, excitations)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> <span class="fu">dicke_chain</span>(<span class="fl">10</span>; rng <span class="op">=</span> <span class="fu">Xoshiro</span>(<span class="fl">42</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>path.times[2:end]</code> contains the photon emission times. Between successive times, the excitation number is constant; after the last emission it remains zero. Averaging the occupancy of each level over many such paths recovers <span class="math inline">\(p_k(t)\)</span>.</p>
+</section>
+<section id="scope-of-the-correspondence" class="level2">
+<h2 class="anchored" data-anchor-id="scope-of-the-correspondence">Scope of the correspondence</h2>
+<p>The classical process describes excitation populations and photon-counting trajectories for the diagonal states considered here. The quantum state contains additional structure: individual Dicke basis states are generally entangled, and the separability of a mixture requires a separate analysis. Coherences and other measurement schemes require their own descriptions.</p>
 </section>
 <section id="related-reading-and-code" class="level2">
 <h2 class="anchored" data-anchor-id="related-reading-and-code">Related reading and code</h2>
 <ul>
-<li><a href="https://arxiv.org/abs/2504.13646">Absence of Entanglement Growth in Dicke Superradiance</a>.</li>
-<li><a href="https://github.com/Nico0oblr/PiDicke.jl">PIDicke.jl</a> for calculations in the Dicke basis.</li>
+<li>R. Holzinger <em>et al.</em>, <strong>Solving Dicke superradiance analytically: A compendium of methods</strong>. <a href="https://arxiv.org/abs/2503.10463">Preprint</a> · <a href="https://doi.org/10.1103/9p44-kwfl">Published version</a>. See the trajectory and probabilistic approaches.</li>
+<li>N. S. Bassler, <strong>Absence of entanglement growth in Dicke superradiance</strong>. <a href="https://arxiv.org/abs/2504.13646">Preprint</a> · <a href="https://doi.org/10.1103/qxx1-xr44">Published version</a>.</li>
+<li>D. T. Gillespie, <strong>Exact stochastic simulation of coupled chemical reactions</strong>, <em>J. Phys. Chem.</em> <strong>81</strong>, 2340–2361 (1977). <a href="https://doi.org/10.1021/j100540a008">Published version</a>.</li>
+<li><a href="https://github.com/Nico0oblr/PiDicke.jl">PIDicke.jl</a> for population generators and trajectory simulations in the Dicke basis.</li>
 </ul>
 
 

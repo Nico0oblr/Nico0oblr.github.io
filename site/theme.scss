@@ -29,6 +29,8 @@ body:has(.profile-hero) #title-block-header { display: none; }
 h2 { letter-spacing: -.025em; color: $primary; }
 h3 { color: $primary; }
 p { line-height: 1.75; }
+/* Keep long equations scrollable within the article on narrow screens. */
+main mjx-container[display="true"] { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding-block: .2rem; }
 a { text-underline-offset: .2em; }
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #b6804e; outline-offset: 4px; }
 .eyebrow, .item-number, .publication-year { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .7rem; letter-spacing: .13em; color: #647578; }

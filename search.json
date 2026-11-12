@@ -2,37 +2,58 @@
   {
     "objectID": "notes/posts/dicke-decay-conventions.html",
     "href": "notes/posts/dicke-decay-conventions.html",
-    "title": "Dicke states and collective decay: conventions",
+    "title": "Dicke superradiance as a continuous-time Markov chain",
     "section": "",
-    "text": "This note collects the conventions for collective decay of identical two-level emitters. It is a reference for notation, rather than a new research result."
+    "text": "Dicke superradiance provides a useful bridge between open quantum systems and classical stochastic processes. For a state diagonal in the symmetric Dicke basis, collective decay is described exactly by a continuous-time Markov chain. Each emission removes one excitation; the time spent waiting for that emission is random.\nFor a specified initial excitation number, the sequence of states is fixed. The randomness lies in the waiting times."
   },
   {
-    "objectID": "notes/posts/dicke-decay-conventions.html#collective-operators",
-    "href": "notes/posts/dicke-decay-conventions.html#collective-operators",
-    "title": "Dicke states and collective decay: conventions",
-    "section": "Collective operators",
-    "text": "Collective operators\nFor \\(N\\) two-level emitters, define \\(J_- = \\sum_{i=1}^N \\sigma_-^{(i)}\\), \\(J_+ = J_-^\\dagger\\), and \\(J_z = \\tfrac12\\sum_{i=1}^N \\sigma_z^{(i)}\\). Within a total-spin sector \\(j\\),\n\\[\nJ_-\\lvert j,m\\rangle\n= \\sqrt{(j+m)(j-m+1)}\\,\\lvert j,m-1\\rangle.\n\\]\nThe fully symmetric sector has \\(j=N/2\\). If \\(k=j+m\\) is the number of excitations, then \\(k\\) runs from \\(0\\) to \\(N\\)."
+    "objectID": "notes/posts/dicke-decay-conventions.html#from-the-master-equation-to-transition-rates",
+    "href": "notes/posts/dicke-decay-conventions.html#from-the-master-equation-to-transition-rates",
+    "title": "Dicke superradiance as a continuous-time Markov chain",
+    "section": "From the master equation to transition rates",
+    "text": "From the master equation to transition rates\nConsider \\(N\\) identical two-level emitters with collective lowering operator \\(J_- = \\sum_{i=1}^N \\sigma_-^{(i)}\\) and master equation\n\\[\n\\dot\\rho = \\Gamma\\,\\mathcal D[J_-]\\rho,\n\\qquad\n\\mathcal D[L]\\rho = L\\rho L^\\dagger\n-\\frac12\\left\\{L^\\dagger L,\\rho\\right\\}.\n\\]\nHere \\(\\Gamma&gt;0\\) is the single-emitter population decay rate. We assume collective decay only, with no drive or other loss channels, and restrict to the fully symmetric sector \\(j=N/2\\).\nLet \\(\\lvert k\\rangle=\\lvert j=N/2,m=k-N/2\\rangle\\) denote the Dicke state with \\(k\\) excitations. The ladder matrix element is\n\\[\nJ_-\\lvert k\\rangle\n=\\sqrt{k(N-k+1)}\\,\\lvert k-1\\rangle.\n\\]\nA diagonal initial state, including the fully excited state, remains diagonal:\n\\[\n\\rho(t)=\\sum_{k=0}^N p_k(t)\\lvert k\\rangle\\langle k\\rvert.\n\\]\nIts populations obey\n\\[\n\\dot p_k=r_{k+1}p_{k+1}-r_kp_k,\n\\qquad\nr_k=\\Gamma k(N-k+1),\n\\]\nwhere \\(r_0=0\\) and the inflow term is absent at \\(k=N\\)."
   },
   {
-    "objectID": "notes/posts/dicke-decay-conventions.html#rate-convention",
-    "href": "notes/posts/dicke-decay-conventions.html#rate-convention",
-    "title": "Dicke states and collective decay: conventions",
-    "section": "Rate convention",
-    "text": "Rate convention\nUse the master equation\n\\[\n\\dot\\rho = \\Gamma\\,\\mathcal D[J_-]\\rho,\n\\qquad\n\\mathcal D[L]\\rho = L\\rho L^\\dagger\n-\\frac12\\left\\{L^\\dagger L,\\rho\\right\\}.\n\\]\nFor a Dicke state, the jump rate is\n\\[\nr_{j,m}=\\Gamma(j+m)(j-m+1).\n\\]\nIn the symmetric sector this becomes\n\\[\nr_k=\\Gamma k(N-k+1).\n\\]\nConsequently, the fully excited state has rate \\(r_N=\\Gamma N\\), while the ground state has \\(r_0=0\\). These expressions use the dissipator normalization written above; checking that normalization avoids factors of two when comparing implementations."
+    "objectID": "notes/posts/dicke-decay-conventions.html#a-pure-death-markov-chain",
+    "href": "notes/posts/dicke-decay-conventions.html#a-pure-death-markov-chain",
+    "title": "Dicke superradiance as a continuous-time Markov chain",
+    "section": "A pure-death Markov chain",
+    "text": "A pure-death Markov chain\nIntroduce a classical random variable \\(K_t\\in\\{0,1,\\ldots,N\\}\\) for the number of remaining excitations. Its only allowed transition is\n\\[\nk\\longrightarrow k-1\n\\quad\\text{at rate}\\quad\nr_k=\\Gamma k(N-k+1).\n\\]\nThis is a pure-death process, with \\(k=0\\) an absorbing state. The correspondence is\n\n\n\nCollective decay\nMarkov-chain description\n\n\n\n\n\\(k\\) excitations\nState \\(K_t=k\\)\n\n\nDicke population \\(p_k(t)\\)\nProbability \\(\\Pr(K_t=k)\\)\n\n\nPhoton emission\nTransition \\(k\\to k-1\\)\n\n\nPopulation rate equations\nKolmogorov forward equation\n\n\n\nA diagonal mixture corresponds to drawing the initial state \\(K_0\\) with probabilities \\(p_k(0)\\).\nUsing a column probability vector \\(\\boldsymbol p=(p_0,\\ldots,p_N)^\\mathsf T\\), write\n\\[\n\\dot{\\boldsymbol p}=Q\\boldsymbol p,\n\\qquad\nQ_{k-1,k}=r_k,\\quad Q_{k,k}=-r_k\n\\quad (k=1,\\ldots,N),\n\\]\nwith all remaining entries zero, including \\(Q_{0,0}=0\\). Each column sums to zero, expressing conservation of probability, and\n\\[\n\\boldsymbol p(t)=e^{Qt}\\boldsymbol p(0).\n\\]\nThe quantum model determines the rates. Once these rates are known, the population evolution can be studied using the tools of finite-state Markov chains."
   },
   {
-    "objectID": "notes/posts/dicke-decay-conventions.html#population-dynamics",
-    "href": "notes/posts/dicke-decay-conventions.html#population-dynamics",
-    "title": "Dicke states and collective decay: conventions",
-    "section": "Population dynamics",
-    "text": "Population dynamics\nWriting \\(p_k\\) for the population with \\(k\\) excitations gives\n\\[\n\\dot p_k = r_{k+1}p_{k+1}-r_kp_k,\n\\]\nwith no inflow from above \\(k=N\\) and no outflow below \\(k=0\\). The emitted photon rate is \\(\\sum_k r_kp_k\\).\nThe rate itself is a small Julia function:\ndicke_decay_rate(N, k; Γ = 1.0) = Γ * k * (N - k + 1)\n\ndicke_decay_rate(10, 10)  # 10.0: fully excited\ndicke_decay_rate(10, 5)   # 30.0: inside the ladder\ndicke_decay_rate(10, 0)   #  0.0: ground state"
+    "objectID": "notes/posts/dicke-decay-conventions.html#waiting-times-and-the-emission-burst",
+    "href": "notes/posts/dicke-decay-conventions.html#waiting-times-and-the-emission-burst",
+    "title": "Dicke superradiance as a continuous-time Markov chain",
+    "section": "Waiting times and the emission burst",
+    "text": "Waiting times and the emission burst\nAt level \\(k&gt;0\\), the waiting time \\(\\tau_k\\) until the next photon has survival probability\n\\[\n\\Pr(\\tau_k&gt;\\tau)=e^{-r_k\\tau},\n\\qquad\n\\mathbb E[\\tau_k]=\\frac{1}{r_k}.\n\\]\nAfter the jump, the process starts a new exponential waiting time at level \\(k-1\\). The embedded discrete jump chain simply visits \\(N,N-1,\\ldots,0\\) when initialized at full excitation. The holding times are independent exponentials, with a different rate at each level.\nThe fully excited state has rate \\(r_N=\\Gamma N\\). Around the middle of the ladder, the rate is of order \\(\\Gamma N^2\\), so a trajectory passes through these levels much faster. For comparison, independent emitters give a pure-death process with rates \\(r_k=\\Gamma k\\).\nThe ensemble photon emission rate is\n\\[\nI(t)=\\mathbb E[r_{K_t}]\n=\\sum_{k=0}^N r_kp_k(t)\n=-\\frac{d}{dt}\\mathbb E[K_t].\n\\]\nThis distinguishes the instantaneous rate at a particular level from the experimentally averaged emission curve, which also depends on the distribution of occupied levels."
+  },
+  {
+    "objectID": "notes/posts/dicke-decay-conventions.html#two-emitters-equal-rates-different-populations",
+    "href": "notes/posts/dicke-decay-conventions.html#two-emitters-equal-rates-different-populations",
+    "title": "Dicke superradiance as a continuous-time Markov chain",
+    "section": "Two emitters: equal rates, different populations",
+    "text": "Two emitters: equal rates, different populations\nFor \\(N=2\\), both nonzero transition rates are equal:\n\\[\n2\\xrightarrow{\\,2\\Gamma\\,}1\\xrightarrow{\\,2\\Gamma\\,}0.\n\\]\nStarting in \\(k=2\\), the populations are\n\\[\np_2(t)=e^{-2\\Gamma t},\\qquad\np_1(t)=2\\Gamma t\\,e^{-2\\Gamma t},\\qquad\np_0(t)=1-(1+2\\Gamma t)e^{-2\\Gamma t}.\n\\]\nThe time of the second photon is the sum of two independent exponential waiting times with rate \\(2\\Gamma\\), an Erlang distribution. The factor of \\(t\\) in \\(p_1\\) also illustrates why formulas that assume distinct decay rates need care: Dicke rates satisfy \\(r_k=r_{N-k+1}\\)."
+  },
+  {
+    "objectID": "notes/posts/dicke-decay-conventions.html#exact-sampling-in-julia",
+    "href": "notes/posts/dicke-decay-conventions.html#exact-sampling-in-julia",
+    "title": "Dicke superradiance as a continuous-time Markov chain",
+    "section": "Exact sampling in Julia",
+    "text": "Exact sampling in Julia\nA trajectory can be sampled by drawing the waiting time at each level. This is the single-channel version of a Gillespie jump simulation; it introduces no time-step discretization.\nusing Random\n\nfunction dicke_chain(N::Integer; Γ = 1.0, rng = Random.default_rng())\n    N &gt;= 0 || throw(ArgumentError(\"N must be nonnegative\"))\n    Γ &gt; 0 || throw(ArgumentError(\"Γ must be positive\"))\n\n    times = [0.0]\n    excitations = [N]\n    t = 0.0\n\n    for k in N:-1:1\n        rate = Γ * k * (N - k + 1)\n        t += randexp(rng) / rate\n        push!(times, t)\n        push!(excitations, k - 1)\n    end\n\n    return (; times, excitations)\nend\n\npath = dicke_chain(10; rng = Xoshiro(42))\npath.times[2:end] contains the photon emission times. Between successive times, the excitation number is constant; after the last emission it remains zero. Averaging the occupancy of each level over many such paths recovers \\(p_k(t)\\)."
+  },
+  {
+    "objectID": "notes/posts/dicke-decay-conventions.html#scope-of-the-correspondence",
+    "href": "notes/posts/dicke-decay-conventions.html#scope-of-the-correspondence",
+    "title": "Dicke superradiance as a continuous-time Markov chain",
+    "section": "Scope of the correspondence",
+    "text": "Scope of the correspondence\nThe classical process describes excitation populations and photon-counting trajectories for the diagonal states considered here. The quantum state contains additional structure: individual Dicke basis states are generally entangled, and the separability of a mixture requires a separate analysis. Coherences and other measurement schemes require their own descriptions."
   },
   {
     "objectID": "notes/posts/dicke-decay-conventions.html#related-reading-and-code",
     "href": "notes/posts/dicke-decay-conventions.html#related-reading-and-code",
-    "title": "Dicke states and collective decay: conventions",
+    "title": "Dicke superradiance as a continuous-time Markov chain",
     "section": "Related reading and code",
-    "text": "Related reading and code\n\nAbsence of Entanglement Growth in Dicke Superradiance.\nPIDicke.jl for calculations in the Dicke basis."
+    "text": "Related reading and code\n\nR. Holzinger et al., Solving Dicke superradiance analytically: A compendium of methods. Preprint · Published version. See the trajectory and probabilistic approaches.\nN. S. Bassler, Absence of entanglement growth in Dicke superradiance. Preprint · Published version.\nD. T. Gillespie, Exact stochastic simulation of coupled chemical reactions, J. Phys. Chem. 81, 2340–2361 (1977). Published version.\nPIDicke.jl for population generators and trajectory simulations in the Dicke basis."
   },
   {
     "objectID": "code.html",
@@ -109,6 +130,6 @@
     "href": "notes/index.html",
     "title": "Research Notes",
     "section": "",
-    "text": "A place for derivations, calculations, numerical methods, and ideas that benefit from a little more space. Notes can be short references or longer explorations; each one states its assumptions and conventions.\nThe notebook begins with a reference on Dicke-state decay rates. More notes will follow as material is added.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\nDicke states and collective decay: conventions\n\n\n\nCollective spins\n\nConventions\n\n\n\nA short reference for ladder operators, Lindblad rates, and excitation-number notation.\n\n\n\n\n\n12 Nov 2026\n\n\n\n\n\nNo matching items"
+    "text": "A place for derivations, calculations, numerical methods, and ideas that benefit from a little more space. Notes can be short references or longer explorations; each one states its assumptions and conventions.\nThe first note connects Dicke collective decay to continuous-time Markov chains, from transition rates and waiting times to trajectory sampling.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\nDicke superradiance as a continuous-time Markov chain\n\n\n\nCollective spins\n\nMarkov chains\n\nNumerical methods\n\n\n\nCollective decay as a pure-death process: population dynamics, exponential waiting times, and exact trajectory sampling.\n\n\n\n\n\n12 Nov 2026\n\n\n\n\n\nNo matching items"
   }
 ]
