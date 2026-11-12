@@ -63,7 +63,7 @@ Cooperative optical response in emitter arrays, from optical elements to cavitie
 ::: {}
 ## Beyond the paper
 
-This site brings together my publications, scientific code, and a growing collection of research notes: derivations, conventions, calculations, and questions worth keeping track of.
+This site brings together my publications, [conference presentations](presentations.qmd), scientific code, and a growing collection of research notes: derivations, conventions, calculations, and questions worth keeping track of.
 :::
 ::: {}
 [Explore the notebook →](notes/index.qmd){.text-link}

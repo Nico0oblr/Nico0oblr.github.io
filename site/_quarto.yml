@@ -4,6 +4,7 @@ project:
   render:
     - index.qmd
     - publications.qmd
+    - presentations.qmd
     - code.qmd
     - notes/index.qmd
     - notes/posts/*.qmd
@@ -24,6 +25,8 @@ website:
         text: About
       - href: publications.qmd
         text: Publications
+      - href: presentations.qmd
+        text: Presentations
       - href: notes/index.qmd
         text: Research Notes
       - href: code.qmd

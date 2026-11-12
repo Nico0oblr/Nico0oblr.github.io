@@ -58,6 +58,11 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 .publication > p { margin-bottom: .65rem; font-size: .9rem; }
 .publication > p:first-child { position: absolute; left: 0; top: 1.5rem; }
 .paper-link { display: inline-block; font-size: .8rem; margin-right: 1rem; }
+.presentation { border-top: 1px solid $border-color; padding: 1.5rem 0; }
+.presentation h3 { font-size: 1.4rem; line-height: 1.35; margin: .7rem 0; }
+.presentation p { font-size: .92rem; margin-bottom: .65rem; }
+.presentation-kind { display: inline-block; padding: .2rem .6rem; background: #edf0e9; border-radius: 3px; color: $primary; font-family: ui-monospace, monospace; font-size: .65rem; letter-spacing: .05em; text-transform: uppercase; }
+.presentation-meta { color: #647578; font-size: .8rem; }
 .code-project { border-top: 1px solid $border-color; margin-top: 2rem; padding: 1.7rem 0 .4rem; }
 .code-project h2 { border: 0; margin-top: .6rem; font-size: 1.8rem; }
 .code-project p { font-size: .95rem; }

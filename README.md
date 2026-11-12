@@ -10,6 +10,7 @@ All authored content lives in `site/`:
 | --- | --- |
 | `site/index.qmd` | About and research interests |
 | `site/publications.qmd` | Publications and preprints, with links to both versions |
+| `site/presentations.qmd` | Conference talks and posters, with programme links |
 | `site/notes/index.qmd` | Automatic research-note index |
 | `site/notes/posts/*.qmd` | Individual notes |
 | `site/code.qmd` | Public code links |
@@ -33,6 +34,10 @@ python3 scripts/build.py
 Inspect the result, then commit and push. GitHub Actions also renders source changes on `main`, commits the generated pages, and explicitly requests a Pages rebuild. GitHub Pages serves **main / (root)**, preserving the original repository's publishing route. No personal access token is required by the workflow.
 
 Generated HTML, `site_libs/`, and related assets in the repository root are build output. Edit the `.qmd` source instead. `scripts/generated-files.json` records generated files so removed notes are also removed from the published output on the next build. Git history and previous deployments can still retain previously published content.
+
+## Add a presentation
+
+Edit `site/presentations.qmd` and add an entry under its year with the title, event, date, contribution type, and programme link. Preserve the programme's title and verify who presented the contribution. Label invited talks only when documented. Add slides or poster PDFs only when the user selects files for publication; link them from the relevant entry.
 
 ## Add a research note
 

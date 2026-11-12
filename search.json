@@ -84,20 +84,6 @@
     "text": "Number fluctuations and particle loss\nCode accompanying work on number fluctuations and particle loss in Dicke superradiance.\nRepository ↗"
   },
   {
-    "objectID": "index.html#research-interests",
-    "href": "index.html#research-interests",
-    "title": "About",
-    "section": "Research interests",
-    "text": "Research interests\nFrom microscopic interactions to collective behavior."
-  },
-  {
-    "objectID": "index.html#beyond-the-paper",
-    "href": "index.html#beyond-the-paper",
-    "title": "About",
-    "section": "Beyond the paper",
-    "text": "Beyond the paper\nThis site brings together my publications, scientific code, and a growing collection of research notes: derivations, conventions, calculations, and questions worth keeping track of."
-  },
-  {
     "objectID": "publications.html",
     "href": "publications.html",
     "title": "Publications",
@@ -124,6 +110,62 @@
     "title": "Publications",
     "section": "Theses",
     "text": "Theses\n\n2025\n\nQuantum Optics with Atoms and Molecules\nNico Baßler.\nDoctoral dissertation, Friedrich-Alexander-Universität Erlangen-Nürnberg (2025).\nThesis (PDF, 13.2 MB) University record ↗\n\n\n\n2020\n\nEffect of domain walls in bilayer graphene in an external magnetic field\nNico S. Baßler.\nMaster’s thesis in physics, Friedrich-Alexander-Universität Erlangen-Nürnberg (2020).\nThesis (PDF, 7.5 MB) Related article\n\n\n\nRelated calculations and reproducibility resources are collected under research notes and code."
+  },
+  {
+    "objectID": "index.html#research-interests",
+    "href": "index.html#research-interests",
+    "title": "About",
+    "section": "Research interests",
+    "text": "Research interests\nFrom microscopic interactions to collective behavior."
+  },
+  {
+    "objectID": "index.html#beyond-the-paper",
+    "href": "index.html#beyond-the-paper",
+    "title": "About",
+    "section": "Beyond the paper",
+    "text": "Beyond the paper\nThis site brings together my publications, conference presentations, scientific code, and a growing collection of research notes: derivations, conventions, calculations, and questions worth keeping track of."
+  },
+  {
+    "objectID": "presentations.html",
+    "href": "presentations.html",
+    "title": "Presentations",
+    "section": "",
+    "text": "Conference talks and posters, with links to programmes and related publications."
+  },
+  {
+    "objectID": "presentations.html#section",
+    "href": "presentations.html#section",
+    "title": "Presentations",
+    "section": "2026",
+    "text": "2026\n\nTalk\n\nSymbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance\nDPG Spring Meeting · Mainz, Germany\n6 March 2026 · Q 69.6\nProgramme & abstract ↗ Related paper\n\n\n\nPoster\n\nAbsence of Entanglement Growth in Dicke Superradiance\nDPG Spring Meeting · Mainz, Germany\n4 March 2026 · Q 43.2\nProgramme & abstract ↗ Related paper"
+  },
+  {
+    "objectID": "presentations.html#section-1",
+    "href": "presentations.html#section-1",
+    "title": "Presentations",
+    "section": "2025",
+    "text": "2025\n\nPoster\n\nGeneralized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules\nDPG Spring Meeting · Bonn, Germany\n11 March 2025 · MO 9.3\nProgramme & abstract ↗ Related preprint"
+  },
+  {
+    "objectID": "presentations.html#section-2",
+    "href": "presentations.html#section-2",
+    "title": "Presentations",
+    "section": "2024",
+    "text": "2024\n\nInvited talk\n\nMetasurface Based Hybrid Optical Cavities for Chiral Sensing\nMetamaterials 2024 · Platanias, Crete, Greece\n10 September 2024 · 18th International Congress on Artificial Materials for Novel Wave Phenomena\nProgramme & abstract ↗ Related paper\n\n\n\nPoster\n\nCooperative effects in dense cold atomic gases including magnetic dipole interaction\nDPG Spring Meeting · Berlin, Germany\n21 March 2024 · TT 80.59\nProgramme & abstract ↗ Related paper\n\n\n\nTalk\n\nOpen quantum system approach to non-adiabatic molecular physics\nDPG Spring Meeting · Freiburg, Germany\n14 March 2024 · MO 20.6\nProgramme & abstract ↗\n\n\n\nPoster\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nDPG Spring Meeting · Freiburg, Germany\n12 March 2024 · Q 24.38\nProgramme & abstract ↗ Related paper"
+  },
+  {
+    "objectID": "presentations.html#section-3",
+    "href": "presentations.html#section-3",
+    "title": "Presentations",
+    "section": "2023",
+    "text": "2023\n\nTalk\n\nApplications of cooperative subwavelength quantum emitter arrays\nDPG Spring Meeting · SAMOP 2023\n8 March 2023 · Q 35.2\nProgramme & abstract ↗ Related paper"
+  },
+  {
+    "objectID": "presentations.html#section-4",
+    "href": "presentations.html#section-4",
+    "title": "Presentations",
+    "section": "2022",
+    "text": "2022\n\nTalk\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nDPG Spring Meeting · Erlangen, Germany\n17 March 2022 · SYQC 1.2 · Symposium Quantum Cooperativity of Light and Matter\nProgramme & abstract ↗ Related paper\n\n\n\nPoster\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nInternational Conference on Quantum Optics · Obergurgl, Austria\n20–26 February 2022 · Conference dates\nBook of abstracts, p. 28 ↗ Related paper\n\n\n\nFind preprints, published articles, and thesis PDFs on the Publications page."
   },
   {
     "objectID": "notes/index.html",

@@ -1,0 +1,140 @@
+---
+title: "Presentations"
+description: "Conference talks and posters in quantum optics, collective light–matter interactions, and molecular physics."
+---
+
+Conference talks and posters, with links to programmes and related publications.
+
+## 2026
+
+::: {.presentation}
+[Talk]{.presentation-kind}
+
+### Symbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance
+
+**DPG Spring Meeting · Mainz, Germany**
+
+[6 March 2026 · Q 69.6]{.presentation-meta}
+
+[Programme & abstract ↗](https://www.dpg-verhandlungen.de/year/2026/conference/mainz/part/q/session/69/contribution/6){.paper-link} [Related paper](publications.qmd#symbolic-quantum-trajectory-method-for-multichannel-dicke-superradiance){.paper-link}
+:::
+
+::: {.presentation}
+[Poster]{.presentation-kind}
+
+### Absence of Entanglement Growth in Dicke Superradiance
+
+**DPG Spring Meeting · Mainz, Germany**
+
+[4 March 2026 · Q 43.2]{.presentation-meta}
+
+[Programme & abstract ↗](https://www.dpg-verhandlungen.de/year/2026/conference/mainz/part/q/session/43/contribution/2){.paper-link} [Related paper](publications.qmd#absence-of-entanglement-growth-in-dicke-superradiance){.paper-link}
+:::
+
+## 2025
+
+::: {.presentation}
+[Poster]{.presentation-kind}
+
+### Generalized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules
+
+**DPG Spring Meeting · Bonn, Germany**
+
+[11 March 2025 · MO 9.3]{.presentation-meta}
+
+[Programme & abstract ↗](https://www.dpg-verhandlungen.de/year/2025/conference/bonn/part/mo/session/9/contribution/3){.paper-link} [Related preprint](publications.qmd#generalized-energy-gap-law-an-open-system-dynamics-approach-to-non-adiabatic-phenomena-in-molecules){.paper-link}
+:::
+
+## 2024
+
+::: {.presentation}
+[Invited talk]{.presentation-kind}
+
+### Metasurface Based Hybrid Optical Cavities for Chiral Sensing
+
+**Metamaterials 2024 · Platanias, Crete, Greece**
+
+[10 September 2024 · 18th International Congress on Artificial Materials for Novel Wave Phenomena]{.presentation-meta}
+
+[Programme & abstract ↗](https://congress2024.metamorphose-vi.org/index.php/component/svisor/?Itemid=156&task=showScheduleSvisor){.paper-link} [Related paper](publications.qmd#metasurface-based-hybrid-optical-cavities-for-chiral-sensing){.paper-link}
+:::
+
+::: {.presentation}
+[Poster]{.presentation-kind}
+
+### Cooperative effects in dense cold atomic gases including magnetic dipole interaction
+
+**DPG Spring Meeting · Berlin, Germany**
+
+[21 March 2024 · TT 80.59]{.presentation-meta}
+
+[Programme & abstract ↗](https://www.dpg-verhandlungen.de/year/2024/conference/berlin/part/tt/session/80/contribution/59){.paper-link} [Related paper](publications.qmd#cooperative-effects-in-dense-cold-atomic-gases-including-magnetic-dipole-interactions){.paper-link}
+:::
+
+::: {.presentation}
+[Talk]{.presentation-kind}
+
+### Open quantum system approach to non-adiabatic molecular physics
+
+**DPG Spring Meeting · Freiburg, Germany**
+
+[14 March 2024 · MO 20.6]{.presentation-meta}
+
+[Programme & abstract ↗](https://www.dpg-verhandlungen.de/year/2024/conference/freiburg/part/mo/session/20/contribution/6){.paper-link}
+:::
+
+::: {.presentation}
+[Poster]{.presentation-kind}
+
+### Cooperative effects in dense cold atomic gases including magnetic dipole interactions
+
+**DPG Spring Meeting · Freiburg, Germany**
+
+[12 March 2024 · Q 24.38]{.presentation-meta}
+
+[Programme & abstract ↗](https://www.dpg-verhandlungen.de/year/2024/conference/freiburg/part/q/session/24/contribution/38){.paper-link} [Related paper](publications.qmd#cooperative-effects-in-dense-cold-atomic-gases-including-magnetic-dipole-interactions){.paper-link}
+:::
+
+## 2023
+
+::: {.presentation}
+[Talk]{.presentation-kind}
+
+### Applications of cooperative subwavelength quantum emitter arrays
+
+**DPG Spring Meeting · SAMOP 2023**
+
+[8 March 2023 · Q 35.2]{.presentation-meta}
+
+[Programme & abstract ↗](https://www.dpg-verhandlungen.de/year/2023/conference/samop/part/q/session/35/contribution/2){.paper-link} [Related paper](publications.qmd#linear-optical-elements-based-on-cooperative-subwavelength-emitter-arrays){.paper-link}
+:::
+
+## 2022
+
+::: {.presentation}
+[Talk]{.presentation-kind}
+
+### Cooperative effects in dense cold atomic gases including magnetic dipole interactions
+
+**DPG Spring Meeting · Erlangen, Germany**
+
+[17 March 2022 · SYQC 1.2 · Symposium Quantum Cooperativity of Light and Matter]{.presentation-meta}
+
+[Programme & abstract ↗](https://www.dpg-verhandlungen.de/year/2022/conference/erlangen/part/syqc/session/1/contribution/2){.paper-link} [Related paper](publications.qmd#cooperative-effects-in-dense-cold-atomic-gases-including-magnetic-dipole-interactions){.paper-link}
+:::
+
+::: {.presentation}
+[Poster]{.presentation-kind}
+
+### Cooperative effects in dense cold atomic gases including magnetic dipole interactions
+
+**International Conference on Quantum Optics · Obergurgl, Austria**
+
+[20–26 February 2022 · Conference dates]{.presentation-meta}
+
+[Book of abstracts, p. 28 ↗](https://ritschgroup.uibk.ac.at/obergurgl2026/previous/boa_2022.pdf#page=28){.paper-link} [Related paper](publications.qmd#cooperative-effects-in-dense-cold-atomic-gases-including-magnetic-dipole-interactions){.paper-link}
+:::
+
+::: {.page-endnote}
+Find preprints, published articles, and thesis PDFs on the [Publications](publications.qmd) page.
+:::
