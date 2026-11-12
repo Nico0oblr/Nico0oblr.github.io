@@ -10,6 +10,8 @@ Collective emission and independent-emitter decay can arise from the same collec
 
 The calculation connects two continuous-time Markov chains: a fast **birth–death process** in total spin and a slow **pure-death process** in excitation number. The stationary distribution of the first determines the rates of the second.
 
+This calculation originated as an appendix draft for our [decoherence paper](https://arxiv.org/abs/2607.28034). It is presented here as a standalone derivation, with the Markov-chain connection made explicit. The paper studies the broader competition between collective emission, local dephasing, and spontaneous emission; this note isolates the limit of strong local dephasing without an additional spontaneous-emission channel.
+
 ## Model and conventions
 
 Consider $N$ identical two-level emitters, with $\hbar=1$,
@@ -221,6 +223,7 @@ Local dephasing is essential. Replacing the separate $s_z^{(i)}$ channels by col
 
 ## Related reading and code
 
+- N. S. Bassler, J. Lyne, and J. Cuerda, **Scaling theory of decoherence in Dicke superradiance**, arXiv:2607.28034 (2026). [Preprint](https://arxiv.org/abs/2607.28034). The paper for which this calculation was originally developed as an appendix draft.
 - [Dicke superradiance as a continuous-time Markov chain](dicke-decay-conventions.qmd): collective decay within the fully symmetric sector.
 - N. Shammah, S. Ahmed, N. Lambert, S. De Liberato, and F. Nori, **Open quantum systems with local and collective incoherent processes: Efficient numerical simulations using permutational invariance**, *Phys. Rev. A* **98**, 063815 (2018). [Preprint](https://arxiv.org/abs/1805.05129) · [Published version](https://doi.org/10.1103/PhysRevA.98.063815). Background on the population rates and spin-sector reduction.
 - [PIDicke.jl](https://github.com/Nico0oblr/PiDicke.jl): population generators and trajectory simulations in the Dicke basis.

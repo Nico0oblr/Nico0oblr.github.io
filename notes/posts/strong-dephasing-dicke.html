@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fe0fc50bf14e6d5ade4028179ce50d2f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-2d38a512c66de75e8a3d5e21832186ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -222,6 +222,7 @@ window.Quarto = {
 
 <p>Collective emission and independent-emitter decay can arise from the same collective jump operator. Strong local dephasing changes which total-spin sectors are occupied. Averaging the collective emission rate over their stationary distribution then gives a rate proportional to the number of excitations.</p>
 <p>The calculation connects two continuous-time Markov chains: a fast <strong>birth–death process</strong> in total spin and a slow <strong>pure-death process</strong> in excitation number. The stationary distribution of the first determines the rates of the second.</p>
+<p>This calculation originated as an appendix draft for our <a href="https://arxiv.org/abs/2607.28034">decoherence paper</a>. It is presented here as a standalone derivation, with the Markov-chain connection made explicit. The paper studies the broader competition between collective emission, local dephasing, and spontaneous emission; this note isolates the limit of strong local dephasing without an additional spontaneous-emission channel.</p>
 <section id="model-and-conventions" class="level2">
 <h2 class="anchored" data-anchor-id="model-and-conventions">Model and conventions</h2>
 <p>Consider <span class="math inline">\(N\)</span> identical two-level emitters, with <span class="math inline">\(\hbar=1\)</span>,</p>
@@ -386,6 +387,7 @@ I(t)=\Gamma\langle n(t)\rangle
 <section id="related-reading-and-code" class="level2">
 <h2 class="anchored" data-anchor-id="related-reading-and-code">Related reading and code</h2>
 <ul>
+<li>N. S. Bassler, J. Lyne, and J. Cuerda, <strong>Scaling theory of decoherence in Dicke superradiance</strong>, arXiv:2607.28034 (2026). <a href="https://arxiv.org/abs/2607.28034">Preprint</a>. The paper for which this calculation was originally developed as an appendix draft.</li>
 <li><a href="../../notes/posts/dicke-decay-conventions.html">Dicke superradiance as a continuous-time Markov chain</a>: collective decay within the fully symmetric sector.</li>
 <li>N. Shammah, S. Ahmed, N. Lambert, S. De Liberato, and F. Nori, <strong>Open quantum systems with local and collective incoherent processes: Efficient numerical simulations using permutational invariance</strong>, <em>Phys. Rev.&nbsp;A</em> <strong>98</strong>, 063815 (2018). <a href="https://arxiv.org/abs/1805.05129">Preprint</a> · <a href="https://doi.org/10.1103/PhysRevA.98.063815">Published version</a>. Background on the population rates and spin-sector reduction.</li>
 <li><a href="https://github.com/Nico0oblr/PiDicke.jl">PIDicke.jl</a>: population generators and trajectory simulations in the Dicke basis.</li>

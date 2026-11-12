@@ -4,7 +4,7 @@
     "href": "notes/posts/strong-dephasing-dicke.html",
     "title": "Strong local dephasing in Dicke superradiance",
     "section": "",
-    "text": "Collective emission and independent-emitter decay can arise from the same collective jump operator. Strong local dephasing changes which total-spin sectors are occupied. Averaging the collective emission rate over their stationary distribution then gives a rate proportional to the number of excitations.\nThe calculation connects two continuous-time Markov chains: a fast birth–death process in total spin and a slow pure-death process in excitation number. The stationary distribution of the first determines the rates of the second."
+    "text": "Collective emission and independent-emitter decay can arise from the same collective jump operator. Strong local dephasing changes which total-spin sectors are occupied. Averaging the collective emission rate over their stationary distribution then gives a rate proportional to the number of excitations.\nThe calculation connects two continuous-time Markov chains: a fast birth–death process in total spin and a slow pure-death process in excitation number. The stationary distribution of the first determines the rates of the second.\nThis calculation originated as an appendix draft for our decoherence paper. It is presented here as a standalone derivation, with the Markov-chain connection made explicit. The paper studies the broader competition between collective emission, local dephasing, and spontaneous emission; this note isolates the limit of strong local dephasing without an additional spontaneous-emission channel."
   },
   {
     "objectID": "notes/posts/strong-dephasing-dicke.html#model-and-conventions",
@@ -60,7 +60,7 @@
     "href": "notes/posts/strong-dephasing-dicke.html#related-reading-and-code",
     "title": "Strong local dephasing in Dicke superradiance",
     "section": "Related reading and code",
-    "text": "Related reading and code\n\nDicke superradiance as a continuous-time Markov chain: collective decay within the fully symmetric sector.\nN. Shammah, S. Ahmed, N. Lambert, S. De Liberato, and F. Nori, Open quantum systems with local and collective incoherent processes: Efficient numerical simulations using permutational invariance, Phys. Rev. A 98, 063815 (2018). Preprint · Published version. Background on the population rates and spin-sector reduction.\nPIDicke.jl: population generators and trajectory simulations in the Dicke basis."
+    "text": "Related reading and code\n\nN. S. Bassler, J. Lyne, and J. Cuerda, Scaling theory of decoherence in Dicke superradiance, arXiv:2607.28034 (2026). Preprint. The paper for which this calculation was originally developed as an appendix draft.\nDicke superradiance as a continuous-time Markov chain: collective decay within the fully symmetric sector.\nN. Shammah, S. Ahmed, N. Lambert, S. De Liberato, and F. Nori, Open quantum systems with local and collective incoherent processes: Efficient numerical simulations using permutational invariance, Phys. Rev. A 98, 063815 (2018). Preprint · Published version. Background on the population rates and spin-sector reduction.\nPIDicke.jl: population generators and trajectory simulations in the Dicke basis."
   },
   {
     "objectID": "notes/index.html",
