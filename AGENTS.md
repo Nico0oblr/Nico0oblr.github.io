@@ -10,3 +10,4 @@
 - Preserve `.nojekyll` and the existing `main` root publishing route. Source pushes trigger `.github/workflows/publish.yml`.
 - Do not add dependencies or execute embedded scientific code unless needed for the requested change.
 - Do not generate scientific figures or decorative research illustrations on the user's behalf unless explicitly requested. Use figures the user selects or supplies.
+- Preserve user-requested content removals. Do not reintroduce removed scientific results or derivations without explicit authorization.
