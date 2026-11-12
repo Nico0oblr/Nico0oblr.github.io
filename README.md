@@ -14,6 +14,7 @@ All authored content lives in `site/`:
 | `site/notes/posts/*.qmd` | Individual notes |
 | `site/code.qmd` | Public code links |
 | `site/theme.scss` | Layout, colors, typography |
+| `site/files/` | User-provided thesis PDFs |
 
 Install [Quarto](https://quarto.org/docs/get-started/) (version 1.8.27 is used in CI). No Julia, Python packages, Node.js, or R installation is needed to render the initial content.
 

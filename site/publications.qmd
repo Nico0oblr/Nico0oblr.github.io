@@ -167,11 +167,7 @@ Raphael Holzinger, **Nico S. Bassler**, Helmut Ritsch and Claudiu Genes.
 [Preprint ↗](https://arxiv.org/abs/2009.06315){.paper-link} [Published version ↗](https://doi.org/10.1103/PhysRevB.103.155422){.paper-link}
 :::
 
-::: {.page-endnote}
-Related calculations and reproducibility resources are collected under [research notes](notes/index.qmd) and [code](code.qmd).
-:::
-
-## Doctoral thesis
+## Theses
 
 ::: {.publication}
 [2025]{.publication-year}
@@ -182,5 +178,21 @@ Related calculations and reproducibility resources are collected under [research
 
 Doctoral dissertation, Friedrich-Alexander-Universität Erlangen-Nürnberg (2025).
 
-[University record ↗](https://www.emergent.physics.nat.fau.de/publications/theses/quantum/){.paper-link}
+[Thesis (PDF, 13.2 MB)](files/PHD_thesis.pdf){.paper-link} [University record ↗](https://www.emergent.physics.nat.fau.de/publications/theses/quantum/){.paper-link}
+:::
+
+::: {.publication}
+[2020]{.publication-year}
+
+### Effect of domain walls in bilayer graphene in an external magnetic field
+
+**Nico S. Baßler**.
+
+Master’s thesis in physics, Friedrich-Alexander-Universität Erlangen-Nürnberg (2020).
+
+[Thesis (PDF, 7.5 MB)](files/2020_Masterthesis_Bassler.pdf){.paper-link} [Related article](#effects-of-domain-walls-in-bilayer-graphene-in-an-external-magnetic-field){.paper-link}
+:::
+
+::: {.page-endnote}
+Related calculations and reproducibility resources are collected under [research notes](notes/index.qmd) and [code](code.qmd).
 :::
