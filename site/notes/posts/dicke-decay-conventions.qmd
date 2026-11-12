@@ -162,6 +162,7 @@ The classical process describes excitation populations and photon-counting traje
 
 ## Related reading and code
 
+- [Strong local dephasing in Dicke superradiance](strong-dephasing-dicke.qmd): detailed balance over total-spin sectors and the emergence of independent-emitter decay by stochastic averaging.
 - R. Holzinger *et al.*, **Solving Dicke superradiance analytically: A compendium of methods**. [Preprint](https://arxiv.org/abs/2503.10463) · [Published version](https://doi.org/10.1103/9p44-kwfl). See the trajectory and probabilistic approaches.
 - N. S. Bassler, **Absence of entanglement growth in Dicke superradiance**. [Preprint](https://arxiv.org/abs/2504.13646) · [Published version](https://doi.org/10.1103/qxx1-xr44).
 - D. T. Gillespie, **Exact stochastic simulation of coupled chemical reactions**, *J. Phys. Chem.* **81**, 2340–2361 (1977). [Published version](https://doi.org/10.1021/j100540a008).

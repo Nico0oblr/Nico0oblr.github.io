@@ -15,4 +15,4 @@ listing:
 
 A place for derivations, calculations, numerical methods, and ideas that benefit from a little more space. Notes can be short references or longer explorations; each one states its assumptions and conventions.
 
-The first note connects Dicke collective decay to continuous-time Markov chains, from transition rates and waiting times to trajectory sampling.
+Two complementary notes connect Dicke superradiance to continuous-time Markov chains: collective decay within the symmetric sector, and the emergence of independent-emitter decay under strong local dephasing.

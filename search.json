@@ -1,5 +1,187 @@
 [
   {
+    "objectID": "notes/posts/strong-dephasing-dicke.html",
+    "href": "notes/posts/strong-dephasing-dicke.html",
+    "title": "Strong local dephasing in Dicke superradiance",
+    "section": "",
+    "text": "Collective emission and independent-emitter decay can arise from the same collective jump operator. Strong local dephasing changes which total-spin sectors are occupied. Averaging the collective emission rate over their stationary distribution then gives a rate proportional to the number of excitations.\nThe calculation connects two continuous-time Markov chains: a fast birth–death process in total spin and a slow pure-death process in excitation number. The stationary distribution of the first determines the rates of the second."
+  },
+  {
+    "objectID": "notes/posts/strong-dephasing-dicke.html#model-and-conventions",
+    "href": "notes/posts/strong-dephasing-dicke.html#model-and-conventions",
+    "title": "Strong local dephasing in Dicke superradiance",
+    "section": "Model and conventions",
+    "text": "Model and conventions\nConsider \\(N\\) identical two-level emitters, with \\(\\hbar=1\\),\n\\[\nJ_-=\\sum_{i=1}^N\\sigma_-^{(i)},\n\\qquad\nJ_z=\\sum_{i=1}^N s_z^{(i)},\n\\qquad\ns_z^{(i)}=\\frac12\\left(\\lvert e_i\\rangle\\langle e_i\\rvert-\\lvert g_i\\rangle\\langle g_i\\rvert\\right).\n\\]\nThe master equation is\n\\[\n\\dot\\rho=\\Gamma\\mathcal D[J_-]\\rho\n+\\xi\\sum_{i=1}^N\\mathcal D[s_z^{(i)}]\\rho,\n\\qquad\n\\mathcal D[L]\\rho=L\\rho L^\\dagger-\\frac12\\{L^\\dagger L,\\rho\\}.\n\\]\nHere \\(\\Gamma\\) is the single-emitter population decay rate. With the spin-\\(1/2\\) convention for \\(s_z\\), dephasing alone damps a single-emitter optical coherence at rate \\(\\xi/2\\). There is no drive, Hamiltonian, or additional local emission channel. The dephasing acts independently on each emitter.\nWe assume a permutationally invariant state diagonal in the Dicke basis, including the fully excited initial state. Let \\(p_{S,M}\\) be the probability in the total-spin sector \\(S\\) at inversion \\(M\\), summed over its multiplicity. The excitation number is \\(n=N/2+M\\). The allowed spins are \\(S=|M|,|M|+1,\\ldots,N/2\\); this includes half-integer spins for odd \\(N\\).\nThe limiting statement below takes \\(\\xi/\\Gamma\\to\\infty\\) at fixed \\(N\\). The regime of interest is strong dephasing relative to the collective scale, \\(\\xi\\gg N\\Gamma\\)."
+  },
+  {
+    "objectID": "notes/posts/strong-dephasing-dicke.html#the-fast-markov-chain-at-fixed-inversion",
+    "href": "notes/posts/strong-dephasing-dicke.html#the-fast-markov-chain-at-fixed-inversion",
+    "title": "Strong local dephasing in Dicke superradiance",
+    "section": "The fast Markov chain at fixed inversion",
+    "text": "The fast Markov chain at fixed inversion\nLocal dephasing preserves \\(M\\) and changes \\(S\\) by one. Its off-diagonal transition rates are\n\\[\n\\begin{aligned}\na_{S,M}&=\\xi\\,\n\\frac{(S-M+1)(S+M+1)(N-2S)}{4(S+1)(2S+1)},\\\\\nb_{S,M}&=\\xi\\,\n\\frac{(S-M)(S+M)(N+2S+2)}{4S(2S+1)},\n\\end{aligned}\n\\]\nfor \\(S\\to S+1\\) and \\(S\\to S-1\\), respectively. Transitions outside the allowed spin interval are absent: \\(a_{N/2,M}=0\\) and \\(b_{|M|,M}=0\\). At \\(S=0\\), the latter is set to zero without evaluating the quotient. These are the standard permutationally invariant dephasing rates in the convention above; see Shammah et al..\nAt fixed \\(M\\), dephasing therefore generates the birth–death equation\n\\[\n\\dot p_{S,M}\n=a_{S-1,M}p_{S-1,M}+b_{S+1,M}p_{S+1,M}\n-(a_{S,M}+b_{S,M})p_{S,M},\n\\]\nwith unavailable inflow terms omitted. Here “birth” and “death” refer to the spin coordinate, not to the excitation number. Dephasing emits no photons in this model."
+  },
+  {
+    "objectID": "notes/posts/strong-dephasing-dicke.html#detailed-balance-and-the-stationary-distribution",
+    "href": "notes/posts/strong-dephasing-dicke.html#detailed-balance-and-the-stationary-distribution",
+    "title": "Strong local dephasing in Dicke superradiance",
+    "section": "Detailed balance and the stationary distribution",
+    "text": "Detailed balance and the stationary distribution\nWrite \\(\\pi_{S|M}\\) for the normalized stationary distribution of this fast chain. Detailed balance on each adjacent pair requires\n\\[\na_{S-1,M}\\pi_{S-1|M}=b_{S,M}\\pi_{S|M}.\n\\]\nSubstituting the rates gives\n\\[\n\\frac{\\pi_{S|M}}{\\pi_{S-1|M}}\n=\\frac{(N-2S+2)(2S+1)}{(N+2S+2)(2S-1)}.\n\\]\nThe factors containing \\(M\\) cancel. This is also the ratio \\(d_S/d_{S-1}\\) of the spin-sector multiplicities\n\\[\n\\begin{aligned}\nd_S\n&=\\binom{N}{N/2-S}-\\binom{N}{N/2-S-1}\\\\\n&=\\frac{N!(2S+1)}{(N/2-S)!(N/2+S+1)!}.\n\\end{aligned}\n\\]\nA binomial coefficient with a lower index outside \\(0,\\ldots,N\\) is zero. Each copy of spin \\(S\\) contains exactly one state with a specified allowed \\(M\\). Consequently,\n\\[\n\\sum_{S=|M|}^{N/2}d_S\n=\\binom{N}{N/2+M},\n\\]\nwhich also follows by telescoping the difference of binomial coefficients. Normalization gives\n\\[\n\\boxed{\n\\pi_{S|M}\n=\\frac{d_S}{\\binom{N}{N/2+M}}\n=\\frac{(2S+1)(N/2-M)!(N/2+M)!}\n{(N/2-S)!(N/2+S+1)!}.\n}\n\\]\nThe distribution depends on \\(M\\) through its allowed support and normalization, even though the adjacent-spin ratio is independent of \\(M\\).\nThere is a direct interpretation. At fixed excitation number \\(n\\), the stationary state is the uniform mixture of all \\(\\binom{N}{n}\\) product configurations with \\(n\\) excited emitters. Permutational invariance makes their diagonal weights equal, and local dephasing removes coherences between distinct configurations. Decomposing this mixture into spin sectors gives precisely the multiplicity weights above."
+  },
+  {
+    "objectID": "notes/posts/strong-dephasing-dicke.html#averaging-the-collective-emission-rate",
+    "href": "notes/posts/strong-dephasing-dicke.html#averaging-the-collective-emission-rate",
+    "title": "Strong local dephasing in Dicke superradiance",
+    "section": "Averaging the collective emission rate",
+    "text": "Averaging the collective emission rate\nCollective emission preserves \\(S\\) and lowers \\(M\\) by one, with rate\n\\[\nc_{S,M}=\\Gamma(S+M)(S-M+1)\n=\\Gamma\\left[S(S+1)-M(M-1)\\right].\n\\]\nWe need its average under \\(\\pi_{S|M}\\). The uniform product-state mixture provides a short way to evaluate it. For any product configuration \\(\\lvert x\\rangle\\) with \\(n\\) excitations,\n\\[\n\\langle x|J_+J_-|x\\rangle\n=\\sum_i\\langle x|\\sigma_+^{(i)}\\sigma_-^{(i)}|x\\rangle\n=n.\n\\]\nThe cross terms with \\(i\\ne j\\) have zero diagonal matrix element. Since \\(J_+J_-\\) has eigenvalue \\(S(S+1)-M(M-1)\\) in a Dicke state, this proves\n\\[\n\\sum_S\\pi_{S|M}\\left[S(S+1)-M(M-1)\\right]\n=\\frac N2+M,\n\\]\nor equivalently,\n\\[\n\\left\\langle S(S+1)\\right\\rangle_M=\\frac N2+M^2.\n\\]\nThe effective emission rate is therefore\n\\[\n\\boxed{\n\\overline c_M=\\sum_S c_{S,M}\\pi_{S|M}\n=\\Gamma\\left(\\frac N2+M\\right)=\\Gamma n.\n}\n\\]\nThis is an exact stationary average for every finite \\(N\\). Its use as the dynamical rate requires the separation of dephasing and emission timescales."
+  },
+  {
+    "objectID": "notes/posts/strong-dephasing-dicke.html#stochastic-averaging-the-slow-markov-chain",
+    "href": "notes/posts/strong-dephasing-dicke.html#stochastic-averaging-the-slow-markov-chain",
+    "title": "Strong local dephasing in Dicke superradiance",
+    "section": "Stochastic averaging: the slow Markov chain",
+    "text": "Stochastic averaging: the slow Markov chain\nLet \\(q_M=\\sum_Sp_{S,M}\\). Summing the full population equations over \\(S\\) cancels the dephasing terms and gives the exact identity\n\\[\n\\dot q_M\n=\\sum_S c_{S,M+1}p_{S,M+1}\n-\\sum_S c_{S,M}p_{S,M}.\n\\]\nAt finite \\(\\xi\\), this is generally not a closed equation for \\(q_M\\): the emission rate depends on the unresolved spin distribution. In the fast-dephasing limit, that distribution relaxes between emissions,\n\\[\np_{S,M}\\simeq\\pi_{S|M}q_M,\n\\]\nso the limiting marginal dynamics is\n\\[\n\\dot q_M\n=\\Gamma\\left(\\frac N2+M+1\\right)q_{M+1}\n-\\Gamma\\left(\\frac N2+M\\right)q_M.\n\\]\nAn emission initially leaves the spin distribution inherited from the preceding inversion slice. Fast dephasing then redistributes it according to the stationary distribution on the new slice. This repeated relaxation is the reason stationary averaging closes the slow dynamics.\nIn Markov-chain language, this is stochastic averaging, or adiabatic elimination of the fast coordinate. With column probability vectors, let \\(Q_{\\mathrm{em}}\\) be the collective-emission generator, \\(R\\) sum over \\(S\\), and \\(E\\) lift a marginal to local equilibrium, \\((Eq)_{S,M}=\\pi_{S|M}q_M\\). Then \\(RE\\) is the identity and the limiting generator is\n\\[\nQ_{\\mathrm{eff}}=R Q_{\\mathrm{em}}E.\n\\]\nIn terms of excitation probabilities \\(P_n=q_{n-N/2}\\), this becomes\n\\[\n\\dot P_n=\\Gamma(n+1)P_{n+1}-\\Gamma nP_n,\n\\qquad\nn\\longrightarrow n-1\\quad\\text{at rate }\\Gamma n.\n\\]\nThe inflow term is absent at \\(n=N\\), and \\(n=0\\) is absorbing. These are exactly the population equations for \\(N\\) independently decaying emitters. They contrast with the symmetric Dicke ladder’s rates \\(\\Gamma n(N-n+1)\\), derived in the companion Markov-chain note."
+  },
+  {
+    "objectID": "notes/posts/strong-dephasing-dicke.html#consequence-for-the-emission-curve",
+    "href": "notes/posts/strong-dephasing-dicke.html#consequence-for-the-emission-curve",
+    "title": "Strong local dephasing in Dicke superradiance",
+    "section": "Consequence for the emission curve",
+    "text": "Consequence for the emission curve\nStarting with all emitters excited, the limiting solution is binomial,\n\\[\nP_n(t)=\\binom{N}{n}\n\\bigl(e^{-\\Gamma t}\\bigr)^n\n\\bigl(1-e^{-\\Gamma t}\\bigr)^{N-n}.\n\\]\nThus the mean excitation number and photon emission rate are\n\\[\n\\langle n(t)\\rangle=Ne^{-\\Gamma t},\n\\qquad\nI(t)=\\Gamma\\langle n(t)\\rangle\n=\\Gamma N e^{-\\Gamma t}.\n\\]\nStrong local dephasing removes the collective burst. The emission channel remains collective, but the fast redistribution over spin sectors reduces its averaged rate to the independent-emitter value."
+  },
+  {
+    "objectID": "notes/posts/strong-dephasing-dicke.html#scope",
+    "href": "notes/posts/strong-dephasing-dicke.html#scope",
+    "title": "Strong local dephasing in Dicke superradiance",
+    "section": "Scope",
+    "text": "Scope\nThe stationary distribution and averaged-rate identities above are exact. The reduced dynamical equation is exact in the infinite-dephasing limit at fixed \\(N\\); finite dephasing can retain correlations and deviations from independent decay, including during an initial fast relaxation if the starting state is not already equilibrated. No uniform finite-\\(N\\) error bound is asserted here.\nLocal dephasing is essential. Replacing the separate \\(s_z^{(i)}\\) channels by collective dephasing \\(\\mathcal D[J_z]\\) does not redistribute total spin and does not produce this mechanism. The Markov description concerns the Dicke-diagonal population sector specified above; it does not by itself establish independence for every quantum observable or measurement scheme."
+  },
+  {
+    "objectID": "notes/posts/strong-dephasing-dicke.html#related-reading-and-code",
+    "href": "notes/posts/strong-dephasing-dicke.html#related-reading-and-code",
+    "title": "Strong local dephasing in Dicke superradiance",
+    "section": "Related reading and code",
+    "text": "Related reading and code\n\nDicke superradiance as a continuous-time Markov chain: collective decay within the fully symmetric sector.\nN. Shammah, S. Ahmed, N. Lambert, S. De Liberato, and F. Nori, Open quantum systems with local and collective incoherent processes: Efficient numerical simulations using permutational invariance, Phys. Rev. A 98, 063815 (2018). Preprint · Published version. Background on the population rates and spin-sector reduction.\nPIDicke.jl: population generators and trajectory simulations in the Dicke basis."
+  },
+  {
+    "objectID": "notes/index.html",
+    "href": "notes/index.html",
+    "title": "Research Notes",
+    "section": "",
+    "text": "A place for derivations, calculations, numerical methods, and ideas that benefit from a little more space. Notes can be short references or longer explorations; each one states its assumptions and conventions.\nTwo complementary notes connect Dicke superradiance to continuous-time Markov chains: collective decay within the symmetric sector, and the emergence of independent-emitter decay under strong local dephasing.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\nDicke superradiance as a continuous-time Markov chain\n\n\n\nCollective spins\n\nMarkov chains\n\nNumerical methods\n\n\n\nCollective decay as a pure-death process: population dynamics, exponential waiting times, and exact trajectory sampling.\n\n\n\n\n\n12 Nov 2026\n\n\n\n\n\n\n\nStrong local dephasing in Dicke superradiance\n\n\n\nCollective spins\n\nMarkov chains\n\nAdiabatic elimination\n\n\n\nFrom a fast birth–death chain over total spin to independent-emitter decay: detailed balance, spin multiplicities, and stochastic averaging.\n\n\n\n\n\n12 Nov 2026\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "presentations.html",
+    "href": "presentations.html",
+    "title": "Presentations",
+    "section": "",
+    "text": "Conference talks and posters, with links to programmes and related publications."
+  },
+  {
+    "objectID": "presentations.html#section",
+    "href": "presentations.html#section",
+    "title": "Presentations",
+    "section": "2026",
+    "text": "2026\n\nTalk\n\nSymbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance\nDPG Spring Meeting · Mainz, Germany\n6 March 2026 · Q 69.6\nProgramme & abstract ↗ Related paper\n\n\n\nPoster\n\nAbsence of Entanglement Growth in Dicke Superradiance\nDPG Spring Meeting · Mainz, Germany\n4 March 2026 · Q 43.2\nProgramme & abstract ↗ Related paper"
+  },
+  {
+    "objectID": "presentations.html#section-1",
+    "href": "presentations.html#section-1",
+    "title": "Presentations",
+    "section": "2025",
+    "text": "2025\n\nPoster\n\nGeneralized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules\nDPG Spring Meeting · Bonn, Germany\n11 March 2025 · MO 9.3\nProgramme & abstract ↗ Related preprint"
+  },
+  {
+    "objectID": "presentations.html#section-2",
+    "href": "presentations.html#section-2",
+    "title": "Presentations",
+    "section": "2024",
+    "text": "2024\n\nInvited talk\n\nMetasurface Based Hybrid Optical Cavities for Chiral Sensing\nMetamaterials 2024 · Platanias, Crete, Greece\n10 September 2024 · 18th International Congress on Artificial Materials for Novel Wave Phenomena\nProgramme & abstract ↗ Related paper\n\n\n\nPoster\n\nCooperative effects in dense cold atomic gases including magnetic dipole interaction\nDPG Spring Meeting · Berlin, Germany\n21 March 2024 · TT 80.59\nProgramme & abstract ↗ Related paper\n\n\n\nTalk\n\nOpen quantum system approach to non-adiabatic molecular physics\nDPG Spring Meeting · Freiburg, Germany\n14 March 2024 · MO 20.6\nProgramme & abstract ↗\n\n\n\nPoster\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nDPG Spring Meeting · Freiburg, Germany\n12 March 2024 · Q 24.38\nProgramme & abstract ↗ Related paper"
+  },
+  {
+    "objectID": "presentations.html#section-3",
+    "href": "presentations.html#section-3",
+    "title": "Presentations",
+    "section": "2023",
+    "text": "2023\n\nTalk\n\nApplications of cooperative subwavelength quantum emitter arrays\nDPG Spring Meeting · SAMOP 2023\n8 March 2023 · Q 35.2\nProgramme & abstract ↗ Related paper"
+  },
+  {
+    "objectID": "presentations.html#section-4",
+    "href": "presentations.html#section-4",
+    "title": "Presentations",
+    "section": "2022",
+    "text": "2022\n\nTalk\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nDPG Spring Meeting · Erlangen, Germany\n17 March 2022 · SYQC 1.2 · Symposium Quantum Cooperativity of Light and Matter\nProgramme & abstract ↗ Related paper\n\n\n\nPoster\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nInternational Conference on Quantum Optics · Obergurgl, Austria\n20–26 February 2022 · Conference dates\nBook of abstracts, p. 28 ↗ Related paper\n\n\n\nFind preprints, published articles, and thesis PDFs on the Publications page."
+  },
+  {
+    "objectID": "index.html#research-interests",
+    "href": "index.html#research-interests",
+    "title": "About",
+    "section": "Research interests",
+    "text": "Research interests\nFrom microscopic interactions to collective behavior."
+  },
+  {
+    "objectID": "index.html#beyond-the-paper",
+    "href": "index.html#beyond-the-paper",
+    "title": "About",
+    "section": "Beyond the paper",
+    "text": "Beyond the paper\nThis site brings together my publications, conference presentations, scientific code, and a growing collection of research notes: derivations, conventions, calculations, and questions worth keeping track of."
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "Journal articles and preprints. Each work appears once, with links to the preprint and published version where available.\nGoogle Scholar ↗ Download bibliography"
+  },
+  {
+    "objectID": "publications.html#preprints",
+    "href": "publications.html#preprints",
+    "title": "Publications",
+    "section": "Preprints",
+    "text": "Preprints\n\n2026\n\nExact Analytical Treatment of Collectively Pumped Dicke Superradiance\nAvishi Poddar, Nico Baßler, Julian Lyne, Susanne F. Yelin, Helmut Ritsch, Claudiu Genes and Raphael Holzinger.\nPreprint · arXiv:2610.37665 (2026).\nPreprint ↗\n\n\n\n2026\n\nScaling theory of decoherence in Dicke superradiance\nNico S. Bassler, Julian Lyne and Javier Cuerda.\nPreprint · arXiv:2607.28034 (2026).\nPreprint ↗\n\n\n\n2026\n\nDicke superradiance in degenerate quantum matter: interplay of exchange statistics and spatial confinement\nJulian Lyne, Kai Phillip Schmidt, Claudiu Genes and Nico S. Bassler.\nPreprint · arXiv:2603.00778 (2026).\nPreprint ↗\n\n\n\n2024\n\nGeneralized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules\nN. S. Bassler, M. Reitz, R. Holzinger, A. Vibók, G. J. Halász, B. Gurlek and C. Genes.\nPreprint · arXiv:2405.08718 (2024).\nPreprint ↗"
+  },
+  {
+    "objectID": "publications.html#journal-articles",
+    "href": "publications.html#journal-articles",
+    "title": "Publications",
+    "section": "Journal articles",
+    "text": "Journal articles\n\n2026\n\nSymbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance\nRaphael Holzinger, Nico S. Bassler, Julian Lyne, Susanne F. Yelin and Claudiu Genes.\nPhysical Review Letters 137, 193602 (2026).\nPreprint ↗ Published version ↗\n\n\n\n2026\n\nSolving Dicke superradiance analytically: A compendium of methods\nRaphael Holzinger, Nico S. Bassler, Julian Lyne, Fidel G. Jimenez, Julius T. Gohsrich and Claudiu Genes.\nPhysical Review A 113, 043718 (2026).\nPreprint ↗ Published version ↗\n\n\n\n2025\n\nAbsence of entanglement growth in Dicke superradiance\nNico S. Bassler.\nPhysical Review A 112, 053713 (2025).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nPurcell-modified Doppler cooling of quantum emitters inside optical cavities\nJulian Lyne, Nico S. Bassler, Seong eun Park, Guido Pupillo and Claudiu Genes.\nPhysical Review A 110, 013115 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nN. S. Bassler, I. Varma, M. Proske, P. Windpassinger, K. P. Schmidt and C. Genes.\nPhysical Review Research 6, 023147 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nMetasurface-Based Hybrid Optical Cavities for Chiral Sensing\nNico S. Bassler, Andrea Aiello, Kai P. Schmidt, Claudiu Genes and Michael Reitz.\nPhysical Review Letters 132, 043602 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nScaling Law for Kasha’s Rule in Photoexcited Molecular Aggregates\nRaphael Holzinger, Nico S. Bassler, Helmut Ritsch and Claudiu Genes.\nThe Journal of Physical Chemistry A 128, 3910-3915 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2023\n\nLinear optical elements based on cooperative subwavelength emitter arrays\nNico S. Bassler, Michael Reitz, Kai P. Schmidt and Claudiu Genes.\nOptics Express 31, 6003–6026 (2023).\nPreprint ↗ Published version ↗\n\n\n\n2021\n\nEffects of domain walls in bilayer graphene in an external magnetic field\nN. S. Bassler and K. P. Schmidt.\nPhysical Review B 103, 155422 (2021).\nPreprint ↗ Published version ↗"
+  },
+  {
+    "objectID": "publications.html#theses",
+    "href": "publications.html#theses",
+    "title": "Publications",
+    "section": "Theses",
+    "text": "Theses\n\n2025\n\nQuantum Optics with Atoms and Molecules\nNico Baßler.\nDoctoral dissertation, Friedrich-Alexander-Universität Erlangen-Nürnberg (2025).\nThesis (PDF, 13.2 MB) University record ↗\n\n\n\n2020\n\nEffect of domain walls in bilayer graphene in an external magnetic field\nNico S. Baßler.\nMaster’s thesis in physics, Friedrich-Alexander-Universität Erlangen-Nürnberg (2020).\nThesis (PDF, 7.5 MB) Related article\n\n\n\nRelated calculations and reproducibility resources are collected under research notes and code."
+  },
+  {
+    "objectID": "code.html",
+    "href": "code.html",
+    "title": "Code",
+    "section": "",
+    "text": "Public repositories for numerical methods and collective quantum dynamics. Each repository contains its own source, examples, and license information."
+  },
+  {
+    "objectID": "code.html#pidicke.jl",
+    "href": "code.html#pidicke.jl",
+    "title": "Code",
+    "section": "PIDicke.jl",
+    "text": "PIDicke.jl\nPermutation-invariant open-system calculations for two-level emitters in the Dicke basis, including population dynamics, quantum trajectories, coherences, and spin–cavity models.\nRepository ↗ Examples ↗"
+  },
+  {
+    "objectID": "code.html#krylovsolvermcwf",
+    "href": "code.html#krylovsolvermcwf",
+    "title": "Code",
+    "section": "KrylovSolverMCWF",
+    "text": "KrylovSolverMCWF\nA Krylov-subspace approach to Monte Carlo wavefunction simulations with QuantumOptics.jl, with an example notebook.\nRepository ↗"
+  },
+  {
+    "objectID": "code.html#number-fluctuations-and-particle-loss",
+    "href": "code.html#number-fluctuations-and-particle-loss",
+    "title": "Code",
+    "section": "Number fluctuations and particle loss",
+    "text": "Number fluctuations and particle loss\nCode accompanying work on number fluctuations and particle loss in Dicke superradiance.\nRepository ↗"
+  },
+  {
     "objectID": "notes/posts/dicke-decay-conventions.html",
     "href": "notes/posts/dicke-decay-conventions.html",
     "title": "Dicke superradiance as a continuous-time Markov chain",
@@ -53,125 +235,6 @@
     "href": "notes/posts/dicke-decay-conventions.html#related-reading-and-code",
     "title": "Dicke superradiance as a continuous-time Markov chain",
     "section": "Related reading and code",
-    "text": "Related reading and code\n\nR. Holzinger et al., Solving Dicke superradiance analytically: A compendium of methods. Preprint · Published version. See the trajectory and probabilistic approaches.\nN. S. Bassler, Absence of entanglement growth in Dicke superradiance. Preprint · Published version.\nD. T. Gillespie, Exact stochastic simulation of coupled chemical reactions, J. Phys. Chem. 81, 2340–2361 (1977). Published version.\nPIDicke.jl for population generators and trajectory simulations in the Dicke basis."
-  },
-  {
-    "objectID": "code.html",
-    "href": "code.html",
-    "title": "Code",
-    "section": "",
-    "text": "Public repositories for numerical methods and collective quantum dynamics. Each repository contains its own source, examples, and license information."
-  },
-  {
-    "objectID": "code.html#pidicke.jl",
-    "href": "code.html#pidicke.jl",
-    "title": "Code",
-    "section": "PIDicke.jl",
-    "text": "PIDicke.jl\nPermutation-invariant open-system calculations for two-level emitters in the Dicke basis, including population dynamics, quantum trajectories, coherences, and spin–cavity models.\nRepository ↗ Examples ↗"
-  },
-  {
-    "objectID": "code.html#krylovsolvermcwf",
-    "href": "code.html#krylovsolvermcwf",
-    "title": "Code",
-    "section": "KrylovSolverMCWF",
-    "text": "KrylovSolverMCWF\nA Krylov-subspace approach to Monte Carlo wavefunction simulations with QuantumOptics.jl, with an example notebook.\nRepository ↗"
-  },
-  {
-    "objectID": "code.html#number-fluctuations-and-particle-loss",
-    "href": "code.html#number-fluctuations-and-particle-loss",
-    "title": "Code",
-    "section": "Number fluctuations and particle loss",
-    "text": "Number fluctuations and particle loss\nCode accompanying work on number fluctuations and particle loss in Dicke superradiance.\nRepository ↗"
-  },
-  {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Publications",
-    "section": "",
-    "text": "Journal articles and preprints. Each work appears once, with links to the preprint and published version where available.\nGoogle Scholar ↗ Download bibliography"
-  },
-  {
-    "objectID": "publications.html#preprints",
-    "href": "publications.html#preprints",
-    "title": "Publications",
-    "section": "Preprints",
-    "text": "Preprints\n\n2026\n\nExact Analytical Treatment of Collectively Pumped Dicke Superradiance\nAvishi Poddar, Nico Baßler, Julian Lyne, Susanne F. Yelin, Helmut Ritsch, Claudiu Genes and Raphael Holzinger.\nPreprint · arXiv:2610.37665 (2026).\nPreprint ↗\n\n\n\n2026\n\nScaling theory of decoherence in Dicke superradiance\nNico S. Bassler, Julian Lyne and Javier Cuerda.\nPreprint · arXiv:2607.28034 (2026).\nPreprint ↗\n\n\n\n2026\n\nDicke superradiance in degenerate quantum matter: interplay of exchange statistics and spatial confinement\nJulian Lyne, Kai Phillip Schmidt, Claudiu Genes and Nico S. Bassler.\nPreprint · arXiv:2603.00778 (2026).\nPreprint ↗\n\n\n\n2024\n\nGeneralized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules\nN. S. Bassler, M. Reitz, R. Holzinger, A. Vibók, G. J. Halász, B. Gurlek and C. Genes.\nPreprint · arXiv:2405.08718 (2024).\nPreprint ↗"
-  },
-  {
-    "objectID": "publications.html#journal-articles",
-    "href": "publications.html#journal-articles",
-    "title": "Publications",
-    "section": "Journal articles",
-    "text": "Journal articles\n\n2026\n\nSymbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance\nRaphael Holzinger, Nico S. Bassler, Julian Lyne, Susanne F. Yelin and Claudiu Genes.\nPhysical Review Letters 137, 193602 (2026).\nPreprint ↗ Published version ↗\n\n\n\n2026\n\nSolving Dicke superradiance analytically: A compendium of methods\nRaphael Holzinger, Nico S. Bassler, Julian Lyne, Fidel G. Jimenez, Julius T. Gohsrich and Claudiu Genes.\nPhysical Review A 113, 043718 (2026).\nPreprint ↗ Published version ↗\n\n\n\n2025\n\nAbsence of entanglement growth in Dicke superradiance\nNico S. Bassler.\nPhysical Review A 112, 053713 (2025).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nPurcell-modified Doppler cooling of quantum emitters inside optical cavities\nJulian Lyne, Nico S. Bassler, Seong eun Park, Guido Pupillo and Claudiu Genes.\nPhysical Review A 110, 013115 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nN. S. Bassler, I. Varma, M. Proske, P. Windpassinger, K. P. Schmidt and C. Genes.\nPhysical Review Research 6, 023147 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nMetasurface-Based Hybrid Optical Cavities for Chiral Sensing\nNico S. Bassler, Andrea Aiello, Kai P. Schmidt, Claudiu Genes and Michael Reitz.\nPhysical Review Letters 132, 043602 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nScaling Law for Kasha’s Rule in Photoexcited Molecular Aggregates\nRaphael Holzinger, Nico S. Bassler, Helmut Ritsch and Claudiu Genes.\nThe Journal of Physical Chemistry A 128, 3910-3915 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2023\n\nLinear optical elements based on cooperative subwavelength emitter arrays\nNico S. Bassler, Michael Reitz, Kai P. Schmidt and Claudiu Genes.\nOptics Express 31, 6003–6026 (2023).\nPreprint ↗ Published version ↗\n\n\n\n2021\n\nEffects of domain walls in bilayer graphene in an external magnetic field\nN. S. Bassler and K. P. Schmidt.\nPhysical Review B 103, 155422 (2021).\nPreprint ↗ Published version ↗"
-  },
-  {
-    "objectID": "publications.html#theses",
-    "href": "publications.html#theses",
-    "title": "Publications",
-    "section": "Theses",
-    "text": "Theses\n\n2025\n\nQuantum Optics with Atoms and Molecules\nNico Baßler.\nDoctoral dissertation, Friedrich-Alexander-Universität Erlangen-Nürnberg (2025).\nThesis (PDF, 13.2 MB) University record ↗\n\n\n\n2020\n\nEffect of domain walls in bilayer graphene in an external magnetic field\nNico S. Baßler.\nMaster’s thesis in physics, Friedrich-Alexander-Universität Erlangen-Nürnberg (2020).\nThesis (PDF, 7.5 MB) Related article\n\n\n\nRelated calculations and reproducibility resources are collected under research notes and code."
-  },
-  {
-    "objectID": "index.html#research-interests",
-    "href": "index.html#research-interests",
-    "title": "About",
-    "section": "Research interests",
-    "text": "Research interests\nFrom microscopic interactions to collective behavior."
-  },
-  {
-    "objectID": "index.html#beyond-the-paper",
-    "href": "index.html#beyond-the-paper",
-    "title": "About",
-    "section": "Beyond the paper",
-    "text": "Beyond the paper\nThis site brings together my publications, conference presentations, scientific code, and a growing collection of research notes: derivations, conventions, calculations, and questions worth keeping track of."
-  },
-  {
-    "objectID": "presentations.html",
-    "href": "presentations.html",
-    "title": "Presentations",
-    "section": "",
-    "text": "Conference talks and posters, with links to programmes and related publications."
-  },
-  {
-    "objectID": "presentations.html#section",
-    "href": "presentations.html#section",
-    "title": "Presentations",
-    "section": "2026",
-    "text": "2026\n\nTalk\n\nSymbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance\nDPG Spring Meeting · Mainz, Germany\n6 March 2026 · Q 69.6\nProgramme & abstract ↗ Related paper\n\n\n\nPoster\n\nAbsence of Entanglement Growth in Dicke Superradiance\nDPG Spring Meeting · Mainz, Germany\n4 March 2026 · Q 43.2\nProgramme & abstract ↗ Related paper"
-  },
-  {
-    "objectID": "presentations.html#section-1",
-    "href": "presentations.html#section-1",
-    "title": "Presentations",
-    "section": "2025",
-    "text": "2025\n\nPoster\n\nGeneralized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules\nDPG Spring Meeting · Bonn, Germany\n11 March 2025 · MO 9.3\nProgramme & abstract ↗ Related preprint"
-  },
-  {
-    "objectID": "presentations.html#section-2",
-    "href": "presentations.html#section-2",
-    "title": "Presentations",
-    "section": "2024",
-    "text": "2024\n\nInvited talk\n\nMetasurface Based Hybrid Optical Cavities for Chiral Sensing\nMetamaterials 2024 · Platanias, Crete, Greece\n10 September 2024 · 18th International Congress on Artificial Materials for Novel Wave Phenomena\nProgramme & abstract ↗ Related paper\n\n\n\nPoster\n\nCooperative effects in dense cold atomic gases including magnetic dipole interaction\nDPG Spring Meeting · Berlin, Germany\n21 March 2024 · TT 80.59\nProgramme & abstract ↗ Related paper\n\n\n\nTalk\n\nOpen quantum system approach to non-adiabatic molecular physics\nDPG Spring Meeting · Freiburg, Germany\n14 March 2024 · MO 20.6\nProgramme & abstract ↗\n\n\n\nPoster\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nDPG Spring Meeting · Freiburg, Germany\n12 March 2024 · Q 24.38\nProgramme & abstract ↗ Related paper"
-  },
-  {
-    "objectID": "presentations.html#section-3",
-    "href": "presentations.html#section-3",
-    "title": "Presentations",
-    "section": "2023",
-    "text": "2023\n\nTalk\n\nApplications of cooperative subwavelength quantum emitter arrays\nDPG Spring Meeting · SAMOP 2023\n8 March 2023 · Q 35.2\nProgramme & abstract ↗ Related paper"
-  },
-  {
-    "objectID": "presentations.html#section-4",
-    "href": "presentations.html#section-4",
-    "title": "Presentations",
-    "section": "2022",
-    "text": "2022\n\nTalk\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nDPG Spring Meeting · Erlangen, Germany\n17 March 2022 · SYQC 1.2 · Symposium Quantum Cooperativity of Light and Matter\nProgramme & abstract ↗ Related paper\n\n\n\nPoster\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nInternational Conference on Quantum Optics · Obergurgl, Austria\n20–26 February 2022 · Conference dates\nBook of abstracts, p. 28 ↗ Related paper\n\n\n\nFind preprints, published articles, and thesis PDFs on the Publications page."
-  },
-  {
-    "objectID": "notes/index.html",
-    "href": "notes/index.html",
-    "title": "Research Notes",
-    "section": "",
-    "text": "A place for derivations, calculations, numerical methods, and ideas that benefit from a little more space. Notes can be short references or longer explorations; each one states its assumptions and conventions.\nThe first note connects Dicke collective decay to continuous-time Markov chains, from transition rates and waiting times to trajectory sampling.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\nDicke superradiance as a continuous-time Markov chain\n\n\n\nCollective spins\n\nMarkov chains\n\nNumerical methods\n\n\n\nCollective decay as a pure-death process: population dynamics, exponential waiting times, and exact trajectory sampling.\n\n\n\n\n\n12 Nov 2026\n\n\n\n\n\nNo matching items"
+    "text": "Related reading and code\n\nStrong local dephasing in Dicke superradiance: detailed balance over total-spin sectors and the emergence of independent-emitter decay by stochastic averaging.\nR. Holzinger et al., Solving Dicke superradiance analytically: A compendium of methods. Preprint · Published version. See the trajectory and probabilistic approaches.\nN. S. Bassler, Absence of entanglement growth in Dicke superradiance. Preprint · Published version.\nD. T. Gillespie, Exact stochastic simulation of coupled chemical reactions, J. Phys. Chem. 81, 2340–2361 (1977). Published version.\nPIDicke.jl for population generators and trajectory simulations in the Dicke basis."
   }
 ]

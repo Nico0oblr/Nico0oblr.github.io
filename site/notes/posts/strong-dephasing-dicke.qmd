@@ -1,0 +1,226 @@
+---
+title: "Strong local dephasing in Dicke superradiance"
+description: "From a fast birth–death chain over total spin to independent-emitter decay: detailed balance, spin multiplicities, and stochastic averaging."
+date: 2026-11-12
+categories: [Collective spins, Markov chains, Adiabatic elimination]
+toc: true
+---
+
+Collective emission and independent-emitter decay can arise from the same collective jump operator. Strong local dephasing changes which total-spin sectors are occupied. Averaging the collective emission rate over their stationary distribution then gives a rate proportional to the number of excitations.
+
+The calculation connects two continuous-time Markov chains: a fast **birth–death process** in total spin and a slow **pure-death process** in excitation number. The stationary distribution of the first determines the rates of the second.
+
+## Model and conventions
+
+Consider $N$ identical two-level emitters, with $\hbar=1$,
+
+$$
+J_-=\sum_{i=1}^N\sigma_-^{(i)},
+\qquad
+J_z=\sum_{i=1}^N s_z^{(i)},
+\qquad
+s_z^{(i)}=\frac12\left(\lvert e_i\rangle\langle e_i\rvert-\lvert g_i\rangle\langle g_i\rvert\right).
+$$
+
+The master equation is
+
+$$
+\dot\rho=\Gamma\mathcal D[J_-]\rho
++\xi\sum_{i=1}^N\mathcal D[s_z^{(i)}]\rho,
+\qquad
+\mathcal D[L]\rho=L\rho L^\dagger-\frac12\{L^\dagger L,\rho\}.
+$$
+
+Here $\Gamma$ is the single-emitter population decay rate. With the spin-$1/2$ convention for $s_z$, dephasing alone damps a single-emitter optical coherence at rate $\xi/2$. There is no drive, Hamiltonian, or additional local emission channel. The dephasing acts independently on each emitter.
+
+We assume a permutationally invariant state diagonal in the Dicke basis, including the fully excited initial state. Let $p_{S,M}$ be the probability in the total-spin sector $S$ at inversion $M$, **summed over its multiplicity**. The excitation number is $n=N/2+M$. The allowed spins are $S=|M|,|M|+1,\ldots,N/2$; this includes half-integer spins for odd $N$.
+
+The limiting statement below takes $\xi/\Gamma\to\infty$ at fixed $N$. The regime of interest is strong dephasing relative to the collective scale, $\xi\gg N\Gamma$.
+
+## The fast Markov chain at fixed inversion
+
+Local dephasing preserves $M$ and changes $S$ by one. Its off-diagonal transition rates are
+
+$$
+\begin{aligned}
+a_{S,M}&=\xi\,
+\frac{(S-M+1)(S+M+1)(N-2S)}{4(S+1)(2S+1)},\\
+b_{S,M}&=\xi\,
+\frac{(S-M)(S+M)(N+2S+2)}{4S(2S+1)},
+\end{aligned}
+$$
+
+for $S\to S+1$ and $S\to S-1$, respectively. Transitions outside the allowed spin interval are absent: $a_{N/2,M}=0$ and $b_{|M|,M}=0$. At $S=0$, the latter is set to zero without evaluating the quotient. These are the standard permutationally invariant dephasing rates in the convention above; see [Shammah *et al.*](https://doi.org/10.1103/PhysRevA.98.063815).
+
+At fixed $M$, dephasing therefore generates the birth–death equation
+
+$$
+\dot p_{S,M}
+=a_{S-1,M}p_{S-1,M}+b_{S+1,M}p_{S+1,M}
+-(a_{S,M}+b_{S,M})p_{S,M},
+$$
+
+with unavailable inflow terms omitted. Here “birth” and “death” refer to the spin coordinate, not to the excitation number. Dephasing emits no photons in this model.
+
+## Detailed balance and the stationary distribution
+
+Write $\pi_{S|M}$ for the normalized stationary distribution of this fast chain. Detailed balance on each adjacent pair requires
+
+$$
+a_{S-1,M}\pi_{S-1|M}=b_{S,M}\pi_{S|M}.
+$$
+
+Substituting the rates gives
+
+$$
+\frac{\pi_{S|M}}{\pi_{S-1|M}}
+=\frac{(N-2S+2)(2S+1)}{(N+2S+2)(2S-1)}.
+$$
+
+The factors containing $M$ cancel. This is also the ratio $d_S/d_{S-1}$ of the spin-sector multiplicities
+
+$$
+\begin{aligned}
+d_S
+&=\binom{N}{N/2-S}-\binom{N}{N/2-S-1}\\
+&=\frac{N!(2S+1)}{(N/2-S)!(N/2+S+1)!}.
+\end{aligned}
+$$
+
+A binomial coefficient with a lower index outside $0,\ldots,N$ is zero. Each copy of spin $S$ contains exactly one state with a specified allowed $M$. Consequently,
+
+$$
+\sum_{S=|M|}^{N/2}d_S
+=\binom{N}{N/2+M},
+$$
+
+which also follows by telescoping the difference of binomial coefficients. Normalization gives
+
+$$
+\boxed{
+\pi_{S|M}
+=\frac{d_S}{\binom{N}{N/2+M}}
+=\frac{(2S+1)(N/2-M)!(N/2+M)!}
+{(N/2-S)!(N/2+S+1)!}.
+}
+$$
+
+The distribution depends on $M$ through its allowed support and normalization, even though the adjacent-spin ratio is independent of $M$.
+
+There is a direct interpretation. At fixed excitation number $n$, the stationary state is the uniform mixture of all $\binom{N}{n}$ product configurations with $n$ excited emitters. Permutational invariance makes their diagonal weights equal, and local dephasing removes coherences between distinct configurations. Decomposing this mixture into spin sectors gives precisely the multiplicity weights above.
+
+## Averaging the collective emission rate
+
+Collective emission preserves $S$ and lowers $M$ by one, with rate
+
+$$
+c_{S,M}=\Gamma(S+M)(S-M+1)
+=\Gamma\left[S(S+1)-M(M-1)\right].
+$$
+
+We need its average under $\pi_{S|M}$. The uniform product-state mixture provides a short way to evaluate it. For any product configuration $\lvert x\rangle$ with $n$ excitations,
+
+$$
+\langle x|J_+J_-|x\rangle
+=\sum_i\langle x|\sigma_+^{(i)}\sigma_-^{(i)}|x\rangle
+=n.
+$$
+
+The cross terms with $i\ne j$ have zero diagonal matrix element. Since $J_+J_-$ has eigenvalue $S(S+1)-M(M-1)$ in a Dicke state, this proves
+
+$$
+\sum_S\pi_{S|M}\left[S(S+1)-M(M-1)\right]
+=\frac N2+M,
+$$
+
+or equivalently,
+
+$$
+\left\langle S(S+1)\right\rangle_M=\frac N2+M^2.
+$$
+
+The effective emission rate is therefore
+
+$$
+\boxed{
+\overline c_M=\sum_S c_{S,M}\pi_{S|M}
+=\Gamma\left(\frac N2+M\right)=\Gamma n.
+}
+$$
+
+This is an exact stationary average for every finite $N$. Its use as the dynamical rate requires the separation of dephasing and emission timescales.
+
+## Stochastic averaging: the slow Markov chain
+
+Let $q_M=\sum_Sp_{S,M}$. Summing the full population equations over $S$ cancels the dephasing terms and gives the exact identity
+
+$$
+\dot q_M
+=\sum_S c_{S,M+1}p_{S,M+1}
+-\sum_S c_{S,M}p_{S,M}.
+$$
+
+At finite $\xi$, this is generally not a closed equation for $q_M$: the emission rate depends on the unresolved spin distribution. In the fast-dephasing limit, that distribution relaxes between emissions,
+
+$$
+p_{S,M}\simeq\pi_{S|M}q_M,
+$$
+
+so the limiting marginal dynamics is
+
+$$
+\dot q_M
+=\Gamma\left(\frac N2+M+1\right)q_{M+1}
+-\Gamma\left(\frac N2+M\right)q_M.
+$$
+
+An emission initially leaves the spin distribution inherited from the preceding inversion slice. Fast dephasing then redistributes it according to the stationary distribution on the new slice. This repeated relaxation is the reason stationary averaging closes the slow dynamics.
+
+In Markov-chain language, this is **stochastic averaging**, or adiabatic elimination of the fast coordinate. With column probability vectors, let $Q_{\mathrm{em}}$ be the collective-emission generator, $R$ sum over $S$, and $E$ lift a marginal to local equilibrium, $(Eq)_{S,M}=\pi_{S|M}q_M$. Then $RE$ is the identity and the limiting generator is
+
+$$
+Q_{\mathrm{eff}}=R Q_{\mathrm{em}}E.
+$$
+
+In terms of excitation probabilities $P_n=q_{n-N/2}$, this becomes
+
+$$
+\dot P_n=\Gamma(n+1)P_{n+1}-\Gamma nP_n,
+\qquad
+n\longrightarrow n-1\quad\text{at rate }\Gamma n.
+$$
+
+The inflow term is absent at $n=N$, and $n=0$ is absorbing. These are exactly the population equations for $N$ independently decaying emitters. They contrast with the symmetric Dicke ladder's rates $\Gamma n(N-n+1)$, derived in the [companion Markov-chain note](dicke-decay-conventions.qmd).
+
+## Consequence for the emission curve
+
+Starting with all emitters excited, the limiting solution is binomial,
+
+$$
+P_n(t)=\binom{N}{n}
+\bigl(e^{-\Gamma t}\bigr)^n
+\bigl(1-e^{-\Gamma t}\bigr)^{N-n}.
+$$
+
+Thus the mean excitation number and photon emission rate are
+
+$$
+\langle n(t)\rangle=Ne^{-\Gamma t},
+\qquad
+I(t)=\Gamma\langle n(t)\rangle
+=\Gamma N e^{-\Gamma t}.
+$$
+
+Strong local dephasing removes the collective burst. The emission channel remains collective, but the fast redistribution over spin sectors reduces its averaged rate to the independent-emitter value.
+
+## Scope
+
+The stationary distribution and averaged-rate identities above are exact. The reduced dynamical equation is exact in the infinite-dephasing limit at fixed $N$; finite dephasing can retain correlations and deviations from independent decay, including during an initial fast relaxation if the starting state is not already equilibrated. No uniform finite-$N$ error bound is asserted here.
+
+Local dephasing is essential. Replacing the separate $s_z^{(i)}$ channels by collective dephasing $\mathcal D[J_z]$ does not redistribute total spin and does not produce this mechanism. The Markov description concerns the Dicke-diagonal population sector specified above; it does not by itself establish independence for every quantum observable or measurement scheme.
+
+## Related reading and code
+
+- [Dicke superradiance as a continuous-time Markov chain](dicke-decay-conventions.qmd): collective decay within the fully symmetric sector.
+- N. Shammah, S. Ahmed, N. Lambert, S. De Liberato, and F. Nori, **Open quantum systems with local and collective incoherent processes: Efficient numerical simulations using permutational invariance**, *Phys. Rev. A* **98**, 063815 (2018). [Preprint](https://arxiv.org/abs/1805.05129) · [Published version](https://doi.org/10.1103/PhysRevA.98.063815). Background on the population rates and spin-sector reduction.
+- [PIDicke.jl](https://github.com/Nico0oblr/PiDicke.jl): population generators and trajectory simulations in the Dicke basis.
