@@ -13,7 +13,7 @@ Theoretical Quantum Technology group, Institute for Applied Physics, TU Darmstad
 **Dr. rer. nat. in Physics** · October 2020–May 2025  
 Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU), *magna cum laude*. I carried out my doctoral research at FAU and the Max Planck Institute for the Science of Light under the supervision of Claudiu Genes and Kai P. Schmidt. My dissertation was [*Quantum Optics with Atoms and Molecules*](publications.qmd#quantum-optics-with-atoms-and-molecules).
 
-During my doctorate I was a member of the Integrated Research Training Group of [QuCoLiMa (Quantum Cooperativity of Light and Matter, TRR 306)](https://www.lightmatter.fau.de/people/early-career-researchers/). I served as a doctoral student representative from October 2023.
+During my doctorate I was a member of the Integrated Research Training Group of [QuCoLiMa (Quantum Cooperativity of Light and Matter, TRR 306)](https://www.qucolima.de/rtg/). I served as a doctoral student representative from October 2023.
 
 **M.Sc. in Physics** · July 2017–September 2020  
 FAU, with distinction. My [master’s thesis](files/2020_Masterthesis_Bassler.pdf) studied the effect of domain walls in bilayer graphene in an external magnetic field.
