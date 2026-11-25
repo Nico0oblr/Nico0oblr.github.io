@@ -45,6 +45,16 @@ The archive contains the JLD2 data and plotting scripts for the figures in the p
 [Zenodo archive ↗](https://doi.org/10.5281/zenodo.15293102){.text-link} [Related paper](publications.qmd#absence-of-entanglement-growth-in-dicke-superradiance){.paper-link}
 :::
 
+::: {.code-project}
+[JULIA · REPRODUCIBILITY]{.eyebrow}
+
+## Scaling theory of decoherence in Dicke superradiance
+
+Julia simulations, numerical data, and plotting notebooks for the paper on local dephasing and spontaneous emission in Dicke superradiance.
+
+[Repository ↗](https://github.com/Nico0oblr/SuperradianceMolecules){.text-link} [Code and data (Zenodo) ↗](https://doi.org/10.5281/zenodo.22641833){.paper-link} [Related paper](publications.qmd#scaling-theory-of-decoherence-in-dicke-superradiance){.paper-link}
+:::
+
 ::: {.page-endnote}
 [All public repositories on GitHub ↗](https://github.com/Nico0oblr?tab=repositories)
 :::

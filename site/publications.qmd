@@ -30,7 +30,7 @@ Preprint · arXiv:2610.37665 (2026).
 
 Preprint · arXiv:2607.28034 (2026).
 
-[Preprint ↗](https://arxiv.org/abs/2607.28034){.paper-link}
+[Preprint ↗](https://arxiv.org/abs/2607.28034){.paper-link} [Code ↗](https://github.com/Nico0oblr/SuperradianceMolecules){.paper-link} [Code and data (Zenodo) ↗](https://doi.org/10.5281/zenodo.22641833){.paper-link}
 :::
 
 ::: {.publication}
