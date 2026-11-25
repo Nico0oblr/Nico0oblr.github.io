@@ -10,7 +10,7 @@ Software for simulating collective quantum dynamics, with code and data from ind
 
 ## ShiftedGMRES.jl
 
-Compute a frequency sweep by solving shifted linear systems with a shared Krylov basis. The examples cover a sparse matrix and the scattered field from two coupled dipoles at a detector.
+Compute a frequency sweep by solving shifted linear systems with a shared Krylov basis. The worked example computes a detector spectrum for a sparse array of 102,400 dipoles across 81 detunings.
 
 [Examples and download](shifted-gmres.qmd){.text-link}
 :::
@@ -22,7 +22,7 @@ Compute a frequency sweep by solving shifted linear systems with a shared Krylov
 
 Construct the free-space electric Green tensor, project it onto dipole polarizations, and propagate dipole moments to observation points.
 
-[Two dipoles and a detector](shifted-gmres.qmd#coupled-dipole-spectrum){.text-link} [Download source](files/FreeSpaceGreens-0.1.0.zip){.paper-link}
+[Sparse array and detector](shifted-gmres.qmd#coupled-dipole-spectrum){.text-link} [Download source](files/FreeSpaceGreens-0.1.0.zip){.paper-link}
 :::
 
 ::: {.code-project}

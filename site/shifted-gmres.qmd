@@ -1,74 +1,49 @@
 ---
 title: "ShiftedGMRES.jl"
-description: "Two Julia examples for solving shifted linear systems with a shared Krylov basis."
+description: "A sparse detuning sweep for 102,400 dipoles, including the scattered field at a detector."
 ---
 
-For a fixed matrix $A$ and drive $b$, changing the shift in $(A+\Delta I)x=b$ preserves the Krylov space generated from $b$. ShiftedGMRES.jl uses one Arnoldi basis per restart cycle across the sweep. It returns one solution column and one convergence flag per shift.
+## Detector spectrum of a sparse dipole array {#coupled-dipole-spectrum}
 
-[ShiftedGMRES.jl 0.1.1 with examples](files/ShiftedGMRES-0.1.1.zip){.paper-link} [FreeSpaceGreens.jl 0.1.0](files/FreeSpaceGreens-0.1.0.zip){.paper-link}
+A local drive excites one site of a $320\times320$ square array. At each of 81 detunings we solve $(A+\Delta I)x=b$ for all 102,400 dipole amplitudes and sum their electric fields at a detector. ShiftedGMRES.jl shares one Arnoldi basis across the detunings in each restart cycle.
 
-Extract both archives into one empty folder. Start Julia in that folder and run `pushfirst!(LOAD_PATH, pwd())` to load the local packages. The two examples below are also available as `ShiftedGMRES.jl/examples/sparse_scan.jl` and `ShiftedGMRES.jl/examples/two_dipoles.jl`.
+![Scattered intensity at the detector as a function of detuning for the locally driven square array. The dots are the 81 computed frequencies.](assets/sparse-array-detector.png){fig-alt="Line plot of relative scattered intensity versus detuning for a 320 by 320 array."}
 
-## A sparse nonsymmetric matrix
+[Download the scan (CSV)](files/sparse-array-detector.csv){.text-link} · [Solver and runnable example (ZIP)](files/ShiftedGMRES-0.1.2.zip){.text-link} · [FreeSpaceGreens.jl (ZIP)](files/FreeSpaceGreens-0.1.0.zip){.text-link}
 
-Each column below is checked against a separate sparse direct solve. The `seed` argument selects the reference shift by index.
+### What makes the matrix sparse?
 
-```julia
-using ShiftedGMRES, SparseArrays, LinearAlgebra
-
-n = 80
-A = spdiagm(-1 => fill(-0.3, n-1), 0 => fill(2.0, n), 1 => fill(0.1, n-1))
-b = ones(n)
-shifts = [-0.25, 0.5, 1.0]
-result = shifted_gmres(A, b, shifts; seed=2, restart=8, rtol=1e-9)
-@assert all(result.converged)
-for (j, shift) in enumerate(shifts)
-    reference = (A + shift*I) \ b
-    println((; shift, relative_error=norm(result.X[:,j]-reference)/norm(reference)))
-end
-```
-
-The largest relative difference from a direct solve in this example is about $5.4\times 10^{-14}$ in double precision.
-
-## Two dipoles and a detector {#coupled-dipole-spectrum}
-
-An $x$-polarized plane wave travels along $z$ and drives two emitters separated by $0.35\lambda$. We set $\lambda=1$ and use the single-emitter radiative population decay rate as the frequency unit. The off-diagonal interaction $K$ comes from the free-space Green tensor. As in the original example, the total single-emitter coherence damping is one in these units. Setting `self=:zero` lets us supply the full diagonal damping explicitly in $A=iI-K$.
-
-At each detuning we solve $(A+\Delta I)x=b$. The amplitude $x_j$ gives the dipole moment $x_j\hat{\mathbf x}$ in the chosen drive units. At the detector $\mathbf R=(3,0,4)\lambda$, the scattered field is the coherent sum
-$$
-\mathbf E_{\rm sc}(\mathbf R) = \sum_j \mathbf G(\mathbf R-\mathbf r_j)\,\hat{\mathbf x}\,x_j .
-$$
-We use the full finite-distance tensor with $\epsilon_0=1$ and report $\sum_\alpha |E_{{\rm sc},\alpha}|^2$ as a relative scattered intensity. The incident plane wave enters only through the emitter drive.
+The example models coherent exchange along the four nearest-neighbor bonds of each interior site, with open boundaries and local coherence damping $\Gamma_0/2$. This choice gives **510,720 nonzero entries**. A full free-space dipole interaction couples every pair and gives a dense matrix. The lattice spacing is $0.35\lambda$, all dipoles point along $x$, and the bond strengths are the real parts of the free-space couplings for the two bond orientations. Frequencies are in units of the single-emitter population decay rate $\Gamma_0$.
 
 ```julia
-using ShiftedGMRES, FreeSpaceGreens, LinearAlgebra
-
-# x-polarized plane wave traveling along z. Positions in wavelengths.
-k = 2π
-positions = [0.0 0.0; 0.0 0.0; 0.0 0.35]
-dipole = [1.0, 0.0, 0.0]
-drive = cis.(k .* positions[3, :])
-K = hybrid_coupling_matrix(positions, dipole; k, self=:zero)
-A = im*I - K  # unit coherence damping, included once on the diagonal
-detunings = collect(-3:0.25:3)
-result = shifted_gmres(A, drive, detunings)
-@assert all(result.converged)
-
-# Each column of the outer product is one emitter's vector dipole moment.
-detector = [3.0, 0.0, 4.0]
-G_det = vector_green_matrix([detector], positions; k)
-field(x) = G_det * vec(dipole * transpose(x))
-
-for (j, delta) in enumerate(detunings)
-    x = result.X[:, j]
-    E = field(x)
-    intensity = sum(abs2, E)
-    direct = (A + delta*I) \ drive
-    @assert norm((A + delta*I)*x - drive) / norm(drive) < 1e-10
-    @assert isapprox(E, field(direct); rtol=1e-10)
-    @assert isapprox(intensity, sum(abs2, field(direct)); rtol=1e-10)
-    println((; delta, E, intensity))
-end
+Jx = real(hybrid_coupling([spacing, 0., 0.], dipole, dipole; k))
+Jy = real(hybrid_coupling([0., spacing, 0.], dipole, dipole; k))
+bonds = spdiagm(-1 => ones(side-1), 1 => ones(side-1))
+unit = spdiagm(0 => ones(side))
+A = 0.5im*I - Jx*kron(unit, bonds) - Jy*kron(bonds, unit)
+result = shifted_gmres(A, drive, detunings; restart=24, rtol=1e-9)
 ```
 
-On resonance, the detector field is approximately $(0.3003-0.7108i,\,0,\,-0.2987+0.5200i)$, giving a relative scattered intensity of $0.9551$. The off-axis detector sees both $x$ and $z$ field components even though both source dipoles point along $x$.
+### From amplitudes to the detector field
+
+The driven site is at the origin and the detector is at $(0.6,-0.4,2.5)\lambda$. Each column of the $3\times102{,}400$ detector matrix is the full finite-distance field from a unit dipole at one site. Every source contributes to this sum. The plotted intensity is $|\mathbf E_{\rm sc}|^2$ in arbitrary units. The CSV gives the real and imaginary parts of all three scattered-field components.
+
+```julia
+for (site, xy) in enumerate(Iterators.product(coords, coords))
+    r = detector - [xy[1], xy[2], 0.0]
+    to_detector[:, site] = green_tensor(r; k) * dipole
+end
+E = to_detector * result.X
+intensity = vec(sum(abs2, E; dims=1))
+```
+
+The sweep took 48 shared Arnoldi steps. The largest relative residual over all 81 systems was $1.53\times10^{-11}$. At $\Delta/\Gamma_0=-3,\,0,\,+3$, separate sparse LU solves agreed with the dipole amplitudes, complex detector field, and intensity to relative tolerance $10^{-8}$.
+
+### Run the scan
+
+Extract both ZIP files into one empty directory and start Julia there. The example prints the shared iteration count, solve time, maximum residual, and on-resonance field and intensity. The timed section covers the shifted solve after compilation. It excludes matrix assembly, detector propagation, and the three reference solves.
+
+```julia
+pushfirst!(LOAD_PATH, pwd())
+include("ShiftedGMRES.jl/examples/sparse_dipole_array.jl")
+```
