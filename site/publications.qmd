@@ -92,7 +92,7 @@ Raphael Holzinger, **Nico S. Bassler**, Julian Lyne, Fidel G. Jimenez, Julius T.
 
 *Physical Review A* **112**, 053713 (2025).
 
-[Preprint ↗](https://arxiv.org/abs/2504.13646){.paper-link} [Published version ↗](https://doi.org/10.1103/qxx1-xr44){.paper-link}
+[Preprint ↗](https://arxiv.org/abs/2504.13646){.paper-link} [Published version ↗](https://doi.org/10.1103/qxx1-xr44){.paper-link} [Data and plotting scripts (Zenodo) ↗](https://doi.org/10.5281/zenodo.15293102){.paper-link}
 :::
 
 ::: {.publication}

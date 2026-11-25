@@ -10,6 +10,18 @@ Conference talks and posters, with links to programmes and related publications.
 ::: {.presentation}
 [Talk]{.presentation-kind}
 
+### Scaling theory of decoherence in Dicke superradiance
+
+**Workshop on Collective Scattering of Light (CoScaLi) · Porquerolles, France**
+
+[13–18 September 2026 · Workshop dates]{.presentation-meta}
+
+[Workshop website ↗](https://sites.google.com/ufscar.br/romain/events/coscali-2026/){.paper-link} [Related preprint](publications.qmd#scaling-theory-of-decoherence-in-dicke-superradiance){.paper-link}
+:::
+
+::: {.presentation}
+[Talk]{.presentation-kind}
+
 ### Symbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance
 
 **DPG Spring Meeting · Mainz, Germany**

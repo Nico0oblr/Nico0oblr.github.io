@@ -3,7 +3,7 @@ title: "Code"
 description: "Public Julia code and reproducibility resources for collective quantum dynamics."
 ---
 
-Public repositories for numerical methods and collective quantum dynamics. Each repository contains its own source, examples, and license information.
+Software for simulating collective quantum dynamics, with code and data from individual papers.
 
 ::: {.code-project}
 [JULIA · OPEN QUANTUM SYSTEMS]{.eyebrow}
@@ -33,6 +33,16 @@ A Krylov-subspace approach to Monte Carlo wavefunction simulations with QuantumO
 Code accompanying work on number fluctuations and particle loss in Dicke superradiance.
 
 [Repository ↗](https://github.com/Nico0oblr/Code-for-Number-fluctuations-and-particle-loss-in-Dicke-superradiance-){.text-link}
+:::
+
+::: {.code-project}
+[DATA AND PLOTTING SCRIPTS]{.eyebrow}
+
+## Absence of entanglement growth in Dicke superradiance
+
+The archive contains the JLD2 data and plotting scripts for the figures in the paper.
+
+[Zenodo archive ↗](https://doi.org/10.5281/zenodo.15293102){.text-link} [Related paper](publications.qmd#absence-of-entanglement-growth-in-dicke-superradiance){.paper-link}
 :::
 
 ::: {.page-endnote}
