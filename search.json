@@ -172,7 +172,7 @@
     "href": "publications.html#preprints",
     "title": "Publications",
     "section": "Preprints",
-    "text": "Preprints\n\n2026\n\nExact Analytical Treatment of Collectively Pumped Dicke Superradiance\nAvishi Poddar, Nico Baßler, Julian Lyne, Susanne F. Yelin, Helmut Ritsch, Claudiu Genes and Raphael Holzinger.\nPreprint · arXiv:2610.37665 (2026).\nPreprint ↗\n\n\n\n2026\n\nScaling theory of decoherence in Dicke superradiance\nNico S. Bassler, Julian Lyne and Javier Cuerda.\nPreprint · arXiv:2607.28034 (2026).\nPreprint ↗\n\n\n\n2026\n\nDicke superradiance in degenerate quantum matter: interplay of exchange statistics and spatial confinement\nJulian Lyne, Kai Phillip Schmidt, Claudiu Genes and Nico S. Bassler.\nPreprint · arXiv:2603.00778 (2026).\nPreprint ↗\n\n\n\n2024\n\nGeneralized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules\nN. S. Bassler, M. Reitz, R. Holzinger, A. Vibók, G. J. Halász, B. Gurlek and C. Genes.\nPreprint · arXiv:2405.08718 (2024).\nPreprint ↗"
+    "text": "Preprints\n\n2026\n\nExact Analytical Treatment of Collectively Pumped Dicke Superradiance\nAvishi Poddar, Nico Baßler, Julian Lyne, Susanne F. Yelin, Helmut Ritsch, Claudiu Genes and Raphael Holzinger.\nPreprint · arXiv:2610.37665 (2026).\nPreprint ↗\n\n\n\n2026\n\nScaling theory of decoherence in Dicke superradiance\nNico S. Bassler, Julian Lyne and Javier Cuerda.\nPreprint · arXiv:2607.28034 (2026).\nPreprint ↗ Code ↗ Code and data (Zenodo) ↗\n\n\n\n2026\n\nDicke superradiance in degenerate quantum matter: interplay of exchange statistics and spatial confinement\nJulian Lyne, Kai Phillip Schmidt, Claudiu Genes and Nico S. Bassler.\nPreprint · arXiv:2603.00778 (2026).\nPreprint ↗\n\n\n\n2024\n\nGeneralized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules\nN. S. Bassler, M. Reitz, R. Holzinger, A. Vibók, G. J. Halász, B. Gurlek and C. Genes.\nPreprint · arXiv:2405.08718 (2024).\nPreprint ↗"
   },
   {
     "objectID": "publications.html#journal-articles",
@@ -222,6 +222,13 @@
     "title": "Code",
     "section": "Absence of entanglement growth in Dicke superradiance",
     "text": "Absence of entanglement growth in Dicke superradiance\nThe archive contains the JLD2 data and plotting scripts for the figures in the paper.\nZenodo archive ↗ Related paper"
+  },
+  {
+    "objectID": "code.html#scaling-theory-of-decoherence-in-dicke-superradiance",
+    "href": "code.html#scaling-theory-of-decoherence-in-dicke-superradiance",
+    "title": "Code",
+    "section": "Scaling theory of decoherence in Dicke superradiance",
+    "text": "Scaling theory of decoherence in Dicke superradiance\nJulia simulations, numerical data, and plotting notebooks for the paper on local dephasing and spontaneous emission in Dicke superradiance.\nRepository ↗ Code and data (Zenodo) ↗ Related paper"
   },
   {
     "objectID": "notes/posts/dicke-decay-conventions.html",
