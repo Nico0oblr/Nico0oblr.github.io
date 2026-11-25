@@ -1,4 +1,5 @@
 [
+  "assets/sparse-array-detector.png",
   "code.html",
   "cv.html",
   "files/2020_Masterthesis_Bassler.pdf",
@@ -6,6 +7,8 @@
   "files/PHD_thesis.pdf",
   "files/ShiftedGMRES-0.1.0.zip",
   "files/ShiftedGMRES-0.1.1.zip",
+  "files/ShiftedGMRES-0.1.2.zip",
+  "files/sparse-array-detector.csv",
   "index.html",
   "listings.json",
   "notes/index.html",

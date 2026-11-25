@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Two Julia examples for solving shifted linear systems with a shared Krylov basis.">
+<meta name="description" content="A sparse detuning sweep for 102,400 dipoles, including the scattered field at a detector.">
 
 <title>ShiftedGMRES.jl – Nico S. Baßler</title>
 <style>
@@ -136,8 +136,12 @@ window.Quarto = {
 </script>
 
 <meta property="og:title" content="ShiftedGMRES.jl – Nico S. Baßler">
-<meta property="og:description" content="Two Julia examples for solving shifted linear systems with a shared Krylov basis.">
+<meta property="og:description" content="A sparse detuning sweep for 102,400 dipoles, including the scattered field at a detector.">
+<meta property="og:image" content="https://nico0oblr.github.io/assets/sparse-array-detector.png">
 <meta property="og:site_name" content="Nico S. Baßler">
+<meta property="og:image:alt" content="Line plot of relative scattered intensity versus detuning for a 320 by 320 array.">
+<meta property="og:image:height" content="684">
+<meta property="og:image:width" content="1278">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -215,7 +219,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Two Julia examples for solving shifted linear systems with a shared Krylov basis.
+    A sparse detuning sweep for 102,400 dipoles, including the scattered field at a detector.
   </div>
 </div>
 
@@ -232,63 +236,45 @@ window.Quarto = {
 </header>
 
 
-<p>For a fixed matrix <span class="math inline">\(A\)</span> and drive <span class="math inline">\(b\)</span>, changing the shift in <span class="math inline">\((A+\Delta I)x=b\)</span> preserves the Krylov space generated from <span class="math inline">\(b\)</span>. ShiftedGMRES.jl uses one Arnoldi basis per restart cycle across the sweep. It returns one solution column and one convergence flag per shift.</p>
-<p><a href="files/ShiftedGMRES-0.1.1.zip" class="paper-link">ShiftedGMRES.jl 0.1.1 with examples</a> <a href="files/FreeSpaceGreens-0.1.0.zip" class="paper-link">FreeSpaceGreens.jl 0.1.0</a></p>
-<p>Extract both archives into one empty folder. Start Julia in that folder and run <code>pushfirst!(LOAD_PATH, pwd())</code> to load the local packages. The two examples below are also available as <code>ShiftedGMRES.jl/examples/sparse_scan.jl</code> and <code>ShiftedGMRES.jl/examples/two_dipoles.jl</code>.</p>
-<section id="a-sparse-nonsymmetric-matrix" class="level2">
-<h2 class="anchored" data-anchor-id="a-sparse-nonsymmetric-matrix">A sparse nonsymmetric matrix</h2>
-<p>Each column below is checked against a separate sparse direct solve. The <code>seed</code> argument selects the reference shift by index.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ShiftedGMRES</span>, <span class="bu">SparseArrays</span>, <span class="bu">LinearAlgebra</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="fl">80</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> <span class="fu">spdiagm</span>(<span class="op">-</span><span class="fl">1</span> <span class="op">=&gt;</span> <span class="fu">fill</span>(<span class="op">-</span><span class="fl">0.3</span>, n<span class="op">-</span><span class="fl">1</span>), <span class="fl">0</span> <span class="op">=&gt;</span> <span class="fu">fill</span>(<span class="fl">2.0</span>, n), <span class="fl">1</span> <span class="op">=&gt;</span> <span class="fu">fill</span>(<span class="fl">0.1</span>, n<span class="op">-</span><span class="fl">1</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="fu">ones</span>(n)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>shifts <span class="op">=</span> [<span class="op">-</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="fu">shifted_gmres</span>(A, b, shifts; seed<span class="op">=</span><span class="fl">2</span>, restart<span class="op">=</span><span class="fl">8</span>, rtol<span class="op">=</span><span class="fl">1e-9</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">@assert</span> <span class="fu">all</span>(result.converged)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j, shift) <span class="kw">in</span> <span class="fu">enumerate</span>(shifts)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    reference <span class="op">=</span> (A <span class="op">+</span> shift<span class="op">*</span>I) <span class="op">\</span> b</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>((; shift, relative_error<span class="op">=</span><span class="fu">norm</span>(result.X[<span class="op">:</span>,j]<span class="op">-</span>reference)<span class="op">/</span><span class="fu">norm</span>(reference)))</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The largest relative difference from a direct solve in this example is about <span class="math inline">\(5.4\times 10^{-14}\)</span> in double precision.</p>
-</section>
 <section id="coupled-dipole-spectrum" class="level2">
-<h2 class="anchored" data-anchor-id="coupled-dipole-spectrum">Two dipoles and a detector</h2>
-<p>An <span class="math inline">\(x\)</span>-polarized plane wave travels along <span class="math inline">\(z\)</span> and drives two emitters separated by <span class="math inline">\(0.35\lambda\)</span>. We set <span class="math inline">\(\lambda=1\)</span> and use the single-emitter radiative population decay rate as the frequency unit. The off-diagonal interaction <span class="math inline">\(K\)</span> comes from the free-space Green tensor. As in the original example, the total single-emitter coherence damping is one in these units. Setting <code>self=:zero</code> lets us supply the full diagonal damping explicitly in <span class="math inline">\(A=iI-K\)</span>.</p>
-<p>At each detuning we solve <span class="math inline">\((A+\Delta I)x=b\)</span>. The amplitude <span class="math inline">\(x_j\)</span> gives the dipole moment <span class="math inline">\(x_j\hat{\mathbf x}\)</span> in the chosen drive units. At the detector <span class="math inline">\(\mathbf R=(3,0,4)\lambda\)</span>, the scattered field is the coherent sum <span class="math display">\[
-\mathbf E_{\rm sc}(\mathbf R) = \sum_j \mathbf G(\mathbf R-\mathbf r_j)\,\hat{\mathbf x}\,x_j .
-\]</span> We use the full finite-distance tensor with <span class="math inline">\(\epsilon_0=1\)</span> and report <span class="math inline">\(\sum_\alpha |E_{{\rm sc},\alpha}|^2\)</span> as a relative scattered intensity. The incident plane wave enters only through the emitter drive.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ShiftedGMRES</span>, <span class="bu">FreeSpaceGreens</span>, <span class="bu">LinearAlgebra</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># x-polarized plane wave traveling along z. Positions in wavelengths.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="fl">2</span>π</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> [<span class="fl">0.0</span> <span class="fl">0.0</span>; <span class="fl">0.0</span> <span class="fl">0.0</span>; <span class="fl">0.0</span> <span class="fl">0.35</span>]</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>dipole <span class="op">=</span> [<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>drive <span class="op">=</span> <span class="fu">cis</span>.(k <span class="op">.*</span> positions[<span class="fl">3</span>, <span class="op">:</span>])</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="fu">hybrid_coupling_matrix</span>(positions, dipole; k, self<span class="op">=:</span>zero)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> <span class="cn">im</span><span class="op">*</span>I <span class="op">-</span> K  <span class="co"># unit coherence damping, included once on the diagonal</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>detunings <span class="op">=</span> <span class="fu">collect</span>(<span class="op">-</span><span class="fl">3</span><span class="op">:</span><span class="fl">0.25</span><span class="op">:</span><span class="fl">3</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="fu">shifted_gmres</span>(A, drive, detunings)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="pp">@assert</span> <span class="fu">all</span>(result.converged)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Each column of the outer product is one emitter's vector dipole moment.</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>detector <span class="op">=</span> [<span class="fl">3.0</span>, <span class="fl">0.0</span>, <span class="fl">4.0</span>]</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>G_det <span class="op">=</span> <span class="fu">vector_green_matrix</span>([detector], positions; k)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">field</span>(x) <span class="op">=</span> G_det <span class="op">*</span> <span class="fu">vec</span>(dipole <span class="op">*</span> <span class="fu">transpose</span>(x))</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j, delta) <span class="kw">in</span> <span class="fu">enumerate</span>(detunings)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> result.X[<span class="op">:</span>, j]</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    E <span class="op">=</span> <span class="fu">field</span>(x)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    intensity <span class="op">=</span> <span class="fu">sum</span>(abs2, E)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    direct <span class="op">=</span> (A <span class="op">+</span> delta<span class="op">*</span>I) <span class="op">\</span> drive</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@assert</span> <span class="fu">norm</span>((A <span class="op">+</span> delta<span class="op">*</span>I)<span class="op">*</span>x <span class="op">-</span> drive) <span class="op">/</span> <span class="fu">norm</span>(drive) <span class="op">&lt;</span> <span class="fl">1e-10</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@assert</span> <span class="fu">isapprox</span>(E, <span class="fu">field</span>(direct); rtol<span class="op">=</span><span class="fl">1e-10</span>)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@assert</span> <span class="fu">isapprox</span>(intensity, <span class="fu">sum</span>(abs2, <span class="fu">field</span>(direct)); rtol<span class="op">=</span><span class="fl">1e-10</span>)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>((; delta, E, intensity))</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>On resonance, the detector field is approximately <span class="math inline">\((0.3003-0.7108i,\,0,\,-0.2987+0.5200i)\)</span>, giving a relative scattered intensity of <span class="math inline">\(0.9551\)</span>. The off-axis detector sees both <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span> field components even though both source dipoles point along <span class="math inline">\(x\)</span>.</p>
+<h2 class="anchored" data-anchor-id="coupled-dipole-spectrum">Detector spectrum of a sparse dipole array</h2>
+<p>A local drive excites one site of a <span class="math inline">\(320\times320\)</span> square array. At each of 81 detunings we solve <span class="math inline">\((A+\Delta I)x=b\)</span> for all 102,400 dipole amplitudes and sum their electric fields at a detector. ShiftedGMRES.jl shares one Arnoldi basis across the detunings in each restart cycle.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/sparse-array-detector.png" class="img-fluid figure-img" alt="Line plot of relative scattered intensity versus detuning for a 320 by 320 array."></p>
+<figcaption>Scattered intensity at the detector as a function of detuning for the locally driven square array. The dots are the 81 computed frequencies.</figcaption>
+</figure>
+</div>
+<p><a href="files/sparse-array-detector.csv" class="text-link">Download the scan (CSV)</a> · <a href="files/ShiftedGMRES-0.1.2.zip" class="text-link">Solver and runnable example (ZIP)</a> · <a href="files/FreeSpaceGreens-0.1.0.zip" class="text-link">FreeSpaceGreens.jl (ZIP)</a></p>
+<section id="what-makes-the-matrix-sparse" class="level3">
+<h3 class="anchored" data-anchor-id="what-makes-the-matrix-sparse">What makes the matrix sparse?</h3>
+<p>The example models coherent exchange along the four nearest-neighbor bonds of each interior site, with open boundaries and local coherence damping <span class="math inline">\(\Gamma_0/2\)</span>. This choice gives <strong>510,720 nonzero entries</strong>. A full free-space dipole interaction couples every pair and gives a dense matrix. The lattice spacing is <span class="math inline">\(0.35\lambda\)</span>, all dipoles point along <span class="math inline">\(x\)</span>, and the bond strengths are the real parts of the free-space couplings for the two bond orientations. Frequencies are in units of the single-emitter population decay rate <span class="math inline">\(\Gamma_0\)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Jx <span class="op">=</span> <span class="fu">real</span>(<span class="fu">hybrid_coupling</span>([spacing, <span class="fl">0</span>., <span class="fl">0</span>.], dipole, dipole; k))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Jy <span class="op">=</span> <span class="fu">real</span>(<span class="fu">hybrid_coupling</span>([<span class="fl">0</span>., spacing, <span class="fl">0</span>.], dipole, dipole; k))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>bonds <span class="op">=</span> <span class="fu">spdiagm</span>(<span class="op">-</span><span class="fl">1</span> <span class="op">=&gt;</span> <span class="fu">ones</span>(side<span class="op">-</span><span class="fl">1</span>), <span class="fl">1</span> <span class="op">=&gt;</span> <span class="fu">ones</span>(side<span class="op">-</span><span class="fl">1</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>unit <span class="op">=</span> <span class="fu">spdiagm</span>(<span class="fl">0</span> <span class="op">=&gt;</span> <span class="fu">ones</span>(side))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> <span class="fl">0.5im</span><span class="op">*</span>I <span class="op">-</span> <span class="fu">Jx*kron</span>(unit, bonds) <span class="op">-</span> <span class="fu">Jy*kron</span>(bonds, unit)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="fu">shifted_gmres</span>(A, drive, detunings; restart<span class="op">=</span><span class="fl">24</span>, rtol<span class="op">=</span><span class="fl">1e-9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="from-amplitudes-to-the-detector-field" class="level3">
+<h3 class="anchored" data-anchor-id="from-amplitudes-to-the-detector-field">From amplitudes to the detector field</h3>
+<p>The driven site is at the origin and the detector is at <span class="math inline">\((0.6,-0.4,2.5)\lambda\)</span>. Each column of the <span class="math inline">\(3\times102{,}400\)</span> detector matrix is the full finite-distance field from a unit dipole at one site. Every source contributes to this sum. The plotted intensity is <span class="math inline">\(|\mathbf E_{\rm sc}|^2\)</span> in arbitrary units. The CSV gives the real and imaginary parts of all three scattered-field components.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (site, xy) <span class="kw">in</span> <span class="fu">enumerate</span>(<span class="bu">Iterators</span>.<span class="fu">product</span>(coords, coords))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> detector <span class="op">-</span> [xy[<span class="fl">1</span>], xy[<span class="fl">2</span>], <span class="fl">0.0</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    to_detector[<span class="op">:</span>, site] <span class="op">=</span> <span class="fu">green_tensor</span>(r; k) <span class="op">*</span> dipole</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> to_detector <span class="op">*</span> result.X</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>intensity <span class="op">=</span> <span class="fu">vec</span>(<span class="fu">sum</span>(abs2, E; dims<span class="op">=</span><span class="fl">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The sweep took 48 shared Arnoldi steps. The largest relative residual over all 81 systems was <span class="math inline">\(1.53\times10^{-11}\)</span>. At <span class="math inline">\(\Delta/\Gamma_0=-3,\,0,\,+3\)</span>, separate sparse LU solves agreed with the dipole amplitudes, complex detector field, and intensity to relative tolerance <span class="math inline">\(10^{-8}\)</span>.</p>
+</section>
+<section id="run-the-scan" class="level3">
+<h3 class="anchored" data-anchor-id="run-the-scan">Run the scan</h3>
+<p>Extract both ZIP files into one empty directory and start Julia there. The example prints the shared iteration count, solve time, maximum residual, and on-resonance field and intensity. The timed section covers the shifted solve after compilation. It excludes matrix assembly, detector propagation, and the three reference solves.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pushfirst!</span>(<span class="cn">LOAD_PATH</span>, <span class="fu">pwd</span>())</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"ShiftedGMRES.jl/examples/sparse_dipole_array.jl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
