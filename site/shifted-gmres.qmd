@@ -1,0 +1,61 @@
+---
+title: "ShiftedGMRES.jl"
+description: "Two Julia examples for solving shifted linear systems with a shared Krylov basis."
+---
+
+For a fixed matrix $A$ and drive $b$, changing the shift in $(A+\Delta I)x=b$ preserves the Krylov space generated from $b$. ShiftedGMRES.jl uses one Arnoldi basis per restart cycle across the sweep. It returns one solution column and one convergence flag per shift.
+
+[Download ShiftedGMRES.jl 0.1.0 and examples](files/ShiftedGMRES-0.1.0.zip){.paper-link}
+
+Unzip the archive, open the package directory, and start Julia with `julia --project=.`. Both examples use only the package and Julia standard libraries.
+
+## A sparse nonsymmetric matrix
+
+Each column below is checked against a separate sparse direct solve. The `seed` argument selects the reference shift by index.
+
+```julia
+using ShiftedGMRES, SparseArrays, LinearAlgebra
+
+n = 80
+A = spdiagm(-1 => fill(-0.3, n-1), 0 => fill(2.0, n), 1 => fill(0.1, n-1))
+b = ones(n)
+shifts = [-0.25, 0.5, 1.0]
+result = shifted_gmres(A, b, shifts; seed=2, restart=8, rtol=1e-9)
+@assert all(result.converged)
+for (j, shift) in enumerate(shifts)
+    reference = (A + shift*I) \ b
+    println((; shift, relative_error=norm(result.X[:,j]-reference)/norm(reference)))
+end
+```
+
+The largest relative difference from a direct solve in this example is about $5.4\times 10^{-14}$ in double precision.
+
+## A coupled-dipole spectrum
+
+Two identical dipoles sit on the propagation axis, separated by 0.35 wavelengths and polarized perpendicular to that axis. The drive accumulates a phase between sites. In the forward direction the propagation phases enter the detected amplitudes with the opposite sign. We use a diagonal damping term $+i$ in linewidth units and report the scattered intensity in common arbitrary units.
+
+```julia
+using ShiftedGMRES, LinearAlgebra
+
+# Two parallel electric dipoles, perpendicular to their separation.
+# Distances in wavelengths, detunings and couplings in units of gamma.
+kr = 2π * 0.35
+g = (3/4) * cis(kr) * (-1/kr - im/kr^2 + 1/kr^3)
+A = [im -g; -g im]
+drive = [1, cis(kr)]
+detunings = collect(-3:0.25:3)
+result = shifted_gmres(A, drive, detunings)
+@assert all(result.converged)
+
+# Forward scattered intensity, omitting the common radiation prefactor.
+forward = [1, cis(-kr)]
+intensity(x) = abs2(transpose(forward) * x)
+for (j, delta) in enumerate(detunings)
+    I_forward = intensity(result.X[:,j])
+    reference = intensity((A + delta*I) \ drive)
+    @assert isapprox(I_forward, reference; atol=1e-12)
+    println((; delta, I_forward))
+end
+```
+
+At zero detuning this gives a forward intensity of approximately 4.158 in the chosen units.

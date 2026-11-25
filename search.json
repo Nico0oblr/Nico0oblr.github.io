@@ -70,6 +70,132 @@
     "text": "A place for derivations, calculations, numerical methods, and ideas that benefit from a little more space. Notes can be short references or longer explorations; each one states its assumptions and conventions.\nTwo complementary notes connect Dicke superradiance to continuous-time Markov chains: collective decay within the symmetric sector, and the emergence of independent-emitter decay under strong local dephasing.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\nDicke superradiance as a continuous-time Markov chain\n\n\n\nCollective spins\n\nMarkov chains\n\nNumerical methods\n\n\n\nCollective decay as a pure-death process: population dynamics, exponential waiting times, and exact trajectory sampling.\n\n\n\n\n\n12 Nov 2026\n\n\n\n\n\n\n\nStrong local dephasing in Dicke superradiance\n\n\n\nCollective spins\n\nMarkov chains\n\nAdiabatic elimination\n\n\n\nFrom a fast birth–death chain over total spin to independent-emitter decay: detailed balance, spin multiplicities, and stochastic averaging.\n\n\n\n\n\n12 Nov 2026\n\n\n\n\n\nNo matching items"
   },
   {
+    "objectID": "code.html",
+    "href": "code.html",
+    "title": "Code",
+    "section": "",
+    "text": "Software for simulating collective quantum dynamics, with code and data from individual papers."
+  },
+  {
+    "objectID": "code.html#shiftedgmres.jl",
+    "href": "code.html#shiftedgmres.jl",
+    "title": "Code",
+    "section": "ShiftedGMRES.jl",
+    "text": "ShiftedGMRES.jl\nCompute a frequency sweep by solving shifted linear systems with a shared Krylov basis. The examples cover a sparse matrix and the forward scattering from two coupled dipoles.\nExamples and download"
+  },
+  {
+    "objectID": "code.html#pidicke.jl",
+    "href": "code.html#pidicke.jl",
+    "title": "Code",
+    "section": "PIDicke.jl",
+    "text": "PIDicke.jl\nPermutation-invariant open-system calculations for two-level emitters in the Dicke basis, including population dynamics, quantum trajectories, coherences, and spin–cavity models.\nRepository ↗ Examples ↗"
+  },
+  {
+    "objectID": "code.html#krylovsolvermcwf",
+    "href": "code.html#krylovsolvermcwf",
+    "title": "Code",
+    "section": "KrylovSolverMCWF",
+    "text": "KrylovSolverMCWF\nA Krylov-subspace approach to Monte Carlo wavefunction simulations with QuantumOptics.jl, with an example notebook.\nRepository ↗"
+  },
+  {
+    "objectID": "code.html#number-fluctuations-and-particle-loss",
+    "href": "code.html#number-fluctuations-and-particle-loss",
+    "title": "Code",
+    "section": "Number fluctuations and particle loss",
+    "text": "Number fluctuations and particle loss\nCode accompanying work on number fluctuations and particle loss in Dicke superradiance.\nRepository ↗"
+  },
+  {
+    "objectID": "code.html#absence-of-entanglement-growth-in-dicke-superradiance",
+    "href": "code.html#absence-of-entanglement-growth-in-dicke-superradiance",
+    "title": "Code",
+    "section": "Absence of entanglement growth in Dicke superradiance",
+    "text": "Absence of entanglement growth in Dicke superradiance\nThe archive contains the JLD2 data and plotting scripts for the figures in the paper.\nZenodo archive ↗ Related paper"
+  },
+  {
+    "objectID": "code.html#scaling-theory-of-decoherence-in-dicke-superradiance",
+    "href": "code.html#scaling-theory-of-decoherence-in-dicke-superradiance",
+    "title": "Code",
+    "section": "Scaling theory of decoherence in Dicke superradiance",
+    "text": "Scaling theory of decoherence in Dicke superradiance\nJulia simulations, numerical data, and plotting notebooks for the paper on local dephasing and spontaneous emission in Dicke superradiance.\nRepository ↗ Code and data (Zenodo) ↗ Related paper"
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "Journal articles and preprints. Each work appears once, with links to the preprint and published version where available.\nGoogle Scholar ↗ Download bibliography"
+  },
+  {
+    "objectID": "publications.html#preprints",
+    "href": "publications.html#preprints",
+    "title": "Publications",
+    "section": "Preprints",
+    "text": "Preprints\n\n2026\n\nExact Analytical Treatment of Collectively Pumped Dicke Superradiance\nAvishi Poddar, Nico Baßler, Julian Lyne, Susanne F. Yelin, Helmut Ritsch, Claudiu Genes and Raphael Holzinger.\nPreprint · arXiv:2610.37665 (2026).\nPreprint ↗\n\n\n\n2026\n\nScaling theory of decoherence in Dicke superradiance\nNico S. Bassler, Julian Lyne and Javier Cuerda.\nPreprint · arXiv:2607.28034 (2026).\nPreprint ↗ Code ↗ Code and data (Zenodo) ↗\n\n\n\n2026\n\nDicke superradiance in degenerate quantum matter: interplay of exchange statistics and spatial confinement\nJulian Lyne, Kai Phillip Schmidt, Claudiu Genes and Nico S. Bassler.\nPreprint · arXiv:2603.00778 (2026).\nPreprint ↗\n\n\n\n2024\n\nGeneralized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules\nN. S. Bassler, M. Reitz, R. Holzinger, A. Vibók, G. J. Halász, B. Gurlek and C. Genes.\nPreprint · arXiv:2405.08718 (2024).\nPreprint ↗"
+  },
+  {
+    "objectID": "publications.html#journal-articles",
+    "href": "publications.html#journal-articles",
+    "title": "Publications",
+    "section": "Journal articles",
+    "text": "Journal articles\n\n2026\n\nSymbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance\nRaphael Holzinger, Nico S. Bassler, Julian Lyne, Susanne F. Yelin and Claudiu Genes.\nPhysical Review Letters 137, 193602 (2026).\nPreprint ↗ Published version ↗\n\n\n\n2026\n\nSolving Dicke superradiance analytically: A compendium of methods\nRaphael Holzinger, Nico S. Bassler, Julian Lyne, Fidel G. Jimenez, Julius T. Gohsrich and Claudiu Genes.\nPhysical Review A 113, 043718 (2026).\nPreprint ↗ Published version ↗\n\n\n\n2025\n\nAbsence of entanglement growth in Dicke superradiance\nNico S. Bassler.\nPhysical Review A 112, 053713 (2025).\nPreprint ↗ Published version ↗ Data and plotting scripts (Zenodo) ↗\n\n\n\n2024\n\nPurcell-modified Doppler cooling of quantum emitters inside optical cavities\nJulian Lyne, Nico S. Bassler, Seong eun Park, Guido Pupillo and Claudiu Genes.\nPhysical Review A 110, 013115 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nN. S. Bassler, I. Varma, M. Proske, P. Windpassinger, K. P. Schmidt and C. Genes.\nPhysical Review Research 6, 023147 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nMetasurface-Based Hybrid Optical Cavities for Chiral Sensing\nNico S. Bassler, Andrea Aiello, Kai P. Schmidt, Claudiu Genes and Michael Reitz.\nPhysical Review Letters 132, 043602 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nScaling Law for Kasha’s Rule in Photoexcited Molecular Aggregates\nRaphael Holzinger, Nico S. Bassler, Helmut Ritsch and Claudiu Genes.\nThe Journal of Physical Chemistry A 128, 3910-3915 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2023\n\nLinear optical elements based on cooperative subwavelength emitter arrays\nNico S. Bassler, Michael Reitz, Kai P. Schmidt and Claudiu Genes.\nOptics Express 31, 6003–6026 (2023).\nPreprint ↗ Published version ↗\n\n\n\n2021\n\nEffects of domain walls in bilayer graphene in an external magnetic field\nN. S. Bassler and K. P. Schmidt.\nPhysical Review B 103, 155422 (2021).\nPreprint ↗ Published version ↗"
+  },
+  {
+    "objectID": "publications.html#theses",
+    "href": "publications.html#theses",
+    "title": "Publications",
+    "section": "Theses",
+    "text": "Theses\n\n2025\n\nQuantum Optics with Atoms and Molecules\nNico Baßler.\nDoctoral dissertation, Friedrich-Alexander-Universität Erlangen-Nürnberg (2025).\nThesis (PDF, 13.2 MB) University record ↗\n\n\n\n2020\n\nEffect of domain walls in bilayer graphene in an external magnetic field\nNico S. Baßler.\nMaster’s thesis in physics, Friedrich-Alexander-Universität Erlangen-Nürnberg (2020).\nThesis (PDF, 7.5 MB) Related article\n\n\n\nRelated calculations and reproducibility resources are collected under research notes and code."
+  },
+  {
+    "objectID": "index.html#research-interests",
+    "href": "index.html#research-interests",
+    "title": "About",
+    "section": "Research interests",
+    "text": "Research interests\nFrom microscopic interactions to collective behavior."
+  },
+  {
+    "objectID": "index.html#beyond-the-paper",
+    "href": "index.html#beyond-the-paper",
+    "title": "About",
+    "section": "Beyond the paper",
+    "text": "Beyond the paper\nThis site brings together my publications, conference presentations, scientific code, and a growing collection of research notes: derivations, conventions, calculations, and questions worth keeping track of."
+  },
+  {
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "Short CV",
+    "section": "",
+    "text": "Postdoctoral researcher · June 2025–present\nTheoretical Quantum Technology group, Institute for Applied Physics, TU Darmstadt. I work in Claudiu Genes’s group, where I study how decoherence and atom loss affect collective light emission."
+  },
+  {
+    "objectID": "cv.html#current-position",
+    "href": "cv.html#current-position",
+    "title": "Short CV",
+    "section": "",
+    "text": "Postdoctoral researcher · June 2025–present\nTheoretical Quantum Technology group, Institute for Applied Physics, TU Darmstadt. I work in Claudiu Genes’s group, where I study how decoherence and atom loss affect collective light emission."
+  },
+  {
+    "objectID": "cv.html#education",
+    "href": "cv.html#education",
+    "title": "Short CV",
+    "section": "Education",
+    "text": "Education\nDr. rer. nat. in Physics · October 2020–May 2025\nFriedrich-Alexander-Universität Erlangen-Nürnberg (FAU), magna cum laude. I carried out my doctoral research at FAU and the Max Planck Institute for the Science of Light under the supervision of Claudiu Genes and Kai P. Schmidt. My dissertation was Quantum Optics with Atoms and Molecules.\nDuring my doctorate I was a member of the Integrated Research Training Group of QuCoLiMa (Quantum Cooperativity of Light and Matter, TRR 306). I served as a doctoral student representative from October 2023.\nM.Sc. in Physics · July 2017–September 2020\nFAU, with distinction. My master’s thesis studied the effect of domain walls in bilayer graphene in an external magnetic field.\nB.Sc. in Physics · October 2013–July 2017\nFAU, Elite Degree Programme in Physics."
+  },
+  {
+    "objectID": "cv.html#teaching-and-supervision",
+    "href": "cv.html#teaching-and-supervision",
+    "title": "Short CV",
+    "section": "Teaching and supervision",
+    "text": "Teaching and supervision\nI was a teaching assistant for seven quantum mechanics courses between 2016 and 2024. I also taught tutorials on topics including condensed matter and quantum optics, quantum and classical algorithms, and the theoretical physics of climate change.\nI have co-supervised master’s and doctoral research in collective quantum optics, including Dicke superradiance, and supervised visiting doctoral students. My current student supervision also includes four-wave mixing in hollow-core fiber."
+  },
+  {
+    "objectID": "cv.html#selected-talks",
+    "href": "cv.html#selected-talks",
+    "title": "Short CV",
+    "section": "Selected talks",
+    "text": "Selected talks\n\n2026 · Scaling theory of decoherence in Dicke superradiance. Workshop on Collective Scattering of Light (CoScaLi), Porquerolles.\n2026 · Symbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance. DPG Spring Meeting, Mainz.\n2024 · Invited talk · Metasurface Based Hybrid Optical Cavities for Chiral Sensing. Metamaterials 2024, Platanias, Crete.\n2022 · Cooperative effects in dense cold atomic gases including magnetic dipole interactions. Symposium on Quantum Cooperativity of Light and Matter, DPG Spring Meeting, Erlangen.\n\nMore talks and posters"
+  },
+  {
     "objectID": "presentations.html",
     "href": "presentations.html",
     "title": "Presentations",
@@ -112,123 +238,25 @@
     "text": "2022\n\nTalk\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nDPG Spring Meeting · Erlangen, Germany\n17 March 2022 · SYQC 1.2 · Symposium Quantum Cooperativity of Light and Matter\nProgramme & abstract ↗ Related paper\n\n\n\nPoster\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nInternational Conference on Quantum Optics · Obergurgl, Austria\n20–26 February 2022 · Conference dates\nBook of abstracts, p. 28 ↗ Related paper\n\n\n\nFind preprints, published articles, and thesis PDFs on the Publications page."
   },
   {
-    "objectID": "cv.html",
-    "href": "cv.html",
-    "title": "Short CV",
+    "objectID": "shifted-gmres.html",
+    "href": "shifted-gmres.html",
+    "title": "ShiftedGMRES.jl",
     "section": "",
-    "text": "Postdoctoral researcher · June 2025–present\nTheoretical Quantum Technology group, Institute for Applied Physics, TU Darmstadt. I work in Claudiu Genes’s group, where I study how decoherence and atom loss affect collective light emission."
+    "text": "For a fixed matrix \\(A\\) and drive \\(b\\), changing the shift in \\((A+\\Delta I)x=b\\) preserves the Krylov space generated from \\(b\\). ShiftedGMRES.jl uses one Arnoldi basis per restart cycle across the sweep. It returns one solution column and one convergence flag per shift.\nDownload ShiftedGMRES.jl 0.1.0 and examples\nUnzip the archive, open the package directory, and start Julia with julia --project=.. Both examples use only the package and Julia standard libraries."
   },
   {
-    "objectID": "cv.html#current-position",
-    "href": "cv.html#current-position",
-    "title": "Short CV",
-    "section": "",
-    "text": "Postdoctoral researcher · June 2025–present\nTheoretical Quantum Technology group, Institute for Applied Physics, TU Darmstadt. I work in Claudiu Genes’s group, where I study how decoherence and atom loss affect collective light emission."
+    "objectID": "shifted-gmres.html#a-sparse-nonsymmetric-matrix",
+    "href": "shifted-gmres.html#a-sparse-nonsymmetric-matrix",
+    "title": "ShiftedGMRES.jl",
+    "section": "A sparse nonsymmetric matrix",
+    "text": "A sparse nonsymmetric matrix\nEach column below is checked against a separate sparse direct solve. The seed argument selects the reference shift by index.\nusing ShiftedGMRES, SparseArrays, LinearAlgebra\n\nn = 80\nA = spdiagm(-1 =&gt; fill(-0.3, n-1), 0 =&gt; fill(2.0, n), 1 =&gt; fill(0.1, n-1))\nb = ones(n)\nshifts = [-0.25, 0.5, 1.0]\nresult = shifted_gmres(A, b, shifts; seed=2, restart=8, rtol=1e-9)\n@assert all(result.converged)\nfor (j, shift) in enumerate(shifts)\n    reference = (A + shift*I) \\ b\n    println((; shift, relative_error=norm(result.X[:,j]-reference)/norm(reference)))\nend\nThe largest relative difference from a direct solve in this example is about \\(5.4\\times 10^{-14}\\) in double precision."
   },
   {
-    "objectID": "cv.html#education",
-    "href": "cv.html#education",
-    "title": "Short CV",
-    "section": "Education",
-    "text": "Education\nDr. rer. nat. in Physics · October 2020–May 2025\nFriedrich-Alexander-Universität Erlangen-Nürnberg (FAU), magna cum laude. I carried out my doctoral research at FAU and the Max Planck Institute for the Science of Light under the supervision of Claudiu Genes and Kai P. Schmidt. My dissertation was Quantum Optics with Atoms and Molecules.\nDuring my doctorate I was a member of the Integrated Research Training Group of QuCoLiMa (Quantum Cooperativity of Light and Matter, TRR 306). I served as a doctoral student representative from October 2023.\nM.Sc. in Physics · July 2017–September 2020\nFAU, with distinction. My master’s thesis studied the effect of domain walls in bilayer graphene in an external magnetic field.\nB.Sc. in Physics · October 2013–July 2017\nFAU, Elite Degree Programme in Physics."
-  },
-  {
-    "objectID": "cv.html#teaching-and-supervision",
-    "href": "cv.html#teaching-and-supervision",
-    "title": "Short CV",
-    "section": "Teaching and supervision",
-    "text": "Teaching and supervision\nI was a teaching assistant for seven quantum mechanics courses between 2016 and 2024. I also taught tutorials on topics including condensed matter and quantum optics, quantum and classical algorithms, and the theoretical physics of climate change.\nI have co-supervised master’s and doctoral research in collective quantum optics, including Dicke superradiance, and supervised visiting doctoral students. My current student supervision also includes four-wave mixing in hollow-core fiber."
-  },
-  {
-    "objectID": "cv.html#selected-talks",
-    "href": "cv.html#selected-talks",
-    "title": "Short CV",
-    "section": "Selected talks",
-    "text": "Selected talks\n\n2026 · Scaling theory of decoherence in Dicke superradiance. Workshop on Collective Scattering of Light (CoScaLi), Porquerolles.\n2026 · Symbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance. DPG Spring Meeting, Mainz.\n2024 · Invited talk · Metasurface Based Hybrid Optical Cavities for Chiral Sensing. Metamaterials 2024, Platanias, Crete.\n2022 · Cooperative effects in dense cold atomic gases including magnetic dipole interactions. Symposium on Quantum Cooperativity of Light and Matter, DPG Spring Meeting, Erlangen.\n\nMore talks and posters"
-  },
-  {
-    "objectID": "index.html#research-interests",
-    "href": "index.html#research-interests",
-    "title": "About",
-    "section": "Research interests",
-    "text": "Research interests\nFrom microscopic interactions to collective behavior."
-  },
-  {
-    "objectID": "index.html#beyond-the-paper",
-    "href": "index.html#beyond-the-paper",
-    "title": "About",
-    "section": "Beyond the paper",
-    "text": "Beyond the paper\nThis site brings together my publications, conference presentations, scientific code, and a growing collection of research notes: derivations, conventions, calculations, and questions worth keeping track of."
-  },
-  {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Publications",
-    "section": "",
-    "text": "Journal articles and preprints. Each work appears once, with links to the preprint and published version where available.\nGoogle Scholar ↗ Download bibliography"
-  },
-  {
-    "objectID": "publications.html#preprints",
-    "href": "publications.html#preprints",
-    "title": "Publications",
-    "section": "Preprints",
-    "text": "Preprints\n\n2026\n\nExact Analytical Treatment of Collectively Pumped Dicke Superradiance\nAvishi Poddar, Nico Baßler, Julian Lyne, Susanne F. Yelin, Helmut Ritsch, Claudiu Genes and Raphael Holzinger.\nPreprint · arXiv:2610.37665 (2026).\nPreprint ↗\n\n\n\n2026\n\nScaling theory of decoherence in Dicke superradiance\nNico S. Bassler, Julian Lyne and Javier Cuerda.\nPreprint · arXiv:2607.28034 (2026).\nPreprint ↗ Code ↗ Code and data (Zenodo) ↗\n\n\n\n2026\n\nDicke superradiance in degenerate quantum matter: interplay of exchange statistics and spatial confinement\nJulian Lyne, Kai Phillip Schmidt, Claudiu Genes and Nico S. Bassler.\nPreprint · arXiv:2603.00778 (2026).\nPreprint ↗\n\n\n\n2024\n\nGeneralized energy gap law: An open system dynamics approach to non-adiabatic phenomena in molecules\nN. S. Bassler, M. Reitz, R. Holzinger, A. Vibók, G. J. Halász, B. Gurlek and C. Genes.\nPreprint · arXiv:2405.08718 (2024).\nPreprint ↗"
-  },
-  {
-    "objectID": "publications.html#journal-articles",
-    "href": "publications.html#journal-articles",
-    "title": "Publications",
-    "section": "Journal articles",
-    "text": "Journal articles\n\n2026\n\nSymbolic Quantum-Trajectory Method for Multichannel Dicke Superradiance\nRaphael Holzinger, Nico S. Bassler, Julian Lyne, Susanne F. Yelin and Claudiu Genes.\nPhysical Review Letters 137, 193602 (2026).\nPreprint ↗ Published version ↗\n\n\n\n2026\n\nSolving Dicke superradiance analytically: A compendium of methods\nRaphael Holzinger, Nico S. Bassler, Julian Lyne, Fidel G. Jimenez, Julius T. Gohsrich and Claudiu Genes.\nPhysical Review A 113, 043718 (2026).\nPreprint ↗ Published version ↗\n\n\n\n2025\n\nAbsence of entanglement growth in Dicke superradiance\nNico S. Bassler.\nPhysical Review A 112, 053713 (2025).\nPreprint ↗ Published version ↗ Data and plotting scripts (Zenodo) ↗\n\n\n\n2024\n\nPurcell-modified Doppler cooling of quantum emitters inside optical cavities\nJulian Lyne, Nico S. Bassler, Seong eun Park, Guido Pupillo and Claudiu Genes.\nPhysical Review A 110, 013115 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nCooperative effects in dense cold atomic gases including magnetic dipole interactions\nN. S. Bassler, I. Varma, M. Proske, P. Windpassinger, K. P. Schmidt and C. Genes.\nPhysical Review Research 6, 023147 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nMetasurface-Based Hybrid Optical Cavities for Chiral Sensing\nNico S. Bassler, Andrea Aiello, Kai P. Schmidt, Claudiu Genes and Michael Reitz.\nPhysical Review Letters 132, 043602 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2024\n\nScaling Law for Kasha’s Rule in Photoexcited Molecular Aggregates\nRaphael Holzinger, Nico S. Bassler, Helmut Ritsch and Claudiu Genes.\nThe Journal of Physical Chemistry A 128, 3910-3915 (2024).\nPreprint ↗ Published version ↗\n\n\n\n2023\n\nLinear optical elements based on cooperative subwavelength emitter arrays\nNico S. Bassler, Michael Reitz, Kai P. Schmidt and Claudiu Genes.\nOptics Express 31, 6003–6026 (2023).\nPreprint ↗ Published version ↗\n\n\n\n2021\n\nEffects of domain walls in bilayer graphene in an external magnetic field\nN. S. Bassler and K. P. Schmidt.\nPhysical Review B 103, 155422 (2021).\nPreprint ↗ Published version ↗"
-  },
-  {
-    "objectID": "publications.html#theses",
-    "href": "publications.html#theses",
-    "title": "Publications",
-    "section": "Theses",
-    "text": "Theses\n\n2025\n\nQuantum Optics with Atoms and Molecules\nNico Baßler.\nDoctoral dissertation, Friedrich-Alexander-Universität Erlangen-Nürnberg (2025).\nThesis (PDF, 13.2 MB) University record ↗\n\n\n\n2020\n\nEffect of domain walls in bilayer graphene in an external magnetic field\nNico S. Baßler.\nMaster’s thesis in physics, Friedrich-Alexander-Universität Erlangen-Nürnberg (2020).\nThesis (PDF, 7.5 MB) Related article\n\n\n\nRelated calculations and reproducibility resources are collected under research notes and code."
-  },
-  {
-    "objectID": "code.html",
-    "href": "code.html",
-    "title": "Code",
-    "section": "",
-    "text": "Software for simulating collective quantum dynamics, with code and data from individual papers."
-  },
-  {
-    "objectID": "code.html#pidicke.jl",
-    "href": "code.html#pidicke.jl",
-    "title": "Code",
-    "section": "PIDicke.jl",
-    "text": "PIDicke.jl\nPermutation-invariant open-system calculations for two-level emitters in the Dicke basis, including population dynamics, quantum trajectories, coherences, and spin–cavity models.\nRepository ↗ Examples ↗"
-  },
-  {
-    "objectID": "code.html#krylovsolvermcwf",
-    "href": "code.html#krylovsolvermcwf",
-    "title": "Code",
-    "section": "KrylovSolverMCWF",
-    "text": "KrylovSolverMCWF\nA Krylov-subspace approach to Monte Carlo wavefunction simulations with QuantumOptics.jl, with an example notebook.\nRepository ↗"
-  },
-  {
-    "objectID": "code.html#number-fluctuations-and-particle-loss",
-    "href": "code.html#number-fluctuations-and-particle-loss",
-    "title": "Code",
-    "section": "Number fluctuations and particle loss",
-    "text": "Number fluctuations and particle loss\nCode accompanying work on number fluctuations and particle loss in Dicke superradiance.\nRepository ↗"
-  },
-  {
-    "objectID": "code.html#absence-of-entanglement-growth-in-dicke-superradiance",
-    "href": "code.html#absence-of-entanglement-growth-in-dicke-superradiance",
-    "title": "Code",
-    "section": "Absence of entanglement growth in Dicke superradiance",
-    "text": "Absence of entanglement growth in Dicke superradiance\nThe archive contains the JLD2 data and plotting scripts for the figures in the paper.\nZenodo archive ↗ Related paper"
-  },
-  {
-    "objectID": "code.html#scaling-theory-of-decoherence-in-dicke-superradiance",
-    "href": "code.html#scaling-theory-of-decoherence-in-dicke-superradiance",
-    "title": "Code",
-    "section": "Scaling theory of decoherence in Dicke superradiance",
-    "text": "Scaling theory of decoherence in Dicke superradiance\nJulia simulations, numerical data, and plotting notebooks for the paper on local dephasing and spontaneous emission in Dicke superradiance.\nRepository ↗ Code and data (Zenodo) ↗ Related paper"
+    "objectID": "shifted-gmres.html#a-coupled-dipole-spectrum",
+    "href": "shifted-gmres.html#a-coupled-dipole-spectrum",
+    "title": "ShiftedGMRES.jl",
+    "section": "A coupled-dipole spectrum",
+    "text": "A coupled-dipole spectrum\nTwo identical dipoles sit on the propagation axis, separated by 0.35 wavelengths and polarized perpendicular to that axis. The drive accumulates a phase between sites. In the forward direction the propagation phases enter the detected amplitudes with the opposite sign. We use a diagonal damping term \\(+i\\) in linewidth units and report the scattered intensity in common arbitrary units.\nusing ShiftedGMRES, LinearAlgebra\n\n# Two parallel electric dipoles, perpendicular to their separation.\n# Distances in wavelengths, detunings and couplings in units of gamma.\nkr = 2π * 0.35\ng = (3/4) * cis(kr) * (-1/kr - im/kr^2 + 1/kr^3)\nA = [im -g; -g im]\ndrive = [1, cis(kr)]\ndetunings = collect(-3:0.25:3)\nresult = shifted_gmres(A, drive, detunings)\n@assert all(result.converged)\n\n# Forward scattered intensity, omitting the common radiation prefactor.\nforward = [1, cis(-kr)]\nintensity(x) = abs2(transpose(forward) * x)\nfor (j, delta) in enumerate(detunings)\n    I_forward = intensity(result.X[:,j])\n    reference = intensity((A + delta*I) \\ drive)\n    @assert isapprox(I_forward, reference; atol=1e-12)\n    println((; delta, I_forward))\nend\nAt zero detuning this gives a forward intensity of approximately 4.158 in the chosen units."
   },
   {
     "objectID": "notes/posts/dicke-decay-conventions.html",

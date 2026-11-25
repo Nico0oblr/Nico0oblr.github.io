@@ -6,6 +6,16 @@ description: "Public Julia code and reproducibility resources for collective qua
 Software for simulating collective quantum dynamics, with code and data from individual papers.
 
 ::: {.code-project}
+[JULIA · NUMERICAL METHODS]{.eyebrow}
+
+## ShiftedGMRES.jl
+
+Compute a frequency sweep by solving shifted linear systems with a shared Krylov basis. The examples cover a sparse matrix and the forward scattering from two coupled dipoles.
+
+[Examples and download](shifted-gmres.qmd){.text-link}
+:::
+
+::: {.code-project}
 [JULIA · OPEN QUANTUM SYSTEMS]{.eyebrow}
 
 ## PIDicke.jl

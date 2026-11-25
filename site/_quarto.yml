@@ -7,6 +7,7 @@ project:
     - publications.qmd
     - presentations.qmd
     - code.qmd
+    - shifted-gmres.qmd
     - notes/index.qmd
     - notes/posts/*.qmd
 
