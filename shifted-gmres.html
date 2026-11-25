@@ -233,8 +233,8 @@ window.Quarto = {
 
 
 <p>For a fixed matrix <span class="math inline">\(A\)</span> and drive <span class="math inline">\(b\)</span>, changing the shift in <span class="math inline">\((A+\Delta I)x=b\)</span> preserves the Krylov space generated from <span class="math inline">\(b\)</span>. ShiftedGMRES.jl uses one Arnoldi basis per restart cycle across the sweep. It returns one solution column and one convergence flag per shift.</p>
-<p><a href="files/ShiftedGMRES-0.1.0.zip" class="paper-link">Download ShiftedGMRES.jl 0.1.0 and examples</a></p>
-<p>Unzip the archive, open the package directory, and start Julia with <code>julia --project=.</code>. Both examples use only the package and Julia standard libraries.</p>
+<p><a href="files/ShiftedGMRES-0.1.1.zip" class="paper-link">ShiftedGMRES.jl 0.1.1 with examples</a> <a href="files/FreeSpaceGreens-0.1.0.zip" class="paper-link">FreeSpaceGreens.jl 0.1.0</a></p>
+<p>Extract both archives into one empty folder. Start Julia in that folder and run <code>pushfirst!(LOAD_PATH, pwd())</code> to load the local packages. The two examples below are also available as <code>ShiftedGMRES.jl/examples/sparse_scan.jl</code> and <code>ShiftedGMRES.jl/examples/two_dipoles.jl</code>.</p>
 <section id="a-sparse-nonsymmetric-matrix" class="level2">
 <h2 class="anchored" data-anchor-id="a-sparse-nonsymmetric-matrix">A sparse nonsymmetric matrix</h2>
 <p>Each column below is checked against a separate sparse direct solve. The <code>seed</code> argument selects the reference shift by index.</p>
@@ -252,31 +252,41 @@ window.Quarto = {
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The largest relative difference from a direct solve in this example is about <span class="math inline">\(5.4\times 10^{-14}\)</span> in double precision.</p>
 </section>
-<section id="a-coupled-dipole-spectrum" class="level2">
-<h2 class="anchored" data-anchor-id="a-coupled-dipole-spectrum">A coupled-dipole spectrum</h2>
-<p>Two identical dipoles sit on the propagation axis, separated by 0.35 wavelengths and polarized perpendicular to that axis. The drive accumulates a phase between sites. In the forward direction the propagation phases enter the detected amplitudes with the opposite sign. We use a diagonal damping term <span class="math inline">\(+i\)</span> in linewidth units and report the scattered intensity in common arbitrary units.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ShiftedGMRES</span>, <span class="bu">LinearAlgebra</span></span>
+<section id="coupled-dipole-spectrum" class="level2">
+<h2 class="anchored" data-anchor-id="coupled-dipole-spectrum">Two dipoles and a detector</h2>
+<p>An <span class="math inline">\(x\)</span>-polarized plane wave travels along <span class="math inline">\(z\)</span> and drives two emitters separated by <span class="math inline">\(0.35\lambda\)</span>. We set <span class="math inline">\(\lambda=1\)</span> and use the single-emitter radiative population decay rate as the frequency unit. The off-diagonal interaction <span class="math inline">\(K\)</span> comes from the free-space Green tensor. As in the original example, the total single-emitter coherence damping is one in these units. Setting <code>self=:zero</code> lets us supply the full diagonal damping explicitly in <span class="math inline">\(A=iI-K\)</span>.</p>
+<p>At each detuning we solve <span class="math inline">\((A+\Delta I)x=b\)</span>. The amplitude <span class="math inline">\(x_j\)</span> gives the dipole moment <span class="math inline">\(x_j\hat{\mathbf x}\)</span> in the chosen drive units. At the detector <span class="math inline">\(\mathbf R=(3,0,4)\lambda\)</span>, the scattered field is the coherent sum <span class="math display">\[
+\mathbf E_{\rm sc}(\mathbf R) = \sum_j \mathbf G(\mathbf R-\mathbf r_j)\,\hat{\mathbf x}\,x_j .
+\]</span> We use the full finite-distance tensor with <span class="math inline">\(\epsilon_0=1\)</span> and report <span class="math inline">\(\sum_\alpha |E_{{\rm sc},\alpha}|^2\)</span> as a relative scattered intensity. The incident plane wave enters only through the emitter drive.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ShiftedGMRES</span>, <span class="bu">FreeSpaceGreens</span>, <span class="bu">LinearAlgebra</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Two parallel electric dipoles, perpendicular to their separation.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Distances in wavelengths, detunings and couplings in units of gamma.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>kr <span class="op">=</span> <span class="fl">2</span>π <span class="op">*</span> <span class="fl">0.35</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> (<span class="fl">3</span><span class="op">/</span><span class="fl">4</span>) <span class="op">*</span> <span class="fu">cis</span>(kr) <span class="op">*</span> (<span class="op">-</span><span class="fl">1</span><span class="op">/</span>kr <span class="op">-</span> <span class="cn">im</span><span class="op">/</span>kr<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">1</span><span class="op">/</span>kr<span class="op">^</span><span class="fl">3</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> [<span class="cn">im</span> <span class="op">-</span>g; <span class="op">-</span>g <span class="cn">im</span>]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>drive <span class="op">=</span> [<span class="fl">1</span>, <span class="fu">cis</span>(kr)]</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>detunings <span class="op">=</span> <span class="fu">collect</span>(<span class="op">-</span><span class="fl">3</span><span class="op">:</span><span class="fl">0.25</span><span class="op">:</span><span class="fl">3</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="fu">shifted_gmres</span>(A, drive, detunings)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="pp">@assert</span> <span class="fu">all</span>(result.converged)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Forward scattered intensity, omitting the common radiation prefactor.</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>forward <span class="op">=</span> [<span class="fl">1</span>, <span class="fu">cis</span>(<span class="op">-</span>kr)]</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">intensity</span>(x) <span class="op">=</span> <span class="fu">abs2</span>(<span class="fu">transpose</span>(forward) <span class="op">*</span> x)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j, delta) <span class="kw">in</span> <span class="fu">enumerate</span>(detunings)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    I_forward <span class="op">=</span> <span class="fu">intensity</span>(result.X[<span class="op">:</span>,j])</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    reference <span class="op">=</span> <span class="fu">intensity</span>((A <span class="op">+</span> delta<span class="op">*</span>I) <span class="op">\</span> drive)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@assert</span> <span class="fu">isapprox</span>(I_forward, reference; atol<span class="op">=</span><span class="fl">1e-12</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>((; delta, I_forward))</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>At zero detuning this gives a forward intensity of approximately 4.158 in the chosen units.</p>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># x-polarized plane wave traveling along z. Positions in wavelengths.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="fl">2</span>π</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> [<span class="fl">0.0</span> <span class="fl">0.0</span>; <span class="fl">0.0</span> <span class="fl">0.0</span>; <span class="fl">0.0</span> <span class="fl">0.35</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>dipole <span class="op">=</span> [<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>drive <span class="op">=</span> <span class="fu">cis</span>.(k <span class="op">.*</span> positions[<span class="fl">3</span>, <span class="op">:</span>])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="fu">hybrid_coupling_matrix</span>(positions, dipole; k, self<span class="op">=:</span>zero)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> <span class="cn">im</span><span class="op">*</span>I <span class="op">-</span> K  <span class="co"># unit coherence damping, included once on the diagonal</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>detunings <span class="op">=</span> <span class="fu">collect</span>(<span class="op">-</span><span class="fl">3</span><span class="op">:</span><span class="fl">0.25</span><span class="op">:</span><span class="fl">3</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="fu">shifted_gmres</span>(A, drive, detunings)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="pp">@assert</span> <span class="fu">all</span>(result.converged)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Each column of the outer product is one emitter's vector dipole moment.</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>detector <span class="op">=</span> [<span class="fl">3.0</span>, <span class="fl">0.0</span>, <span class="fl">4.0</span>]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>G_det <span class="op">=</span> <span class="fu">vector_green_matrix</span>([detector], positions; k)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">field</span>(x) <span class="op">=</span> G_det <span class="op">*</span> <span class="fu">vec</span>(dipole <span class="op">*</span> <span class="fu">transpose</span>(x))</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j, delta) <span class="kw">in</span> <span class="fu">enumerate</span>(detunings)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> result.X[<span class="op">:</span>, j]</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    E <span class="op">=</span> <span class="fu">field</span>(x)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    intensity <span class="op">=</span> <span class="fu">sum</span>(abs2, E)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    direct <span class="op">=</span> (A <span class="op">+</span> delta<span class="op">*</span>I) <span class="op">\</span> drive</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@assert</span> <span class="fu">norm</span>((A <span class="op">+</span> delta<span class="op">*</span>I)<span class="op">*</span>x <span class="op">-</span> drive) <span class="op">/</span> <span class="fu">norm</span>(drive) <span class="op">&lt;</span> <span class="fl">1e-10</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@assert</span> <span class="fu">isapprox</span>(E, <span class="fu">field</span>(direct); rtol<span class="op">=</span><span class="fl">1e-10</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@assert</span> <span class="fu">isapprox</span>(intensity, <span class="fu">sum</span>(abs2, <span class="fu">field</span>(direct)); rtol<span class="op">=</span><span class="fl">1e-10</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>((; delta, E, intensity))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On resonance, the detector field is approximately <span class="math inline">\((0.3003-0.7108i,\,0,\,-0.2987+0.5200i)\)</span>, giving a relative scattered intensity of <span class="math inline">\(0.9551\)</span>. The off-axis detector sees both <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span> field components even though both source dipoles point along <span class="math inline">\(x\)</span>.</p>
 
 
 </section>

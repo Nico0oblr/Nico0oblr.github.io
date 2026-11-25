@@ -81,7 +81,14 @@
     "href": "code.html#shiftedgmres.jl",
     "title": "Code",
     "section": "ShiftedGMRES.jl",
-    "text": "ShiftedGMRES.jl\nCompute a frequency sweep by solving shifted linear systems with a shared Krylov basis. The examples cover a sparse matrix and the forward scattering from two coupled dipoles.\nExamples and download"
+    "text": "ShiftedGMRES.jl\nCompute a frequency sweep by solving shifted linear systems with a shared Krylov basis. The examples cover a sparse matrix and the scattered field from two coupled dipoles at a detector.\nExamples and download"
+  },
+  {
+    "objectID": "code.html#freespacegreens.jl",
+    "href": "code.html#freespacegreens.jl",
+    "title": "Code",
+    "section": "FreeSpaceGreens.jl",
+    "text": "FreeSpaceGreens.jl\nConstruct the free-space electric Green tensor, project it onto dipole polarizations, and propagate dipole moments to observation points.\nTwo dipoles and a detector Download source"
   },
   {
     "objectID": "code.html#pidicke.jl",
@@ -242,7 +249,7 @@
     "href": "shifted-gmres.html",
     "title": "ShiftedGMRES.jl",
     "section": "",
-    "text": "For a fixed matrix \\(A\\) and drive \\(b\\), changing the shift in \\((A+\\Delta I)x=b\\) preserves the Krylov space generated from \\(b\\). ShiftedGMRES.jl uses one Arnoldi basis per restart cycle across the sweep. It returns one solution column and one convergence flag per shift.\nDownload ShiftedGMRES.jl 0.1.0 and examples\nUnzip the archive, open the package directory, and start Julia with julia --project=.. Both examples use only the package and Julia standard libraries."
+    "text": "For a fixed matrix \\(A\\) and drive \\(b\\), changing the shift in \\((A+\\Delta I)x=b\\) preserves the Krylov space generated from \\(b\\). ShiftedGMRES.jl uses one Arnoldi basis per restart cycle across the sweep. It returns one solution column and one convergence flag per shift.\nShiftedGMRES.jl 0.1.1 with examples FreeSpaceGreens.jl 0.1.0\nExtract both archives into one empty folder. Start Julia in that folder and run pushfirst!(LOAD_PATH, pwd()) to load the local packages. The two examples below are also available as ShiftedGMRES.jl/examples/sparse_scan.jl and ShiftedGMRES.jl/examples/two_dipoles.jl."
   },
   {
     "objectID": "shifted-gmres.html#a-sparse-nonsymmetric-matrix",
@@ -252,11 +259,11 @@
     "text": "A sparse nonsymmetric matrix\nEach column below is checked against a separate sparse direct solve. The seed argument selects the reference shift by index.\nusing ShiftedGMRES, SparseArrays, LinearAlgebra\n\nn = 80\nA = spdiagm(-1 =&gt; fill(-0.3, n-1), 0 =&gt; fill(2.0, n), 1 =&gt; fill(0.1, n-1))\nb = ones(n)\nshifts = [-0.25, 0.5, 1.0]\nresult = shifted_gmres(A, b, shifts; seed=2, restart=8, rtol=1e-9)\n@assert all(result.converged)\nfor (j, shift) in enumerate(shifts)\n    reference = (A + shift*I) \\ b\n    println((; shift, relative_error=norm(result.X[:,j]-reference)/norm(reference)))\nend\nThe largest relative difference from a direct solve in this example is about \\(5.4\\times 10^{-14}\\) in double precision."
   },
   {
-    "objectID": "shifted-gmres.html#a-coupled-dipole-spectrum",
-    "href": "shifted-gmres.html#a-coupled-dipole-spectrum",
+    "objectID": "shifted-gmres.html#coupled-dipole-spectrum",
+    "href": "shifted-gmres.html#coupled-dipole-spectrum",
     "title": "ShiftedGMRES.jl",
-    "section": "A coupled-dipole spectrum",
-    "text": "A coupled-dipole spectrum\nTwo identical dipoles sit on the propagation axis, separated by 0.35 wavelengths and polarized perpendicular to that axis. The drive accumulates a phase between sites. In the forward direction the propagation phases enter the detected amplitudes with the opposite sign. We use a diagonal damping term \\(+i\\) in linewidth units and report the scattered intensity in common arbitrary units.\nusing ShiftedGMRES, LinearAlgebra\n\n# Two parallel electric dipoles, perpendicular to their separation.\n# Distances in wavelengths, detunings and couplings in units of gamma.\nkr = 2π * 0.35\ng = (3/4) * cis(kr) * (-1/kr - im/kr^2 + 1/kr^3)\nA = [im -g; -g im]\ndrive = [1, cis(kr)]\ndetunings = collect(-3:0.25:3)\nresult = shifted_gmres(A, drive, detunings)\n@assert all(result.converged)\n\n# Forward scattered intensity, omitting the common radiation prefactor.\nforward = [1, cis(-kr)]\nintensity(x) = abs2(transpose(forward) * x)\nfor (j, delta) in enumerate(detunings)\n    I_forward = intensity(result.X[:,j])\n    reference = intensity((A + delta*I) \\ drive)\n    @assert isapprox(I_forward, reference; atol=1e-12)\n    println((; delta, I_forward))\nend\nAt zero detuning this gives a forward intensity of approximately 4.158 in the chosen units."
+    "section": "Two dipoles and a detector",
+    "text": "Two dipoles and a detector\nAn \\(x\\)-polarized plane wave travels along \\(z\\) and drives two emitters separated by \\(0.35\\lambda\\). We set \\(\\lambda=1\\) and use the single-emitter radiative population decay rate as the frequency unit. The off-diagonal interaction \\(K\\) comes from the free-space Green tensor. As in the original example, the total single-emitter coherence damping is one in these units. Setting self=:zero lets us supply the full diagonal damping explicitly in \\(A=iI-K\\).\nAt each detuning we solve \\((A+\\Delta I)x=b\\). The amplitude \\(x_j\\) gives the dipole moment \\(x_j\\hat{\\mathbf x}\\) in the chosen drive units. At the detector \\(\\mathbf R=(3,0,4)\\lambda\\), the scattered field is the coherent sum \\[\n\\mathbf E_{\\rm sc}(\\mathbf R) = \\sum_j \\mathbf G(\\mathbf R-\\mathbf r_j)\\,\\hat{\\mathbf x}\\,x_j .\n\\] We use the full finite-distance tensor with \\(\\epsilon_0=1\\) and report \\(\\sum_\\alpha |E_{{\\rm sc},\\alpha}|^2\\) as a relative scattered intensity. The incident plane wave enters only through the emitter drive.\nusing ShiftedGMRES, FreeSpaceGreens, LinearAlgebra\n\n# x-polarized plane wave traveling along z. Positions in wavelengths.\nk = 2π\npositions = [0.0 0.0; 0.0 0.0; 0.0 0.35]\ndipole = [1.0, 0.0, 0.0]\ndrive = cis.(k .* positions[3, :])\nK = hybrid_coupling_matrix(positions, dipole; k, self=:zero)\nA = im*I - K  # unit coherence damping, included once on the diagonal\ndetunings = collect(-3:0.25:3)\nresult = shifted_gmres(A, drive, detunings)\n@assert all(result.converged)\n\n# Each column of the outer product is one emitter's vector dipole moment.\ndetector = [3.0, 0.0, 4.0]\nG_det = vector_green_matrix([detector], positions; k)\nfield(x) = G_det * vec(dipole * transpose(x))\n\nfor (j, delta) in enumerate(detunings)\n    x = result.X[:, j]\n    E = field(x)\n    intensity = sum(abs2, E)\n    direct = (A + delta*I) \\ drive\n    @assert norm((A + delta*I)*x - drive) / norm(drive) &lt; 1e-10\n    @assert isapprox(E, field(direct); rtol=1e-10)\n    @assert isapprox(intensity, sum(abs2, field(direct)); rtol=1e-10)\n    println((; delta, E, intensity))\nend\nOn resonance, the detector field is approximately \\((0.3003-0.7108i,\\,0,\\,-0.2987+0.5200i)\\), giving a relative scattered intensity of \\(0.9551\\). The off-axis detector sees both \\(x\\) and \\(z\\) field components even though both source dipoles point along \\(x\\)."
   },
   {
     "objectID": "notes/posts/dicke-decay-conventions.html",
