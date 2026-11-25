@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A sparse detuning sweep for 102,400 dipoles, including the scattered field at a detector.">
+<meta name="description" content="A sparse detuning sweep for 102,400 dipoles, including the scattered field at two detector angles.">
 
 <title>ShiftedGMRES.jl – Nico S. Baßler</title>
 <style>
@@ -136,12 +136,12 @@ window.Quarto = {
 </script>
 
 <meta property="og:title" content="ShiftedGMRES.jl – Nico S. Baßler">
-<meta property="og:description" content="A sparse detuning sweep for 102,400 dipoles, including the scattered field at a detector.">
-<meta property="og:image" content="https://nico0oblr.github.io/assets/sparse-array-detector.png">
+<meta property="og:description" content="A sparse detuning sweep for 102,400 dipoles, including the scattered field at two detector angles.">
+<meta property="og:image" content="https://nico0oblr.github.io/assets/sparse-array-two-detectors.png">
 <meta property="og:site_name" content="Nico S. Baßler">
-<meta property="og:image:alt" content="Line plot of relative scattered intensity versus detuning for a 320 by 320 array.">
-<meta property="og:image:height" content="684">
-<meta property="og:image:width" content="1278">
+<meta property="og:image:alt" content="Two detector spectra for a 320 by 320 array, including a detector tilted 18 degrees from the array normal toward the dipole axis.">
+<meta property="og:image:height" content="729">
+<meta property="og:image:width" content="1332">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -219,7 +219,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    A sparse detuning sweep for 102,400 dipoles, including the scattered field at a detector.
+    A sparse detuning sweep for 102,400 dipoles, including the scattered field at two detector angles.
   </div>
 </div>
 
@@ -238,14 +238,14 @@ window.Quarto = {
 
 <section id="coupled-dipole-spectrum" class="level2">
 <h2 class="anchored" data-anchor-id="coupled-dipole-spectrum">Detector spectrum of a sparse dipole array</h2>
-<p>A local drive excites one site of a <span class="math inline">\(320\times320\)</span> square array. At each of 81 detunings we solve <span class="math inline">\((A+\Delta I)x=b\)</span> for all 102,400 dipole amplitudes and sum their electric fields at a detector. ShiftedGMRES.jl shares one Arnoldi basis across the detunings in each restart cycle.</p>
+<p>A local drive excites one site of a <span class="math inline">\(320\times320\)</span> square array. At each of 81 detunings we solve <span class="math inline">\((A+\Delta I)x=b\)</span> for all 102,400 dipole amplitudes and sum their electric fields at two detectors at the same distance from the driven site. ShiftedGMRES.jl shares one Arnoldi basis across the detunings in each restart cycle.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="assets/sparse-array-detector.png" class="img-fluid figure-img" alt="Line plot of relative scattered intensity versus detuning for a 320 by 320 array."></p>
-<figcaption>Scattered intensity at the detector as a function of detuning for the locally driven square array. The dots are the 81 computed frequencies.</figcaption>
+<p><img src="assets/sparse-array-two-detectors.png" class="img-fluid figure-img" alt="Two detector spectra for a 320 by 320 array, including a detector tilted 18 degrees from the array normal toward the dipole axis."></p>
+<figcaption>Scattered intensity across 81 detunings at two detector positions. Both curves use the same intensity scale.</figcaption>
 </figure>
 </div>
-<p><a href="files/sparse-array-detector.csv" class="text-link">Download the scan (CSV)</a> · <a href="files/ShiftedGMRES-0.1.2.zip" class="text-link">Solver and runnable example (ZIP)</a> · <a href="files/FreeSpaceGreens-0.1.0.zip" class="text-link">FreeSpaceGreens.jl (ZIP)</a></p>
+<p><a href="files/sparse-array-detector.csv" class="text-link">Original detector (CSV)</a> · <a href="files/sparse-array-detector-xz.csv" class="text-link">18° detector (CSV)</a> · <a href="files/ShiftedGMRES-0.1.3.zip" class="text-link">Solver and runnable example (ZIP)</a> · <a href="files/FreeSpaceGreens-0.1.0.zip" class="text-link">FreeSpaceGreens.jl (ZIP)</a></p>
 <section id="what-makes-the-matrix-sparse" class="level3">
 <h3 class="anchored" data-anchor-id="what-makes-the-matrix-sparse">What makes the matrix sparse?</h3>
 <p>The example models coherent exchange along the four nearest-neighbor bonds of each interior site, with open boundaries and local coherence damping <span class="math inline">\(\Gamma_0/2\)</span>. This choice gives <strong>510,720 nonzero entries</strong>. A full free-space dipole interaction couples every pair and gives a dense matrix. The lattice spacing is <span class="math inline">\(0.35\lambda\)</span>, all dipoles point along <span class="math inline">\(x\)</span>, and the bond strengths are the real parts of the free-space couplings for the two bond orientations. Frequencies are in units of the single-emitter population decay rate <span class="math inline">\(\Gamma_0\)</span>.</p>
@@ -258,14 +258,15 @@ window.Quarto = {
 </section>
 <section id="from-amplitudes-to-the-detector-field" class="level3">
 <h3 class="anchored" data-anchor-id="from-amplitudes-to-the-detector-field">From amplitudes to the detector field</h3>
-<p>The driven site is at the origin and the detector is at <span class="math inline">\((0.6,-0.4,2.5)\lambda\)</span>. Each column of the <span class="math inline">\(3\times102{,}400\)</span> detector matrix is the full finite-distance field from a unit dipole at one site. Every source contributes to this sum. The plotted intensity is <span class="math inline">\(|\mathbf E_{\rm sc}|^2\)</span> in arbitrary units. The CSV gives the real and imaginary parts of all three scattered-field components.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (site, xy) <span class="kw">in</span> <span class="fu">enumerate</span>(<span class="bu">Iterators</span>.<span class="fu">product</span>(coords, coords))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> detector <span class="op">-</span> [xy[<span class="fl">1</span>], xy[<span class="fl">2</span>], <span class="fl">0.0</span>]</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    to_detector[<span class="op">:</span>, site] <span class="op">=</span> <span class="fu">green_tensor</span>(r; k) <span class="op">*</span> dipole</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> to_detector <span class="op">*</span> result.X</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>intensity <span class="op">=</span> <span class="fu">vec</span>(<span class="fu">sum</span>(abs2, E; dims<span class="op">=</span><span class="fl">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The sweep took 48 shared Arnoldi steps. The largest relative residual over all 81 systems was <span class="math inline">\(1.53\times10^{-11}\)</span>. At <span class="math inline">\(\Delta/\Gamma_0=-3,\,0,\,+3\)</span>, separate sparse LU solves agreed with the dipole amplitudes, complex detector field, and intensity to relative tolerance <span class="math inline">\(10^{-8}\)</span>.</p>
+<p>The driven site is at the origin. The first detector is at <span class="math inline">\(\mathbf R_1=(0.6,-0.4,2.5)\lambda\)</span>. The second is tilted by <span class="math inline">\(\pi/10\)</span> from <span class="math inline">\(+z\)</span> toward <span class="math inline">\(+x\)</span> in the <span class="math inline">\(xz\)</span> plane, at <span class="math inline">\(\mathbf R_2=|\mathbf R_1|(\sin(\pi/10),0,\cos(\pi/10))\)</span>. Changing the detector only changes the field readout. Both spectra use the same solved dipole amplitudes.</p>
+<p>For each detector, each column of its three-row matrix maps one <span class="math inline">\(x\)</span>-polarized source to its full finite-distance electric field. Stacking the two matrices lets one multiplication give all three components at both detectors across the scan. The plotted intensity is <span class="math inline">\(|\mathbf E_{\rm sc}|^2\)</span> in arbitrary units. Each CSV also gives the real and imaginary parts of the three components.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>original <span class="op">=</span> [<span class="fl">0.6</span>, <span class="op">-</span><span class="fl">0.4</span>, <span class="fl">2.5</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tilted <span class="op">=</span> <span class="fu">norm</span>(original) <span class="op">*</span> [<span class="fu">sinpi</span>(<span class="fl">1</span><span class="op">/</span><span class="fl">10</span>), <span class="fl">0.0</span>, <span class="fu">cospi</span>(<span class="fl">1</span><span class="op">/</span><span class="fl">10</span>)]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>detectors <span class="op">=</span> (original, tilted)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># After filling the two three-row blocks with green_tensor(R - source; k) * dipole:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> <span class="fu">reshape</span>(to_detectors <span class="op">*</span> result.X, <span class="fl">3</span>, <span class="fu">length</span>(detectors), <span class="op">:</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>intensity <span class="op">=</span> <span class="fu">dropdims</span>(<span class="fu">sum</span>(abs2, E; dims<span class="op">=</span><span class="fl">1</span>); dims<span class="op">=</span><span class="fl">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The sweep took 48 shared Arnoldi steps. The largest relative residual over all 81 systems was <span class="math inline">\(1.53\times10^{-11}\)</span>. At <span class="math inline">\(\Delta/\Gamma_0=-3,\,0,\,+3\)</span>, separate sparse LU solves agreed with the dipole amplitudes, complex fields, and intensities at both detectors to relative tolerance <span class="math inline">\(10^{-8}\)</span>.</p>
 </section>
 <section id="run-the-scan" class="level3">
 <h3 class="anchored" data-anchor-id="run-the-scan">Run the scan</h3>
