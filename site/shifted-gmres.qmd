@@ -1,15 +1,15 @@
 ---
 title: "ShiftedGMRES.jl"
-description: "A sparse detuning sweep for 102,400 dipoles, including the scattered field at a detector."
+description: "A sparse detuning sweep for 102,400 dipoles, including the scattered field at two detector angles."
 ---
 
 ## Detector spectrum of a sparse dipole array {#coupled-dipole-spectrum}
 
-A local drive excites one site of a $320\times320$ square array. At each of 81 detunings we solve $(A+\Delta I)x=b$ for all 102,400 dipole amplitudes and sum their electric fields at a detector. ShiftedGMRES.jl shares one Arnoldi basis across the detunings in each restart cycle.
+A local drive excites one site of a $320\times320$ square array. At each of 81 detunings we solve $(A+\Delta I)x=b$ for all 102,400 dipole amplitudes and sum their electric fields at two detectors at the same distance from the driven site. ShiftedGMRES.jl shares one Arnoldi basis across the detunings in each restart cycle.
 
-![Scattered intensity at the detector as a function of detuning for the locally driven square array. The dots are the 81 computed frequencies.](assets/sparse-array-detector.png){fig-alt="Line plot of relative scattered intensity versus detuning for a 320 by 320 array."}
+![Scattered intensity across 81 detunings at two detector positions. Both curves use the same intensity scale.](assets/sparse-array-two-detectors.png){fig-alt="Two detector spectra for a 320 by 320 array, including a detector tilted 18 degrees from the array normal toward the dipole axis."}
 
-[Download the scan (CSV)](files/sparse-array-detector.csv){.text-link} · [Solver and runnable example (ZIP)](files/ShiftedGMRES-0.1.2.zip){.text-link} · [FreeSpaceGreens.jl (ZIP)](files/FreeSpaceGreens-0.1.0.zip){.text-link}
+[Original detector (CSV)](files/sparse-array-detector.csv){.text-link} · [18° detector (CSV)](files/sparse-array-detector-xz.csv){.text-link} · [Solver and runnable example (ZIP)](files/ShiftedGMRES-0.1.3.zip){.text-link} · [FreeSpaceGreens.jl (ZIP)](files/FreeSpaceGreens-0.1.0.zip){.text-link}
 
 ### What makes the matrix sparse?
 
@@ -26,18 +26,20 @@ result = shifted_gmres(A, drive, detunings; restart=24, rtol=1e-9)
 
 ### From amplitudes to the detector field
 
-The driven site is at the origin and the detector is at $(0.6,-0.4,2.5)\lambda$. Each column of the $3\times102{,}400$ detector matrix is the full finite-distance field from a unit dipole at one site. Every source contributes to this sum. The plotted intensity is $|\mathbf E_{\rm sc}|^2$ in arbitrary units. The CSV gives the real and imaginary parts of all three scattered-field components.
+The driven site is at the origin. The first detector is at $\mathbf R_1=(0.6,-0.4,2.5)\lambda$. The second is tilted by $\pi/10$ from $+z$ toward $+x$ in the $xz$ plane, at $\mathbf R_2=|\mathbf R_1|(\sin(\pi/10),0,\cos(\pi/10))$. Changing the detector only changes the field readout. Both spectra use the same solved dipole amplitudes.
+
+For each detector, each column of its three-row matrix maps one $x$-polarized source to its full finite-distance electric field. Stacking the two matrices lets one multiplication give all three components at both detectors across the scan. The plotted intensity is $|\mathbf E_{\rm sc}|^2$ in arbitrary units. Each CSV also gives the real and imaginary parts of the three components.
 
 ```julia
-for (site, xy) in enumerate(Iterators.product(coords, coords))
-    r = detector - [xy[1], xy[2], 0.0]
-    to_detector[:, site] = green_tensor(r; k) * dipole
-end
-E = to_detector * result.X
-intensity = vec(sum(abs2, E; dims=1))
+original = [0.6, -0.4, 2.5]
+tilted = norm(original) * [sinpi(1/10), 0.0, cospi(1/10)]
+detectors = (original, tilted)
+# After filling the two three-row blocks with green_tensor(R - source; k) * dipole:
+E = reshape(to_detectors * result.X, 3, length(detectors), :)
+intensity = dropdims(sum(abs2, E; dims=1); dims=1)
 ```
 
-The sweep took 48 shared Arnoldi steps. The largest relative residual over all 81 systems was $1.53\times10^{-11}$. At $\Delta/\Gamma_0=-3,\,0,\,+3$, separate sparse LU solves agreed with the dipole amplitudes, complex detector field, and intensity to relative tolerance $10^{-8}$.
+The sweep took 48 shared Arnoldi steps. The largest relative residual over all 81 systems was $1.53\times10^{-11}$. At $\Delta/\Gamma_0=-3,\,0,\,+3$, separate sparse LU solves agreed with the dipole amplitudes, complex fields, and intensities at both detectors to relative tolerance $10^{-8}$.
 
 ### Run the scan
 

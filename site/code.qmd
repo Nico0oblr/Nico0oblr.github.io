@@ -10,7 +10,7 @@ Software for simulating collective quantum dynamics, with code and data from ind
 
 ## ShiftedGMRES.jl
 
-Compute a frequency sweep by solving shifted linear systems with a shared Krylov basis. The worked example computes a detector spectrum for a sparse array of 102,400 dipoles across 81 detunings.
+Compute a frequency sweep by solving shifted linear systems with a shared Krylov basis. The worked example computes two detector spectra for a sparse array of 102,400 dipoles across 81 detunings.
 
 [Examples and download](shifted-gmres.qmd){.text-link}
 :::
