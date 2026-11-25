@@ -5,9 +5,9 @@ description: "Two Julia examples for solving shifted linear systems with a share
 
 For a fixed matrix $A$ and drive $b$, changing the shift in $(A+\Delta I)x=b$ preserves the Krylov space generated from $b$. ShiftedGMRES.jl uses one Arnoldi basis per restart cycle across the sweep. It returns one solution column and one convergence flag per shift.
 
-[Download ShiftedGMRES.jl 0.1.0 and examples](files/ShiftedGMRES-0.1.0.zip){.paper-link}
+[ShiftedGMRES.jl 0.1.1 with examples](files/ShiftedGMRES-0.1.1.zip){.paper-link} [FreeSpaceGreens.jl 0.1.0](files/FreeSpaceGreens-0.1.0.zip){.paper-link}
 
-Unzip the archive, open the package directory, and start Julia with `julia --project=.`. Both examples use only the package and Julia standard libraries.
+Extract both archives into one empty folder. Start Julia in that folder and run `pushfirst!(LOAD_PATH, pwd())` to load the local packages. The two examples below are also available as `ShiftedGMRES.jl/examples/sparse_scan.jl` and `ShiftedGMRES.jl/examples/two_dipoles.jl`.
 
 ## A sparse nonsymmetric matrix
 
@@ -30,32 +30,45 @@ end
 
 The largest relative difference from a direct solve in this example is about $5.4\times 10^{-14}$ in double precision.
 
-## A coupled-dipole spectrum
+## Two dipoles and a detector {#coupled-dipole-spectrum}
 
-Two identical dipoles sit on the propagation axis, separated by 0.35 wavelengths and polarized perpendicular to that axis. The drive accumulates a phase between sites. In the forward direction the propagation phases enter the detected amplitudes with the opposite sign. We use a diagonal damping term $+i$ in linewidth units and report the scattered intensity in common arbitrary units.
+An $x$-polarized plane wave travels along $z$ and drives two emitters separated by $0.35\lambda$. We set $\lambda=1$ and use the single-emitter radiative population decay rate as the frequency unit. The off-diagonal interaction $K$ comes from the free-space Green tensor. As in the original example, the total single-emitter coherence damping is one in these units. Setting `self=:zero` lets us supply the full diagonal damping explicitly in $A=iI-K$.
+
+At each detuning we solve $(A+\Delta I)x=b$. The amplitude $x_j$ gives the dipole moment $x_j\hat{\mathbf x}$ in the chosen drive units. At the detector $\mathbf R=(3,0,4)\lambda$, the scattered field is the coherent sum
+$$
+\mathbf E_{\rm sc}(\mathbf R) = \sum_j \mathbf G(\mathbf R-\mathbf r_j)\,\hat{\mathbf x}\,x_j .
+$$
+We use the full finite-distance tensor with $\epsilon_0=1$ and report $\sum_\alpha |E_{{\rm sc},\alpha}|^2$ as a relative scattered intensity. The incident plane wave enters only through the emitter drive.
 
 ```julia
-using ShiftedGMRES, LinearAlgebra
+using ShiftedGMRES, FreeSpaceGreens, LinearAlgebra
 
-# Two parallel electric dipoles, perpendicular to their separation.
-# Distances in wavelengths, detunings and couplings in units of gamma.
-kr = 2π * 0.35
-g = (3/4) * cis(kr) * (-1/kr - im/kr^2 + 1/kr^3)
-A = [im -g; -g im]
-drive = [1, cis(kr)]
+# x-polarized plane wave traveling along z. Positions in wavelengths.
+k = 2π
+positions = [0.0 0.0; 0.0 0.0; 0.0 0.35]
+dipole = [1.0, 0.0, 0.0]
+drive = cis.(k .* positions[3, :])
+K = hybrid_coupling_matrix(positions, dipole; k, self=:zero)
+A = im*I - K  # unit coherence damping, included once on the diagonal
 detunings = collect(-3:0.25:3)
 result = shifted_gmres(A, drive, detunings)
 @assert all(result.converged)
 
-# Forward scattered intensity, omitting the common radiation prefactor.
-forward = [1, cis(-kr)]
-intensity(x) = abs2(transpose(forward) * x)
+# Each column of the outer product is one emitter's vector dipole moment.
+detector = [3.0, 0.0, 4.0]
+G_det = vector_green_matrix([detector], positions; k)
+field(x) = G_det * vec(dipole * transpose(x))
+
 for (j, delta) in enumerate(detunings)
-    I_forward = intensity(result.X[:,j])
-    reference = intensity((A + delta*I) \ drive)
-    @assert isapprox(I_forward, reference; atol=1e-12)
-    println((; delta, I_forward))
+    x = result.X[:, j]
+    E = field(x)
+    intensity = sum(abs2, E)
+    direct = (A + delta*I) \ drive
+    @assert norm((A + delta*I)*x - drive) / norm(drive) < 1e-10
+    @assert isapprox(E, field(direct); rtol=1e-10)
+    @assert isapprox(intensity, sum(abs2, field(direct)); rtol=1e-10)
+    println((; delta, E, intensity))
 end
 ```
 
-At zero detuning this gives a forward intensity of approximately 4.158 in the chosen units.
+On resonance, the detector field is approximately $(0.3003-0.7108i,\,0,\,-0.2987+0.5200i)$, giving a relative scattered intensity of $0.9551$. The off-axis detector sees both $x$ and $z$ field components even though both source dipoles point along $x$.
