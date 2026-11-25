@@ -1,0 +1,30 @@
+---
+title: "Short CV"
+description: "Nico S. Baßler’s academic appointments, education, teaching, and supervision in theoretical physics."
+---
+
+## Current position
+
+**Postdoctoral researcher** · June 2025–present  
+Theoretical Quantum Technology group, Institute for Applied Physics, TU Darmstadt. I work in Claudiu Genes’s group, where I study how decoherence and atom loss affect collective light emission.
+
+## Education
+
+**Dr. rer. nat. in Physics** · October 2020–May 2025  
+Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU), *magna cum laude*. I carried out my doctoral research at FAU and the Max Planck Institute for the Science of Light under the supervision of Claudiu Genes and Kai P. Schmidt. My dissertation was [*Quantum Optics with Atoms and Molecules*](publications.qmd#quantum-optics-with-atoms-and-molecules).
+
+**M.Sc. in Physics** · July 2017–September 2020  
+FAU, with distinction. My [master’s thesis](files/2020_Masterthesis_Bassler.pdf) studied the effect of domain walls in bilayer graphene in an external magnetic field.
+
+**B.Sc. in Physics** · October 2013–July 2017  
+FAU, Elite Degree Programme in Physics.
+
+## Teaching and supervision
+
+I was a teaching assistant for seven quantum mechanics courses between 2016 and 2024. I also taught tutorials on topics including condensed matter and quantum optics, quantum and classical algorithms, and the theoretical physics of climate change.
+
+I have co-supervised master’s and doctoral research in collective quantum optics, including Dicke superradiance, and supervised visiting doctoral students. My current student supervision also includes four-wave mixing in hollow-core fiber.
+
+## Invited talk
+
+[*Metasurface Based Hybrid Optical Cavities for Chiral Sensing*](presentations.qmd#metasurface-based-hybrid-optical-cavities-for-chiral-sensing) · Metamaterials 2024, Platanias, Crete, 10 September 2024.

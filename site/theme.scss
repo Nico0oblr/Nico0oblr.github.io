@@ -41,7 +41,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 .profile-intro > p { max-width: 39rem; font-size: .97rem; }
 .profile-links { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1.7rem 0 1.2rem; }
 .profile-links .btn { padding: .65rem 1.1rem; border-radius: 3px; font-size: .85rem; }
-.quiet-link { margin-left: 1.2rem; }
+.identity-links p { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; }
 .section-heading { border-top: 1px solid $border-color; padding-top: 2.5rem; }
 .section-heading h2 { border: 0; padding: 0; margin-bottom: .6rem; }
 .section-heading > p { color: #647578; font-size: .93rem; }

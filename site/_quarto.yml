@@ -3,6 +3,7 @@ project:
   output-dir: _site
   render:
     - index.qmd
+    - cv.qmd
     - publications.qmd
     - presentations.qmd
     - code.qmd
@@ -23,6 +24,8 @@ website:
     left:
       - href: index.qmd
         text: About
+      - href: cv.qmd
+        text: CV
       - href: publications.qmd
         text: Publications
       - href: presentations.qmd

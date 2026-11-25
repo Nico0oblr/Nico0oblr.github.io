@@ -1,5 +1,6 @@
 [
   "code.html",
+  "cv.html",
   "files/2020_Masterthesis_Bassler.pdf",
   "files/PHD_thesis.pdf",
   "index.html",
@@ -12,8 +13,8 @@
   "publications.html",
   "robots.txt",
   "search.json",
-  "site_libs/bootstrap/bootstrap-113d22bf474ae3de19aee06ca157f2b2.min.css",
-  "site_libs/bootstrap/bootstrap-fe0fc50bf14e6d5ade4028179ce50d2f.min.css",
+  "site_libs/bootstrap/bootstrap-b6ef44208f82b9d71a631799c114a8d9.min.css",
+  "site_libs/bootstrap/bootstrap-ddf420112de18e25f8a0a4a56e13903c.min.css",
   "site_libs/bootstrap/bootstrap-icons.css",
   "site_libs/bootstrap/bootstrap-icons.woff",
   "site_libs/bootstrap/bootstrap.min.js",

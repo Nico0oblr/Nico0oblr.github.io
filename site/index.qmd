@@ -22,9 +22,18 @@ I study how light and matter behave collectively, with a focus on superradiance,
 ::: {.profile-links}
 [Publications](publications.qmd){.btn .btn-primary}
 [Research notes](notes/index.qmd){.btn .btn-outline-primary}
+[Short CV](cv.qmd){.btn .btn-outline-primary}
 :::
 
-[TU Darmstadt](https://www.iap.tu-darmstadt.de/tqt/theoretical_quantum_technology/team_tqt/team_details_163456.en.jsp) [Google Scholar ↗](https://scholar.google.com/citations?user=3egWxYoAAAAJ&hl=en){.quiet-link} [GitHub ↗](https://github.com/Nico0oblr){.quiet-link}
+[nico.bassler@physik.tu-darmstadt.de](mailto:nico.bassler@physik.tu-darmstadt.de)
+
+::: {.identity-links}
+[TU Darmstadt](https://www.iap.tu-darmstadt.de/tqt/theoretical_quantum_technology/team_tqt/team_details_163456.en.jsp)
+[ORCID](https://orcid.org/0000-0003-0625-7301)
+[arXiv](https://arxiv.org/a/0000-0003-0625-7301.html)
+[Google Scholar](https://scholar.google.com/citations?user=3egWxYoAAAAJ&hl=en)
+[GitHub](https://github.com/Nico0oblr)
+:::
 :::
 
 :::
